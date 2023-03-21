@@ -7,22 +7,45 @@ void game()
     
     SetTargetFPS(60);
 
-    Texture scalpel = imageloader("../res/scalpel.png");
+    // Load textures
+    Texture2D textures[MAX_TEXTURES] = {
+        LoadTexture("../res/scalpel.png"), 
+        LoadTexture("../res/tweezers.png")
+    };
 
-    // Main game loop
-    while (!WindowShouldClose())    // Detect window close button or ESC key
+    while (!WindowShouldClose())
     {
-        BeginDrawing();
+        // Update
+        int clickedTexture = CheckTextureClick(textures, MAX_TEXTURES);
+        if (clickedTexture != -1)
+        {
+            // A texture has been clicked
+            if (IsMouseButtonDown(MOUSE_LEFT_BUTTON))
+            {
+                // Move the texture if the left mouse button is down
+                MoveTexture(&texturePositions[clickedTexture]);
+            }
+        }
 
+        BeginDrawing();
+        
         ClearBackground(RAYWHITE);
 
-        DrawTexture(scalpel, SCREEN_WIDTH/2, SCREEN_HEIGHT/2, WHITE);
-
-        DrawText("Test", 190, 200, 20, LIGHTGRAY);
+        // Draw textures
+        for (int i = 0; i < MAX_TEXTURES; i++)
+        {
+            DrawTexture(textures[i], texturePositions[i].x, texturePositions[i].y, WHITE);
+        }
 
         EndDrawing();
     }
 
-    UnloadTexture(scalpel);
+    // Unload textures
+    for (int i = 0; i < MAX_TEXTURES; i++)
+    {
+        UnloadTexture(textures[i]);
+    }
+
+    // De-initialization
     CloseWindow();
 }

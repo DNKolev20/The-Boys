@@ -14,6 +14,8 @@
 const int SCREEN_WIDTH = GetScreenWidth();
 const int SCREEN_HEIGHT = GetScreenHeight();
 
+#define MAX_TEXTURES 2
+
 #include "visualFunctions.h"
 #include "game.h"
 
