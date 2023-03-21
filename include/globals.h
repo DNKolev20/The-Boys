@@ -1,15 +1,20 @@
 #ifndef GLOBALS
 #define GLOBALS
 
+#include <iostream>
+#include <vector>
+#include <string>
+#include <algorithm>
+
 #include "raylib.h"
 #include "rlgl.h"
 #include "raymath.h"
 #include "raylib.h"
 
-#define SCREEN_WIDTH 800
-#define SCREEN_HEIGHT 450
-#define MOUSE_THRESHOLD 20
+const int SCREEN_WIDTH = GetScreenWidth();
+const int SCREEN_HEIGHT = GetScreenHeight();
 
+#include "visualFunctions.h"
 #include "game.h"
 
 #endif
