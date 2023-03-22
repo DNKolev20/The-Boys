@@ -2,11 +2,6 @@
 
 void game()
 {
-    SetConfigFlags(FLAG_WINDOW_RESIZABLE);
-    InitWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "The Boys");
-    
-    SetTargetFPS(60);
-
     // Load textures
     Texture2D textures[MAX_TEXTURES] = {
         LoadTexture("../res/scalpel.png"), 
@@ -48,4 +43,5 @@ void game()
 
     // De-initialization
     CloseWindow();
+
 }

@@ -2,6 +2,6 @@
 
 int main() 
 {
-    game(); // starts the game
+    menu(); // starts the game
     return 0;
 }
