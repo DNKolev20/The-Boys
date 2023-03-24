@@ -1,15 +1,14 @@
 #include <globals.h>
 
-void menu()
+void options()
 {
     int selectedItem = 0;
-    int itemsNum = 3;
-    Color itemColor[itemsNum] = { GRAY, GRAY, GRAY};
-    const char* itemName[itemsNum] = { "Play", "Select Levels", "Options"};
+    int itemsNum = 2;
+    Color itemColor[itemsNum] = { GRAY, GRAY};
+    const char* itemName[itemsNum] = { "Fullscreen", "Back"};
 
     while (!WindowShouldClose())
-    {
-
+    {   
         // handle user input
         if (IsKeyPressed(KEY_UP)) {
             selectedItem--;
@@ -38,16 +37,13 @@ void menu()
             // Action to take when Enter key is pressed on selected button
             switch (selectedItem) {
                 case 0:
-                    game();
-                    return;
-                case 1:
-                    std::cout << 2 << std::endl;
+                    ToggleFullscreen();
                     break;
-                case 2:
-                    options();
+                case 1:
+                    menu();
                     return;
             }
-        }        
+        }
     }
 
     // De-initialization

@@ -1,13 +1,10 @@
 #include <globals.h>
 
 Vector2 texturePositions[MAX_TEXTURES] = {0};
-    const int NUM_ITEMS = 3; // number of items in the menu
-    const int ITEM_HEIGHT = 50; // height of each item
-    const int ITEM_PADDING = 10; // padding between items
-    const int ITEM_TEXT_SIZE = 20; // font size for item text
-    const int ITEM_TEXT_PADDING = 15; // padding around item text
-    const Color ITEM_COLOR[NUM_ITEMS] = { GREEN, RED, BLUE}; // colors for each item
-    const char* ITEM_NAME[NUM_ITEMS] = { "Play", "Select Levels", "Options"}; // names for each item
+int itemHeight = 50;
+int itemPadding = 10;
+int itemTextSize = 20;
+int itemTextPadding = 15;
 
 // Check which texture has been clicked
 int CheckTextureClick(Texture2D textures[], int count)
@@ -36,41 +33,47 @@ void MoveTexture(Vector2 *position)
     position->y += mouseDelta.y;
 }
 
-void DrawMenuItems(int selectedItem) 
+void DrawButtons(int selectedItem, int itemsNum, Color itemColor[], const char* itemName[])
 {
     int screenWidth = GetScreenWidth();
     int screenHeight = GetScreenHeight();
 
     int menuWidth = 300;
-    int menuHeight = (ITEM_HEIGHT + ITEM_PADDING) * NUM_ITEMS - ITEM_PADDING - 200;
+    int menuHeight = (itemHeight + itemPadding) * itemsNum - itemPadding - 200;
     int menuX = (screenWidth - menuWidth) / 2;
     int menuY = (screenHeight - menuHeight) / 2;
 
-    int titleY = menuY + ITEM_PADDING - 150;
-    DrawText("The Boys", menuX + ITEM_PADDING + 35, titleY, 40, BLACK);
+    int titleY = menuY + itemPadding - 150;
+    DrawText("The Boys", menuX + itemPadding + 35, titleY, 40, BLACK);
 
-    for (int i = 0; i < NUM_ITEMS; i++) {
+    for (int i = 0; i < itemsNum; i++) {
         // calculate position and size of item rectangle
-        int x = menuX + ITEM_PADDING;
-        int y = menuY + ITEM_PADDING + (ITEM_HEIGHT + ITEM_PADDING) * i;
-        int width = menuWidth - ITEM_PADDING * 2;
-        int height = ITEM_HEIGHT;
+        int x = menuX + itemPadding;
+        int y = menuY + itemPadding + (itemHeight + itemPadding) * i;
+        int width = menuWidth - itemPadding * 2;
+        int height = itemHeight;
 
         // set color of item rectangle based on whether it is selected
-        Color color = ITEM_COLOR[i];
+        Color color = itemColor[i];
         if (i == selectedItem) {
-            color = PURPLE;
+            color = BLACK;
         }
 
         // draw item rectangle
         DrawRectangle(x, y, width, height, color);
 
         // calculate position of item text
-        int textWidth = MeasureText(ITEM_NAME[i], ITEM_TEXT_SIZE);
+        int textWidth = MeasureText(itemName[i], itemTextSize);
         int textX = x + (width - textWidth) / 2;
-        int textY = y + (height - ITEM_TEXT_SIZE) / 2;
+        int textY = y + (height - itemTextSize) / 2;
 
         // draw item text
-        DrawText(ITEM_NAME[i], textX, textY, ITEM_TEXT_SIZE, WHITE);
+        DrawText(itemName[i], textX, textY, itemTextSize, WHITE);
     }
+}
+
+void WaitTime1(int seconds) {
+    clock_t endwait;
+    endwait = clock() + seconds * CLOCKS_PER_SEC;
+    while (clock() < endwait) {}
 }
