@@ -71,9 +71,3 @@ void DrawButtons(int selectedItem, int itemsNum, Color itemColor[], const char* 
         DrawText(itemName[i], textX, textY, itemTextSize, WHITE);
     }
 }
-
-void WaitTime1(int seconds) {
-    clock_t endwait;
-    endwait = clock() + seconds * CLOCKS_PER_SEC;
-    while (clock() < endwait) {}
-}
