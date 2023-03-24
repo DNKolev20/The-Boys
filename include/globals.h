@@ -21,6 +21,7 @@ void menu();
 
 #include "config.h"
 #include "visualFunctions.h"
+#include "levels.h"
 #include "game.h"
 #include "options.h"
 #include "menu.h"

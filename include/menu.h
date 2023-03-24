@@ -41,8 +41,8 @@ void menu()
                     game();
                     return;
                 case 1:
-                    std::cout << 2 << std::endl;
-                    break;
+                    levelSelection();
+                    return;
                 case 2:
                     options();
                     return;
