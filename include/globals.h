@@ -19,6 +19,7 @@ void game();
 void options();
 void menu();
 
+#include "config.h"
 #include "visualFunctions.h"
 #include "game.h"
 #include "options.h"

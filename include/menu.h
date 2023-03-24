@@ -3,9 +3,9 @@
 void menu()
 {
     int selectedItem = 0;
-    int itemsNum = 3;
-    Color itemColor[itemsNum] = { GRAY, GRAY, GRAY};
-    const char* itemName[itemsNum] = { "Play", "Select Levels", "Options"};
+    int itemsNum = 4;
+    Color itemColor[itemsNum] = { GRAY, GRAY, GRAY, GRAY};
+    const char* itemName[itemsNum] = { "Play", "Select Levels", "Options", "Exit"};
 
     while (!WindowShouldClose())
     {
@@ -46,6 +46,9 @@ void menu()
                 case 2:
                     options();
                     return;
+                case 3:
+                    CloseWindow();
+                    break;
             }
         }        
     }
