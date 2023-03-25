@@ -3,7 +3,7 @@
 void config()
 {
     SetConfigFlags(FLAG_WINDOW_RESIZABLE);
-    InitWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "The Boys");
+    InitWindow(0, 0, "The Boys");
     SetTargetFPS(60);
     SetExitKey(0);
 

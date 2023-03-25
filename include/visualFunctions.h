@@ -1,34 +1,5 @@
 #include <globals.h>
 
-Vector2 texturePositions[2] = {0};
-
-// Check which texture has been clicked
-int CheckTextureClick(Texture2D textures[], int count)
-{
-    if (IsMouseButtonDown(MOUSE_LEFT_BUTTON))
-    {
-        Vector2 mousePos = GetMousePosition();
-        for (int i = 0; i < count; i++)
-        {
-            if (CheckCollisionPointRec(mousePos, (Rectangle){texturePositions[i].x, texturePositions[i].y, textures[i].width, textures[i].height}))
-            {
-                return i; // Texture i has been clicked
-            }
-        }
-    }
-    return -1; // No texture has been clicked
-}
-
-// Move the specified texture
-void MoveTexture(Vector2 *position)
-{
-    Vector2 mouseDelta = GetMouseDelta();
-
-    // Add mouse delta to texture position
-    position->x += mouseDelta.x;
-    position->y += mouseDelta.y;
-}
-
 void DrawButtons(int selectedItem, int itemsNum, Color itemColor[], const char* itemName[], bool showtitle)
 {
     int itemHeight = 50;
@@ -45,7 +16,7 @@ void DrawButtons(int selectedItem, int itemsNum, Color itemColor[], const char* 
     if (showtitle)
     {
         int titleY = menuY + itemPadding - 150;
-        DrawText("The Boys", menuX + itemPadding + 35, titleY, 40, BLACK);
+        DrawText("Surgery simulator", menuX + itemPadding - 30, titleY, 40, BLACK);
     }
 
     for (int i = 0; i < itemsNum; i++) {

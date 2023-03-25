@@ -13,10 +13,8 @@
 #include "raymath.h"
 #include "raylib.h"
 
-const float SCREEN_WIDTH = GetScreenWidth();
-const float SCREEN_HEIGHT = GetScreenHeight();
-
 int currentLevel = 1;
+int currentStage = 1;
 
 void levelOne();
 void levelTwo();
@@ -24,9 +22,16 @@ void levelThree();
 void menu();
 
 #include "visualFunctions.h"
+
+#include "Levels/functionsForLevels.h"
+
 #include "Levels/pauseMenu.h"
+
+#include "Levels/levelOneStages.h"
 #include "Levels/levelOne.h"
+
 #include "Levels/levelTwo.h"
+
 #include "Levels/levelThree.h"
 
 #include "config.h"
