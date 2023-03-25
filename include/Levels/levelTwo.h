@@ -11,6 +11,11 @@ void levelTwo()
 
     while (!WindowShouldClose())
     {
+        if (IsKeyPressed(KEY_ESCAPE))
+        {
+            pauseMenu();
+        }
+
         // Update
         int clickedTexture = CheckTextureClick(textures, MAX_TEXTURES);
         if (clickedTexture != -1)

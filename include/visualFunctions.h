@@ -29,7 +29,7 @@ void MoveTexture(Vector2 *position)
     position->y += mouseDelta.y;
 }
 
-void DrawButtons(int selectedItem, int itemsNum, Color itemColor[], const char* itemName[])
+void DrawButtons(int selectedItem, int itemsNum, Color itemColor[], const char* itemName[], bool showtitle)
 {
     int itemHeight = 50;
     int itemPadding = 10;
@@ -42,8 +42,11 @@ void DrawButtons(int selectedItem, int itemsNum, Color itemColor[], const char* 
     int menuX = (screenWidth - menuWidth) / 2;
     int menuY = (screenHeight - menuHeight) / 2;
 
-    int titleY = menuY + itemPadding - 150;
-    DrawText("The Boys", menuX + itemPadding + 35, titleY, 40, BLACK);
+    if (showtitle)
+    {
+        int titleY = menuY + itemPadding - 150;
+        DrawText("The Boys", menuX + itemPadding + 35, titleY, 40, BLACK);
+    }
 
     for (int i = 0; i < itemsNum; i++) {
         // calculate position and size of item rectangle

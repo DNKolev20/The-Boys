@@ -6,4 +6,5 @@ void config()
     InitWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "The Boys");
     SetTargetFPS(60);
     SetExitKey(0);
+
 }

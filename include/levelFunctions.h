@@ -59,5 +59,7 @@ bool isUnlocked(int level)
 {
     std::vector<LevelData> savefileData = readSaveFile("savefile.txt");
 
+    if (level == 4) return true;
+
     return savefileData[level-1].value == true ? 1 : 0;
 }

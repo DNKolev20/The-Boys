@@ -18,11 +18,13 @@ const float SCREEN_HEIGHT = GetScreenHeight();
 
 int currentLevel = 1;
 
-void game();
-void options();
+void levelOne();
+void levelTwo();
+void levelThree();
 void menu();
 
 #include "visualFunctions.h"
+#include "Levels/pauseMenu.h"
 #include "Levels/levelOne.h"
 #include "Levels/levelTwo.h"
 #include "Levels/levelThree.h"

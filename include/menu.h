@@ -29,7 +29,7 @@ void menu()
         ClearBackground(RAYWHITE);
 
         // draw menu items
-        DrawButtons(selectedItem, itemsNum, itemColor, itemName);
+        DrawButtons(selectedItem, itemsNum, itemColor, itemName, true);
 
         EndDrawing();
 

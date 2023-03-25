@@ -11,6 +11,8 @@ void levelOne()
 
     while (!WindowShouldClose())
     {
+
+
         // Update
         int clickedTexture = CheckTextureClick(textures, MAX_TEXTURES);
         if (clickedTexture != -1)
@@ -33,6 +35,11 @@ void levelOne()
             DrawTexture(textures[i], texturePositions[i].x, texturePositions[i].y, WHITE);
         }
         EndDrawing();
+
+        if (IsKeyPressed(KEY_ESCAPE))
+        {
+            pauseMenu();    
+        }
     }
     // Unload textures
     for (int i = 0; i < MAX_TEXTURES; i++)
