@@ -4,11 +4,9 @@ void levelSelection()
 {
     int MAX_TEXTURES = 3;
 
-    Texture2D levelTextures[MAX_TEXTURES] = {
-        LoadTexture("../res/testImg.png"),
-        LoadTexture("../res/testImg.png"),
-        LoadTexture("../res/testImg.png")
-    };
+    Texture2D levelTextures[MAX_TEXTURES];
+
+    *levelTextures = checkUnlocked(levelTextures);
 
      // Define the colors to be used for the squares
     Color squareColor = GRAY;
@@ -108,15 +106,22 @@ void levelSelection()
 
         EndDrawing();
 
-        if (IsKeyPressed(KEY_ENTER) && selectedSquare >= 0 && selectedSquare <= 3)
+        if (IsKeyPressed(KEY_ENTER) && selectedSquare >= 0 && selectedSquare <= 3 && isUnlocked(selectedSquare+1))
         {
-            switch (selectedSquare) {
+            switch (selectedSquare) 
+            {
                 case 0:
-                    std::cout << 0 << std::endl;
+                    currentLevel = 1;
+                    menu();
+                    return;
                 case 1:
-                    std::cout << 1 << std::endl;
+                    currentLevel = 2;
+                    menu();
+                    return;
                 case 2:
-                    std::cout << 2 << std::endl;
+                    currentLevel = 3;
+                    menu();
+                    return;
                 case 3:
                     menu();
                     return;
@@ -124,5 +129,12 @@ void levelSelection()
             }
         }
     }
+    // Unload textures
+    for (int i = 0; i < MAX_TEXTURES; i++)
+    {
+        UnloadTexture(levelTextures[i]);
+    }
+
+
     CloseWindow();
 }
