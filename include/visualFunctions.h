@@ -1,10 +1,6 @@
 #include <globals.h>
 
-Vector2 texturePositions[MAX_TEXTURES] = {0};
-int itemHeight = 50;
-int itemPadding = 10;
-int itemTextSize = 20;
-int itemTextPadding = 15;
+Vector2 texturePositions[2] = {0};
 
 // Check which texture has been clicked
 int CheckTextureClick(Texture2D textures[], int count)
@@ -35,6 +31,9 @@ void MoveTexture(Vector2 *position)
 
 void DrawButtons(int selectedItem, int itemsNum, Color itemColor[], const char* itemName[])
 {
+    int itemHeight = 50;
+    int itemPadding = 10;
+    int itemTextSize = 20;
     int screenWidth = GetScreenWidth();
     int screenHeight = GetScreenHeight();
 

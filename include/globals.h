@@ -10,8 +10,6 @@
 #include "raymath.h"
 #include "raylib.h"
 
-#define MAX_TEXTURES 2
-
 const float SCREEN_WIDTH = GetScreenWidth();
 const float SCREEN_HEIGHT = GetScreenHeight();
 
@@ -21,6 +19,7 @@ void menu();
 
 #include "config.h"
 #include "visualFunctions.h"
+#include "levelFunctions.h"
 #include "levels.h"
 #include "game.h"
 #include "options.h"

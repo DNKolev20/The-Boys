@@ -2,15 +2,29 @@
 
 void levelSelection()
 {
-    Texture2D levelTexture = LoadTexture("../res/testImg.png");
-    Texture2D levelTexture2 = LoadTexture("../res/testImg.png");
-    Texture2D levelTexture3 = LoadTexture("../res/testImg.png");
+    int MAX_TEXTURES = 3;
+
+    Texture2D levelTextures[MAX_TEXTURES] = {
+        LoadTexture("../res/testImg.png"),
+        LoadTexture("../res/testImg.png"),
+        LoadTexture("../res/testImg.png")
+    };
 
      // Define the colors to be used for the squares
     Color squareColor = GRAY;
     Color textColor = WHITE;
     int selectedSquare = 0;
 
+    const char* text[3] = {
+        "Level 1",
+        "Level 2",
+        "Level 3"
+    };
+
+    float textWidth[3];
+    float textStartX[3];
+
+    Vector2 texturePos;
 
     while (!WindowShouldClose()) 
     {
@@ -19,21 +33,21 @@ void levelSelection()
         float totalWidth = squareSize * 3 + squareSpacing * 2;
         float startX = (GetScreenWidth() - totalWidth) / 2;
         float startY = (GetScreenHeight() - squareSize) / 2;
-        Rectangle square1 = { startX, startY, squareSize, squareSize };
-        Rectangle square2 = { startX + squareSize + squareSpacing, startY, squareSize, squareSize };
-        Rectangle square3 = { startX + squareSize * 2 + squareSpacing * 2, startY, squareSize, squareSize };
 
-        // Calculate text sizes and positions
-        const char* text1 = "Level 1";
-        const char* text2 = "Level 2";
-        const char* text3 = "Level 3";
+        Rectangle squares[3] {
+            /* Element 1*/ {startX, startY, squareSize, squareSize},
+            /* Element 2*/ {startX + squareSize + squareSpacing, startY, squareSize, squareSize},
+            /* Element 3*/ {startX + squareSize * 2 + squareSpacing * 2, startY, squareSize, squareSize }
+        };
+
         float textHeight = GetScreenHeight() / 20;
-        float textWidth1 = MeasureText(text1, textHeight);
-        float textWidth2 = MeasureText(text2, textHeight);
-        float textWidth3 = MeasureText(text3, textHeight);
-        float textStartX1 = square1.x + (squareSize - textWidth1) / 2;
-        float textStartX2 = square2.x + (squareSize - textWidth2) / 2;
-        float textStartX3 = square3.x + (squareSize - textWidth3) / 2;
+
+        for (int i = 0; i < 3; i++)
+            textWidth[i] = MeasureText(text[i], textHeight);
+
+        for (int i = 0; i < 3; i++)
+            textStartX[i] = squares[i].x + (squareSize - textWidth[i]) / 2;
+
         float textY = startY + squareSize + GetScreenHeight() / 20;
 
         // Calculate back button size and position on the screen
@@ -75,33 +89,22 @@ void levelSelection()
 
         ClearBackground(RAYWHITE);
 
-        DrawRectangleRec(square1, selectedSquare == 0 ? GREEN : BLUE);
-        DrawRectangleRec(square2, selectedSquare == 1 ? GREEN : BLUE);
-        DrawRectangleRec(square3, selectedSquare == 2 ? GREEN : BLUE);
-        DrawRectangleRec(backButtonRec, selectedSquare == 3 ? GREEN : squareColor);
+        drawSelectPanel(squares, selectedSquare, MAX_TEXTURES);
 
-        DrawText(text1, textStartX1, textY, textHeight, BLACK);
-        DrawText(text2, textStartX2, textY, textHeight, BLACK);
-        DrawText(text3, textStartX3, textY, textHeight, BLACK);
+        DrawRectangleRec(backButtonRec, selectedSquare == 3 ? BLACK : squareColor);
+
+        drawTextForPanels(text, textStartX, textY, textHeight, MAX_TEXTURES);
         DrawText(backButton, backButtonX, backButtonY, backButtonHeight, textColor);
 
-        Vector2 texturePos = {
-        square1.x + (square1.width - levelTexture.width) / 2,
-        square1.y + (square1.height - levelTexture.height) / 2
-        };
-        DrawTexture(levelTexture, texturePos.x, texturePos.y, textColor);
+        for (int i = 0; i < MAX_TEXTURES; i++)
+        {
+            texturePos = {
+                squares[i].x + (squares[i].width - levelTextures[i].width) / 2,
+                squares[i].y + (squares[i].width - levelTextures[i].width) / 2
+            };
 
-        texturePos = {
-            square2.x + (square2.width - levelTexture2.width) / 2,
-            square2.y + (square2.height - levelTexture2.height) / 2
-        };
-        DrawTexture(levelTexture2, texturePos.x, texturePos.y, textColor);
-
-        texturePos = {
-            square3.x + (square3.width - levelTexture3.width) / 2,
-            square3.y + (square3.height - levelTexture3.height) / 2
-        };
-        DrawTexture(levelTexture3, texturePos.x, texturePos.y, textColor);
+            DrawTexture(levelTextures[i], texturePos.x, texturePos.y, textColor);
+        }
 
         EndDrawing();
 

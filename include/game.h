@@ -2,6 +2,8 @@
 
 void game()
 {
+    int MAX_TEXTURES = 2;
+
     // Load textures
     Texture2D textures[MAX_TEXTURES] = {
         LoadTexture("../res/scalpel.png"), 
