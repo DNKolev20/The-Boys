@@ -2,35 +2,6 @@
 
 extern int currentStage;
 
-void DrawDashedLine(Vector2 startPos, Vector2 endPos, float dashLength, float gapLength, float offset, Color color)
-{
-    Vector2 dir = Vector2Subtract(endPos, startPos);
-    float length = Vector2Length(dir);
-    dir = Vector2Normalize(dir);
-    
-    float remainingLength = length;
-    Vector2 currentPos = startPos;
-
-    while (remainingLength > 0) {
-        Vector2 dashStart = currentPos;
-        Vector2 dashEnd = Vector2Add(currentPos, Vector2Scale(dir, fmin(remainingLength, dashLength)));
-        
-        if (offset > 0) {
-            float offsetLength = fmod(offset, dashLength + gapLength);
-            if (offsetLength > 0 && offsetLength < dashLength) {
-                float dashOffset = dashLength - offsetLength;
-                dashStart = Vector2Add(dashStart, Vector2Scale(dir, dashOffset));
-            }
-            offset -= fmin(offsetLength, dashLength + gapLength);
-        }
-        
-        DrawLineEx(dashStart, dashEnd, 2, color);
-
-        remainingLength -= dashLength;
-        currentPos = Vector2Add(dashEnd, Vector2Scale(dir, gapLength));
-    }
-}
-
 void fadeBetweenStages(float fadeTime) 
 {
     const int screenWidth = GetScreenWidth();
@@ -60,14 +31,9 @@ void fadeBetweenStages(float fadeTime)
     levelOne();
 }
 
-void startCutting()
+void cutAnimation(Texture2D instrument, Texture2D background, Vector2 startPos, Vector2 endPos)
 {
-    Texture2D background = LoadTexture("../res/Level1_images/stage1_pre-cut.png");
-    Texture2D scalpel = LoadTexture("../res/scalpel.png");
-
     // Define animation variables
-    Vector2 startPos = { 967, 140 }; // Starting position of image
-    Vector2 endPos = { 951, 939 }; // Ending position of image
     Vector2 currPos = startPos; // Current position of image
     float animationTime = 0.0f; // Time elapsed in animation
     float animationDuration = 2.0f; // Duration of animation in seconds
@@ -102,6 +68,12 @@ void startCutting()
         float posX = (screenWidth - textureWidth) / 2.0f;
         float posY = (screenHeight - textureHeight) / 2.0f;
 
+        // Handle input
+        if (IsKeyPressed(KEY_ESCAPE))
+        {
+            pauseMenu();    
+        }
+
         // Update animation
         if (animationTime < animationDuration) 
         {
@@ -112,9 +84,16 @@ void startCutting()
         }
         else
         {
-            currentStage++;
-            std::cout << currentStage;
-            levelOne();
+
+            switch (currentStage)
+            {
+                case 3:
+                    currentStage++;
+                    levelOne();
+                    break;
+            }
+            
+            break;
         }
 
         // Draw
@@ -125,15 +104,29 @@ void startCutting()
                    (Rectangle){posX, posY, textureWidth, textureHeight}, (Vector2){0, 0}, 0.0f, WHITE);
 
         // Draw texture
-        DrawTexture(scalpel, currPos.x, currPos.y - scalpel.height, WHITE);
+        DrawTexture(instrument, currPos.x, currPos.y - instrument.height, WHITE);
 
         EndDrawing();
 
     }
 
-    // Unload textures
-    UnloadTexture(scalpel);
+}
 
-    // De-initialization
-    CloseWindow();
+void editLevel(std::string level) 
+{
+    std::ifstream infile("savefile.txt");
+    std::string line;
+    std::ofstream outfile("temp.txt");
+
+    while (getline(infile, line)) {
+        if (line.substr(0, level.length()) == level) {
+            line.replace(line.find("=") + 2, 1, "1");
+        }
+        outfile << line << std::endl;
+    }
+
+    infile.close();
+    outfile.close();
+    remove("savefile.txt");
+    rename("temp.txt", "savefile.txt");
 }

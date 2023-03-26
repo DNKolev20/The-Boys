@@ -22,10 +22,9 @@ void levelThree();
 void menu();
 
 #include "visualFunctions.h"
+#include "Levels/pauseMenu.h"
 
 #include "Levels/functionsForLevels.h"
-
-#include "Levels/pauseMenu.h"
 
 #include "Levels/levelOneStages.h"
 #include "Levels/levelOne.h"
