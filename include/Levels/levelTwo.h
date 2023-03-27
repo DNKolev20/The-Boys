@@ -2,33 +2,10 @@
 
 void levelTwo()
 {
-    int MAX_TEXTURES = 1;
-
-    // Load textures
-    Texture2D textures[MAX_TEXTURES] = {
-        LoadTexture("../res/tweezers.png")
-    };
-
-    while (!WindowShouldClose())
+    switch (currentStage)
     {
-        if (IsKeyPressed(KEY_ESCAPE))
-        {
-            pauseMenu();
-        }
-
-        BeginDrawing();
-        
-        ClearBackground(RAYWHITE);
-
-        EndDrawing();
+        case 1:
+            levelTwoStageOne();
+            break;
     }
-    // Unload textures
-    for (int i = 0; i < MAX_TEXTURES; i++)
-    {
-        UnloadTexture(textures[i]);
-    }
-
-    // De-initialization
-    CloseWindow();
-
 }

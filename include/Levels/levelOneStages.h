@@ -2,7 +2,7 @@
 
 extern int currentStage;
 
-void stageOne()
+void levelOneStageOne()
 {
     Texture2D background = LoadTexture("../res/Level1_images/patient.png");
     const char* text[3] = {
@@ -57,7 +57,7 @@ void stageOne()
     CloseWindow();
 }
 
-void stageTwo()
+void levelOneStageTwo()
 {
     Texture2D background = LoadTexture("../res/Level1_images/stage1_pre-cut.png");
     const Texture2D& scalpel = LoadTexture("../res/scalpel.png");
@@ -103,7 +103,7 @@ void stageTwo()
     CloseWindow();
 }
 
-void stageThree()
+void levelOneStageThree()
 {
     Texture2D background = LoadTexture("../res/Level1_images/cut_wound.png");
 
@@ -176,7 +176,7 @@ void stageThree()
     CloseWindow();    
 }
 
-void stageFour()
+void levelOneStageFour()
 {
     Texture2D background = LoadTexture("../res/Level1_images/open_wound.png");
     Texture2D osteotome = LoadTexture("../res/osteotome.png");
@@ -249,7 +249,7 @@ void stageFour()
     CloseWindow();     
 }
 
-void stageFive()
+void levelOneStageFive()
 {
     Texture2D background = LoadTexture("../res/Level1_images/open_wound_no_bones.png");
     Texture2D scalpel = LoadTexture("../res/scalpel.png");
@@ -328,7 +328,7 @@ void stageFive()
     CloseWindow();     
 }
 
-void stageSix()
+void levelOneStageSix()
 {
     Texture2D background = LoadTexture("../res/Level1_images/no_heart.png");
     Texture2D heart = LoadTexture("../res/Level1_images/heart.png");
@@ -376,7 +376,7 @@ void stageSix()
     CloseWindow();   
 }
 
-void stageSeven()
+void levelOneStageSeven()
 {
     Texture2D background = LoadTexture("../res/Level1_images/new_heart.png");
     
@@ -433,7 +433,7 @@ void stageSeven()
     CloseWindow();    
 }
 
-void stageEight()
+void levelOneStageEight()
 {
     Texture2D background = LoadTexture("../res/Level1_images/cut_wound.png");
     Texture2D needle = LoadTexture("../res/needle.png");
@@ -480,7 +480,7 @@ void stageEight()
     CloseWindow();
 }
 
-void stageNine()
+void levelOneStageNine()
 {
     Texture2D background = LoadTexture("../res/Level1_images/closed_wound.png");
 
@@ -514,7 +514,7 @@ void stageNine()
     CloseWindow();
 }
 
-void stageTen()
+void levelOneStageTen()
 {
     Texture2D background = LoadTexture("../res/Level1_images/patient.png");
     const char* text[2] = {
@@ -556,7 +556,7 @@ void stageTen()
             currentLevel++;
             currentStage = 1;
             editLevel("level2");
-            menu();
+            menu(0);
         }
 
         if (IsKeyPressed(KEY_ENTER) && end < 3)

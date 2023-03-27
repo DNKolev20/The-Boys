@@ -1,6 +1,7 @@
 #include <globals.h>
 
-struct LevelData {
+struct LevelData 
+{
     std::string name;
     bool value;
 };
@@ -42,16 +43,27 @@ Texture2D checkUnlocked(Texture2D levelTextures[])
 {
     std::vector<LevelData> savefileData = readSaveFile("savefile.txt");
 
-    for (int i = 0; i < 3; i++)
+    for (int i = 0; i < 3; i++) 
     {
         LevelData& level = savefileData[i];
-        if (level.value)
-            levelTextures[i] = LoadTexture("../res/testImg.png");
-        else
+        if (level.value == 1) 
+        {
+            switch(i)
+            {
+                case 0:
+                    levelTextures[i] = LoadTexture("../res/level1.png");
+                    break;
+                case 1:
+                    levelTextures[i] = LoadTexture("../res/level2.png");
+                    break;
+                case 2:
+                    levelTextures[i] = LoadTexture("../res/level3.png");
+                    break;
+            }
+        } else
             levelTextures[i] = LoadTexture("../res/locked.png");
     }
         
-
     return *levelTextures;
 }
 

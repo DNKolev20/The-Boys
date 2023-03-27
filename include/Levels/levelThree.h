@@ -2,34 +2,10 @@
 
 void levelThree()
 {
-    int MAX_TEXTURES = 1;
-
-    // Load textures
-    Texture2D textures[MAX_TEXTURES] = {
-        LoadTexture("../res/locked.png")
-    };
-
-    while (!WindowShouldClose())
-    {        
-        if (IsKeyPressed(KEY_ESCAPE))
-        {
-            pauseMenu();
-        }
-
-
-        BeginDrawing();
-        
-        ClearBackground(RAYWHITE);
-
-        EndDrawing();
-    }
-    // Unload textures
-    for (int i = 0; i < MAX_TEXTURES; i++)
+    switch (currentStage)
     {
-        UnloadTexture(textures[i]);
+        case 1:
+            levelThreeStageOne();
+            break;
     }
-
-    // De-initialization
-    CloseWindow();
-
 }

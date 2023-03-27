@@ -52,7 +52,7 @@ void pauseMenu()
                         isPaused = false;
                         break;
                     case 2:
-                        menu();
+                        menu(0);
                         return;
                     case 3:
                         CloseWindow();

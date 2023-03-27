@@ -1,6 +1,6 @@
 #include <globals.h>
 
-void options()
+void options(int selectedItemMenus)
 {
     int selectedItem = 0;
     int itemsNum = 2;
@@ -25,7 +25,7 @@ void options()
 
         if (IsKeyPressed(KEY_ESCAPE))
         {
-            menu();
+            menu(selectedItemMenus);
             return;            
         }
 
@@ -46,7 +46,7 @@ void options()
                     ToggleFullscreen();
                     break;
                 case 1:
-                    menu();
+                    menu(selectedItemMenus);
                     return;
             }
         }

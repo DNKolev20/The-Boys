@@ -1,6 +1,6 @@
 #include <globals.h>
 
-void levelSelection()
+void levelSelection(int selectedItemMenus)
 {
     int MAX_TEXTURES = 3;
 
@@ -23,6 +23,19 @@ void levelSelection()
     float textStartX[3];
 
     Vector2 texturePos;
+
+    switch (currentLevel)
+    {
+        case 1:
+            selectedSquare = 0;
+            break;
+        case 2:
+            selectedSquare = 1;
+            break;
+        case 3:
+            selectedSquare = 2;
+            break;
+    }
 
     while (!WindowShouldClose()) 
     {
@@ -84,7 +97,7 @@ void levelSelection()
 
         if (IsKeyPressed(KEY_ESCAPE))
         {
-            menu();
+            menu(selectedItemMenus);
             return;            
         }
 
@@ -118,18 +131,21 @@ void levelSelection()
             {
                 case 0:
                     currentLevel = 1;
-                    menu();
+                    currentStage = 1;
+                    menu(selectedItemMenus);
                     return;
                 case 1:
                     currentLevel = 2;
-                    menu();
+                    currentStage = 1;
+                    menu(selectedItemMenus);
                     return;
                 case 2:
                     currentLevel = 3;
-                    menu();
+                    currentStage = 1;
+                    menu(selectedItemMenus);
                     return;
                 case 3:
-                    menu();
+                    menu(selectedItemMenus);
                     return;
 
             }

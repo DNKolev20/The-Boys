@@ -1,8 +1,8 @@
 #include <globals.h>
 
-void menu()
+void menu(int selectedItemMenus)
 {
-    int selectedItem = 0;
+    int selectedItem = selectedItemMenus;
     int itemsNum = 4;
     Color itemColor[itemsNum] = { GRAY, GRAY, GRAY, GRAY};
     const char* itemName[itemsNum] = { "Play", "Select Levels", "Options", "Exit"};
@@ -38,13 +38,13 @@ void menu()
             // Action to take when Enter key is pressed on selected button
             switch (selectedItem) {
                 case 0:
-                    game();
+                    game(selectedItem);
                     return;
                 case 1:
-                    levelSelection();
+                    levelSelection(selectedItem);
                     return;
                 case 2:
-                    options();
+                    options(selectedItem);
                     return;
                 case 3:
                     CloseWindow();

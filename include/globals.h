@@ -19,7 +19,7 @@ int currentStage = 1;
 void levelOne();
 void levelTwo();
 void levelThree();
-void menu();
+void menu(int selectedItemMenus);
 
 #include "functions/visualFunctions.h"
 #include "Levels/pauseMenu.h"
@@ -29,8 +29,10 @@ void menu();
 #include "Levels/levelOneStages.h"
 #include "Levels/levelOne.h"
 
+#include "Levels/levelTwoStages.h"
 #include "Levels/levelTwo.h"
 
+#include "Levels/levelThreeStages.h"
 #include "Levels/levelThree.h"
 
 #include "config.h"

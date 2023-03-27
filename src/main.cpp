@@ -4,6 +4,6 @@ int main()
 {
     config();
 
-    menu(); // starts the game
+    menu(0); // starts the game
     return 0;
 }

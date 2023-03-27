@@ -1,6 +1,6 @@
 #include <globals.h>
 
-void game()
+void game(int selectedItemMenus)
 {
    switch(currentLevel)
     {

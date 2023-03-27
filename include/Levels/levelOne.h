@@ -2,41 +2,40 @@
 
 void levelOne()
 {
-
     switch (currentStage)
     {
         case 1:
-            stageOne();
+            levelOneStageOne();
             break;
         case 2:
             fadeBetweenStages(2.0f);
             break;
         case 3:
-            stageTwo();
+            levelOneStageTwo();
             break;
         case 4:
-            stageThree();
+            levelOneStageThree();
             break;
         case 5:
-            stageFour();
+            levelOneStageFour();
             break;
         case 6:
-            stageFive();
+            levelOneStageFive();
             break;
         case 7:
-            stageSix();
+            levelOneStageSix();
             break;
         case 8:
-            stageSeven();
+            levelOneStageSeven();
             break;
         case 9:
-            stageEight();
+            levelOneStageEight();
             break;
         case 10:
-            stageNine();
+            levelOneStageNine();
             break;
         case 11:
-            stageTen();
+            levelOneStageTen();
             break;
     }
 }
