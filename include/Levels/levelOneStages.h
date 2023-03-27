@@ -26,45 +26,14 @@ void stageOne()
 
     while (!WindowShouldClose())
     {    
-        // Get the current screen size
-        int screenWidth = GetScreenWidth();
-        int screenHeight = GetScreenHeight();
-
-        // Calculate the aspect ratio of the texture and the screen
-        float textureRatio = (float)background.height / (float)background.width;
-        float screenRatio = (float)screenHeight / (float)screenWidth;
-
-        float scale = 1.0f;
-
-        // Determine the scale factor to maintain aspect ratio and fill the screen
-        if (textureRatio > screenRatio) 
-        {
-            scale = (float)screenHeight / (float)background.height;
-        }
-        else 
-        {
-            scale = (float)screenWidth / (float)background.width;
-        }
-
-        // Calculate the size of the background after scaling
-        float textureWidth = background.width * scale;
-        float textureHeight = background.height * scale;
-
-        // Calculate the position to center the background on the screen
-        float posX = (screenWidth - textureWidth) / 2.0f;
-        float posY = (screenHeight - textureHeight) / 2.0f;
-
         // Handle input
-        if (IsKeyPressed(KEY_ESCAPE))
-        {
+         if (IsKeyPressed(KEY_ESCAPE))
             pauseMenu();    
-        }
 
         // Draw
         BeginDrawing();
-
-        DrawTexturePro(background, (Rectangle){0, 0, (float)background.width, (float)background.height},
-                   (Rectangle){posX, posY, textureWidth, textureHeight}, (Vector2){0, 0}, 0.0f, WHITE);
+        ClearBackground(RAYWHITE);
+        backgroundImage(background);
 
         if (tutorial != 3)
             DrawTextEx(GetFontDefault(), text[tutorial], textPosition[tutorial], fontSize, 2.0f, BLACK);
@@ -91,7 +60,7 @@ void stageOne()
 void stageTwo()
 {
     Texture2D background = LoadTexture("../res/Level1_images/stage1_pre-cut.png");
-    Texture2D scalpel = LoadTexture("../res/scalpel.png");
+    const Texture2D& scalpel = LoadTexture("../res/scalpel.png");
 
     Vector2 startPos = { 967, 140 }; // Starting position of image
     Vector2 endPos = { 951, 939 }; // Ending position of image
@@ -102,59 +71,11 @@ void stageTwo()
 
     while (!WindowShouldClose())
     {
-        // Get the current screen size
-        int screenWidth = GetScreenWidth();
-        int screenHeight = GetScreenHeight();
-
-        // Calculate the aspect ratio of the texture and the screen
-        float textureRatio = (float)background.height / (float)background.width;
-        float screenRatio = (float)screenHeight / (float)screenWidth;
-
-        float scale = 1.0f;
-
-        // Determine the scale factor to maintain aspect ratio and fill the screen
-        if (textureRatio > screenRatio) 
-        {
-            scale = (float)screenHeight / (float)background.height;
-        }
-        else 
-        {
-            scale = (float)screenWidth / (float)background.width;
-        }
-
-        // Calculate the size of the background after scaling
-        float textureWidth = background.width * scale;
-        float textureHeight = background.height * scale;
-
-        // Calculate the position to center the background on the screen
-        float posX = (screenWidth - textureWidth) / 2.0f;
-        float posY = (screenHeight - textureHeight) / 2.0f;
-
         // Handle input
         if (IsKeyPressed(KEY_ESCAPE))
-        {
             pauseMenu();    
-        }
 
-        if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
-        {
-            Vector2 mousePosition = GetMousePosition();
-            if (CheckCollisionPointRec(mousePosition, { position.x, position.y, (float)scalpel.width, (float)scalpel.height }))
-            {
-                offset = Vector2Subtract(mousePosition, position);
-                isDragging = true;
-            }
-        }
-
-        if (isDragging && IsMouseButtonDown(MOUSE_LEFT_BUTTON))
-        {
-            Vector2 mousePosition = GetMousePosition();
-            position = Vector2Subtract(mousePosition, offset);
-        }
-        else
-        {
-            isDragging = false;
-        }
+        moveTexture(scalpel, position, offset, isDragging);
 
         Rectangle rect = { position.x, position.y, (float)scalpel.width, (float)scalpel.height };
         if (CheckCollisionCircleRec(startPos, 15, rect))
@@ -162,17 +83,11 @@ void stageTwo()
             cutAnimation(scalpel, background, startPos, endPos);
             DrawCircleV(startPos, 15, BLUE);
         }
-        else
-        {
-            DrawCircleV(startPos, 15, BLUE);
-        }
 
         // Draw
         BeginDrawing();
         ClearBackground(RAYWHITE);
-
-        DrawTexturePro(background, (Rectangle){0, 0, (float)background.width, (float)background.height},
-                   (Rectangle){posX, posY, textureWidth, textureHeight}, (Vector2){0, 0}, 0.0f, WHITE);
+        backgroundImage(background);
 
         DrawTexture(scalpel, position.x, position.y, WHITE);
 
@@ -192,105 +107,58 @@ void stageThree()
 {
     Texture2D background = LoadTexture("../res/Level1_images/cut_wound.png");
 
-    Texture2D retracts[2] = {
-        LoadTexture("../res/retractor.png"),
-        LoadTexture("../res/retractor.png")
-    };
+    Texture2D retract = LoadTexture("../res/retractor.png");
 
     Vector2 startPos[2] = {
         { 939, 506 },
         { 979, 506 }
     };
 
-    Vector2 position[2] = {
-        {0, 0},
-        {0, 0}
-    };
-
-    Vector2 offset[2] = {
-        {0, 0},
-        {0, 0}
-    };
-
-    bool isDragging[2] = {0, 0};
+    Vector2 position = {0, 0};
+    Vector2 offset = {0, 0};
+    bool isDragging = false;
 
     while (!WindowShouldClose())
     {
-        // Get the current screen size
-        int screenWidth = GetScreenWidth();
-        int screenHeight = GetScreenHeight();
-
-        // Calculate the aspect ratio of the texture and the screen
-        float textureRatio = (float)background.height / (float)background.width;
-        float screenRatio = (float)screenHeight / (float)screenWidth;
-
-        float scale = 1.0f;
-
-        // Determine the scale factor to maintain aspect ratio and fill the screen
-        if (textureRatio > screenRatio) 
-            scale = (float)screenHeight / (float)background.height;
-        else 
-            scale = (float)screenWidth / (float)background.width;
-
-        // Calculate the size of the background after scaling
-        float textureWidth = background.width * scale;
-        float textureHeight = background.height * scale;
-
-        // Calculate the position to center the background on the screen
-        float posX = (screenWidth - textureWidth) / 2.0f;
-        float posY = (screenHeight - textureHeight) / 2.0f;
-
-
         // Handle input
-        if (IsKeyPressed(KEY_ESCAPE))
-        {
+         if (IsKeyPressed(KEY_ESCAPE))
             pauseMenu();    
+
+        moveTexture(retract, position, offset, isDragging);
+
+        // Update image 1
+        if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
+        {
+            Vector2 mousePosition = GetMousePosition();
+            if (CheckCollisionPointRec(mousePosition, { position.x, position.y, (float)retract.width, (float)retract.height }))
+            {
+                offset = Vector2Subtract(mousePosition, position);
+                isDragging = true;
+            }
         }
 
-        for (int i = 0; i < 2; i++)
+        if (isDragging && IsMouseButtonDown(MOUSE_LEFT_BUTTON))
         {
-            // Update image 1
-            if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
-            {
-                Vector2 mousePosition = GetMousePosition();
-                if (CheckCollisionPointRec(mousePosition, { position[i].x, position[i].y, (float)retracts[i].width, (float)retracts[i].height }))
-                {
-                    offset[i] = Vector2Subtract(mousePosition, position[i]);
-                    isDragging[i] = true;
-                }
-            }
+            Vector2 mousePosition = GetMousePosition();
+            position = Vector2Subtract(mousePosition, offset);
+        }
+        else
+            isDragging = false;
 
-            if (isDragging[i] && IsMouseButtonDown(MOUSE_LEFT_BUTTON))
-            {
-                Vector2 mousePosition = GetMousePosition();
-                position[i] = Vector2Subtract(mousePosition, offset[i]);
-            }
-            else
-            {
-                isDragging[i] = false;
-            } 
-        }           
+        Rectangle rect = {position.x, position.y, (float)retract.width, (float)retract.height};
 
-        Rectangle rects[2] = {
-            { position[0].x, position[0].y, (float)retracts[0].width, (float)retracts[0].height },
-            { position[1].x, position[1].y, (float)retracts[1].width, (float)retracts[1].height }
-        };
-
-        bool collidesWithCircle = CheckCollisionCircleRec(startPos[0], 15, rects[0]) && CheckCollisionCircleRec(startPos[1], 15, rects[1]);
+        bool collidesWithCircle = CheckCollisionCircleRec(startPos[0], 15, rect) && CheckCollisionCircleRec(startPos[1], 15, rect);
 
         // Draw
         BeginDrawing();
         ClearBackground(RAYWHITE);
 
-        DrawTexturePro(background, (Rectangle){0, 0, (float)background.width, (float)background.height},
-                   (Rectangle){posX, posY, textureWidth, textureHeight}, (Vector2){0, 0}, 0.0f, WHITE);
+        backgroundImage(background);
+
+        DrawTexture(retract, position.x, position.y, WHITE);    
 
         for (int i = 0; i < 2; i++)
-            DrawTexture(retracts[i], position[i].x, position[i].y, WHITE);
-        
-
-        DrawCircleV(startPos[0], 15, BLUE);
-        DrawCircleV(startPos[1], 15, BLUE);
+            DrawCircleV(startPos[i], 15, BLUE);
 
         if (collidesWithCircle)
         {
@@ -327,56 +195,11 @@ void stageFour()
 
     while (!WindowShouldClose())
     {
-        // Get the current screen size
-        int screenWidth = GetScreenWidth();
-        int screenHeight = GetScreenHeight();
-
-        // Calculate the aspect ratio of the texture and the screen
-        float textureRatio = (float)background.height / (float)background.width;
-        float screenRatio = (float)screenHeight / (float)screenWidth;
-
-        float scale = 1.0f;
-
-        // Determine the scale factor to maintain aspect ratio and fill the screen
-        if (textureRatio > screenRatio) 
-            scale = (float)screenHeight / (float)background.height;
-        else 
-            scale = (float)screenWidth / (float)background.width;
-
-        // Calculate the size of the background after scaling
-        float textureWidth = background.width * scale;
-        float textureHeight = background.height * scale;
-
-        // Calculate the position to center the background on the screen
-        float posX = (screenWidth - textureWidth) / 2.0f;
-        float posY = (screenHeight - textureHeight) / 2.0f;
-
-
         // Handle input
-        if (IsKeyPressed(KEY_ESCAPE))
-        {
+         if (IsKeyPressed(KEY_ESCAPE))
             pauseMenu();    
-        }
 
-        if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
-        {
-            Vector2 mousePosition = GetMousePosition();
-            if (CheckCollisionPointRec(mousePosition, { position.x, position.y, (float)osteotome.width, (float)osteotome.height }))
-            {
-                offset = Vector2Subtract(mousePosition, position);
-                isDragging = true;
-            }
-        }
-
-        if (isDragging && IsMouseButtonDown(MOUSE_LEFT_BUTTON))
-        {
-            Vector2 mousePosition = GetMousePosition();
-            position = Vector2Subtract(mousePosition, offset);
-        }
-        else
-        {
-            isDragging = false;
-        }
+        moveTexture(osteotome, position, offset, isDragging);
 
         Rectangle rect = { position.x, position.y, (float)osteotome.width, (float)osteotome.height };
 
@@ -384,8 +207,7 @@ void stageFour()
         BeginDrawing();
         ClearBackground(RAYWHITE);
 
-        DrawTexturePro(background, (Rectangle){0, 0, (float)background.width, (float)background.height},
-                   (Rectangle){posX, posY, textureWidth, textureHeight}, (Vector2){0, 0}, 0.0f, WHITE);
+        backgroundImage(background);
 
         for (int i = 0; i < 3; i++)
         {
@@ -448,57 +270,11 @@ void stageFive()
 
     while (!WindowShouldClose())
     {
-
-        // Get the current screen size
-        int screenWidth = GetScreenWidth();
-        int screenHeight = GetScreenHeight();
-
-        // Calculate the aspect ratio of the texture and the screen
-        float textureRatio = (float)background.height / (float)background.width;
-        float screenRatio = (float)screenHeight / (float)screenWidth;
-
-        float scale = 1.0f;
-
-        // Determine the scale factor to maintain aspect ratio and fill the screen
-        if (textureRatio > screenRatio) 
-            scale = (float)screenHeight / (float)background.height;
-        else 
-            scale = (float)screenWidth / (float)background.width;
-
-        // Calculate the size of the background after scaling
-        float textureWidth = background.width * scale;
-        float textureHeight = background.height * scale;
-
-        // Calculate the position to center the background on the screen
-        float posX = (screenWidth - textureWidth) / 2.0f;
-        float posY = (screenHeight - textureHeight) / 2.0f;
-
-
         // Handle input
         if (IsKeyPressed(KEY_ESCAPE))
-        {
             pauseMenu();    
-        }
 
-        if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
-        {
-            Vector2 mousePosition = GetMousePosition();
-            if (CheckCollisionPointRec(mousePosition, { position.x, position.y, (float)scalpel.width, (float)scalpel.height }))
-            {
-                offset = Vector2Subtract(mousePosition, position);
-                isDragging = true;
-            }
-        }
-
-        if (isDragging && IsMouseButtonDown(MOUSE_LEFT_BUTTON))
-        {
-            Vector2 mousePosition = GetMousePosition();
-            position = Vector2Subtract(mousePosition, offset);
-        }
-        else
-        {
-            isDragging = false;
-        }
+        moveTexture(scalpel, position, offset, isDragging);
 
         Rectangle scalpelRect = {position.x, position.y, (float)scalpel.width, (float)scalpel.height};
 
@@ -524,8 +300,7 @@ void stageFive()
         BeginDrawing();
         ClearBackground(RAYWHITE);
 
-        DrawTexturePro(background, (Rectangle){0, 0, (float)background.width, (float)background.height},
-                   (Rectangle){posX, posY, textureWidth, textureHeight}, (Vector2){0, 0}, 0.0f, WHITE);
+        backgroundImage(background);
 
         for (const auto& positions : cutPositions) {
             for (size_t i = 0; i < positions.size(); i += 2) {
@@ -566,59 +341,12 @@ void stageSix()
 
     while (!WindowShouldClose())
     {
-        // Get the current screen size
-        int screenWidth = GetScreenWidth();
-        int screenHeight = GetScreenHeight();
-
-        // Calculate the aspect ratio of the texture and the screen
-        float textureRatio = (float)background.height / (float)background.width;
-        float screenRatio = (float)screenHeight / (float)screenWidth;
-
-        float scale = 1.0f;
-
-        // Determine the scale factor to maintain aspect ratio and fill the screen
-        if (textureRatio > screenRatio) 
-        {
-            scale = (float)screenHeight / (float)background.height;
-        }
-        else 
-        {
-            scale = (float)screenWidth / (float)background.width;
-        }
-
-        // Calculate the size of the background after scaling
-        float textureWidth = background.width * scale;
-        float textureHeight = background.height * scale;
-
-        // Calculate the position to center the background on the screen
-        float posX = (screenWidth - textureWidth) / 2.0f;
-        float posY = (screenHeight - textureHeight) / 2.0f;
 
         // Handle input
-        if (IsKeyPressed(KEY_ESCAPE))
-        {
+         if (IsKeyPressed(KEY_ESCAPE))
             pauseMenu();    
-        }
 
-        if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
-        {
-            Vector2 mousePosition = GetMousePosition();
-            if (CheckCollisionPointRec(mousePosition, { position.x, position.y, (float)heart.width, (float)heart.height }))
-            {
-                offset = Vector2Subtract(mousePosition, position);
-                isDragging = true;
-            }
-        }
-
-        if (isDragging && IsMouseButtonDown(MOUSE_LEFT_BUTTON))
-        {
-            Vector2 mousePosition = GetMousePosition();
-            position = Vector2Subtract(mousePosition, offset);
-        }
-        else
-        {
-            isDragging = false;
-        }
+        moveTexture(heart, position, offset, isDragging);
 
         Rectangle rect = { position.x, position.y, (float)heart.width, (float)heart.height };
         if (CheckCollisionCircleRec(startPos, 15, rect))
@@ -627,20 +355,12 @@ void stageSix()
             levelOne();
             DrawCircleV(startPos, 15, BLUE);
         }
-        else
-        {
-            DrawCircleV(startPos, 15, BLUE);
-        }
-
-        if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
-            std::cout << GetMousePosition().x << GetMousePosition().y << std::endl;
 
         // Draw
         BeginDrawing();
         ClearBackground(RAYWHITE);
 
-        DrawTexturePro(background, (Rectangle){0, 0, (float)background.width, (float)background.height},
-                   (Rectangle){posX, posY, textureWidth, textureHeight}, (Vector2){0, 0}, 0.0f, WHITE);
+        backgroundImage(background);
 
         DrawTexture(heart, position.x, position.y, WHITE);
 
@@ -658,14 +378,6 @@ void stageSix()
 
 void stageSeven()
 {
-    std::vector<std::vector<Vector2>> cutPositions 
-    {{
-        {{ /*Start position ->*/ { 823, 439 }, { 888, 420 }   /*<- End position*/   }},
-        {{ /*Start position ->*/ { 898, 418 }, { 985, 429 }   /*<- End position*/   }},
-        {{ /*Start position ->*/ { 1017, 427 }, { 1076, 425 } /*<- End position*/ }},
-        {{ /*Start position ->*/ { 1115, 449 }, { 1121, 505 } /*<- End position*/ }}
-    }};
-
     Texture2D background = LoadTexture("../res/Level1_images/new_heart.png");
     
     // Variables to keep track of time and which background image to use
@@ -676,37 +388,11 @@ void stageSeven()
     {
         timer += GetFrameTime();
 
-        // Get the current screen size
-        int screenWidth = GetScreenWidth();
-        int screenHeight = GetScreenHeight();
-
-        // Calculate the aspect ratio of the texture and the screen
-        float textureRatio = (float)background.height / (float)background.width;
-        float screenRatio = (float)screenHeight / (float)screenWidth;
-
-        float scale = 1.0f;
-
-        // Determine the scale factor to maintain aspect ratio and fill the screen
-        if (textureRatio > screenRatio) 
-            scale = (float)screenHeight / (float)background.height;
-        else 
-            scale = (float)screenWidth / (float)background.width;
-
-        // Calculate the size of the background after scaling
-        float textureWidth = background.width * scale;
-        float textureHeight = background.height * scale;
-
-        // Calculate the position to center the background on the screen
-        float posX = (screenWidth - textureWidth) / 2.0f;
-        float posY = (screenHeight - textureHeight) / 2.0f;
-
         // Handle input
         if (IsKeyPressed(KEY_ESCAPE))
-        {
             pauseMenu();    
-        }
 
-            timer += GetFrameTime();
+        timer += GetFrameTime();
         
         // If 1.5 seconds have passed, change the background image
         if (timer >= 1.5f)
@@ -734,14 +420,8 @@ void stageSeven()
         BeginDrawing();
         ClearBackground(RAYWHITE);
 
-        for (const auto& positions : cutPositions) {
-            for (size_t i = 0; i < positions.size(); i += 2) {
-                DrawLineEx(positions[i], positions[i + 1], 5, LIGHTGRAY);
-            }
-        }
+        backgroundImage(background);
 
-        DrawTexturePro(background, (Rectangle){0, 0, (float)background.width, (float)background.height},
-                   (Rectangle){posX, posY, textureWidth, textureHeight}, (Vector2){0, 0}, 0.0f, WHITE);
 
         EndDrawing();
     }
@@ -766,59 +446,11 @@ void stageEight()
 
     while (!WindowShouldClose())
     {
-        // Get the current screen size
-        int screenWidth = GetScreenWidth();
-        int screenHeight = GetScreenHeight();
-
-        // Calculate the aspect ratio of the texture and the screen
-        float textureRatio = (float)background.height / (float)background.width;
-        float screenRatio = (float)screenHeight / (float)screenWidth;
-
-        float scale = 1.0f;
-
-        // Determine the scale factor to maintain aspect ratio and fill the screen
-        if (textureRatio > screenRatio) 
-        {
-            scale = (float)screenHeight / (float)background.height;
-        }
-        else 
-        {
-            scale = (float)screenWidth / (float)background.width;
-        }
-
-        // Calculate the size of the background after scaling
-        float textureWidth = background.width * scale;
-        float textureHeight = background.height * scale;
-
-        // Calculate the position to center the background on the screen
-        float posX = (screenWidth - textureWidth) / 2.0f;
-        float posY = (screenHeight - textureHeight) / 2.0f;
-
         // Handle input
-        if (IsKeyPressed(KEY_ESCAPE))
-        {
+         if (IsKeyPressed(KEY_ESCAPE))
             pauseMenu();    
-        }
 
-        if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
-        {
-            Vector2 mousePosition = GetMousePosition();
-            if (CheckCollisionPointRec(mousePosition, { position.x, position.y, (float)needle.width, (float)needle.height }))
-            {
-                offset = Vector2Subtract(mousePosition, position);
-                isDragging = true;
-            }
-        }
-
-        if (isDragging && IsMouseButtonDown(MOUSE_LEFT_BUTTON))
-        {
-            Vector2 mousePosition = GetMousePosition();
-            position = Vector2Subtract(mousePosition, offset);
-        }
-        else
-        {
-            isDragging = false;
-        }
+        moveTexture(needle, position, offset, isDragging);
 
         Rectangle rect = { position.x, position.y, (float)needle.width, (float)needle.height };
         if (CheckCollisionCircleRec(startPos, 15, rect))
@@ -827,17 +459,12 @@ void stageEight()
             levelOne();
             DrawCircleV(startPos, 15, BLUE);
         }
-        else
-        {
-            DrawCircleV(startPos, 15, BLUE);
-        }
 
         // Draw
         BeginDrawing();
         ClearBackground(RAYWHITE);
 
-        DrawTexturePro(background, (Rectangle){0, 0, (float)background.width, (float)background.height},
-                   (Rectangle){posX, posY, textureWidth, textureHeight}, (Vector2){0, 0}, 0.0f, WHITE);
+        backgroundImage(background);
 
         DrawTexture(needle, position.x, position.y, WHITE);
 
@@ -859,46 +486,15 @@ void stageNine()
 
     while (!WindowShouldClose())
     {
-        // Get the current screen size
-        int screenWidth = GetScreenWidth();
-        int screenHeight = GetScreenHeight();
-
-        // Calculate the aspect ratio of the texture and the screen
-        float textureRatio = (float)background.height / (float)background.width;
-        float screenRatio = (float)screenHeight / (float)screenWidth;
-
-        float scale = 1.0f;
-
-        // Determine the scale factor to maintain aspect ratio and fill the screen
-        if (textureRatio > screenRatio) 
-        {
-            scale = (float)screenHeight / (float)background.height;
-        }
-        else 
-        {
-            scale = (float)screenWidth / (float)background.width;
-        }
-
-        // Calculate the size of the background after scaling
-        float textureWidth = background.width * scale;
-        float textureHeight = background.height * scale;
-
-        // Calculate the position to center the background on the screen
-        float posX = (screenWidth - textureWidth) / 2.0f;
-        float posY = (screenHeight - textureHeight) / 2.0f;
-
         // Handle input
-        if (IsKeyPressed(KEY_ESCAPE))
-        {
+         if (IsKeyPressed(KEY_ESCAPE))
             pauseMenu();    
-        }
 
         // Draw
         BeginDrawing();
         ClearBackground(RAYWHITE);
 
-        DrawTexturePro(background, (Rectangle){0, 0, (float)background.width, (float)background.height},
-                   (Rectangle){posX, posY, textureWidth, textureHeight}, (Vector2){0, 0}, 0.0f, WHITE);
+        backgroundImage(background);
 
         DrawTextEx(GetFontDefault(), "Press [Enter] to continue", {(float)GetScreenWidth()/2 - 200, (float)GetScreenHeight() - 232}, 32, 2.0f, BLACK);
 
@@ -940,46 +536,15 @@ void stageTen()
     int end = 0;
 
     while (!WindowShouldClose())
-    {    
-        // Get the current screen size
-        int screenWidth = GetScreenWidth();
-        int screenHeight = GetScreenHeight();
-
-        // Calculate the aspect ratio of the texture and the screen
-        float textureRatio = (float)background.height / (float)background.width;
-        float screenRatio = (float)screenHeight / (float)screenWidth;
-
-        float scale = 1.0f;
-
-        // Determine the scale factor to maintain aspect ratio and fill the screen
-        if (textureRatio > screenRatio) 
-        {
-            scale = (float)screenHeight / (float)background.height;
-        }
-        else 
-        {
-            scale = (float)screenWidth / (float)background.width;
-        }
-
-        // Calculate the size of the background after scaling
-        float textureWidth = background.width * scale;
-        float textureHeight = background.height * scale;
-
-        // Calculate the position to center the background on the screen
-        float posX = (screenWidth - textureWidth) / 2.0f;
-        float posY = (screenHeight - textureHeight) / 2.0f;
-
+    {
         // Handle input
-        if (IsKeyPressed(KEY_ESCAPE))
-        {
+         if (IsKeyPressed(KEY_ESCAPE))
             pauseMenu();    
-        }
 
         // Draw
         BeginDrawing();
 
-        DrawTexturePro(background, (Rectangle){0, 0, (float)background.width, (float)background.height},
-                   (Rectangle){posX, posY, textureWidth, textureHeight}, (Vector2){0, 0}, 0.0f, WHITE);
+        backgroundImage(background);
 
         if (end != 2)
             DrawTextEx(GetFontDefault(), text[end], textPosition[end], fontSize, 2.0f, BLACK);

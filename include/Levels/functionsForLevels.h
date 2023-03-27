@@ -31,6 +31,30 @@ void fadeBetweenStages(float fadeTime)
     levelOne();
 }
 
+void moveTexture(Texture2D texture, Vector2& position, Vector2& offset, bool& isDragging)
+{
+    if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
+    {
+        Vector2 mousePosition = GetMousePosition();
+        if (CheckCollisionPointRec(mousePosition, { position.x, position.y, (float)texture.width, (float)texture.height }))
+        {
+            offset = Vector2Subtract(mousePosition, position);
+            isDragging = true;
+        }
+    }
+
+    if (isDragging && IsMouseButtonDown(MOUSE_LEFT_BUTTON))
+    {
+        Vector2 mousePosition = GetMousePosition();
+        position = Vector2Subtract(mousePosition, offset);
+    }
+    else
+    {
+        isDragging = false;
+    }
+}
+
+
 void cutAnimation(Texture2D instrument, Texture2D background, Vector2 startPos, Vector2 endPos)
 {
     // Define animation variables
@@ -40,33 +64,6 @@ void cutAnimation(Texture2D instrument, Texture2D background, Vector2 startPos, 
 
     while (!WindowShouldClose())
     {
-        // Get the current screen size
-        int screenWidth = GetScreenWidth();
-        int screenHeight = GetScreenHeight();
-
-        // Calculate the aspect ratio of the texture and the screen
-        float textureRatio = (float)background.height / (float)background.width;
-        float screenRatio = (float)screenHeight / (float)screenWidth;
-
-        float scale = 1.0f;
-
-        // Determine the scale factor to maintain aspect ratio and fill the screen
-        if (textureRatio > screenRatio) 
-        {
-            scale = (float)screenHeight / (float)background.height;
-        }
-        else 
-        {
-            scale = (float)screenWidth / (float)background.width;
-        }
-
-        // Calculate the size of the background after scaling
-        float textureWidth = background.width * scale;
-        float textureHeight = background.height * scale;
-
-        // Calculate the position to center the background on the screen
-        float posX = (screenWidth - textureWidth) / 2.0f;
-        float posY = (screenHeight - textureHeight) / 2.0f;
 
         // Handle input
         if (IsKeyPressed(KEY_ESCAPE))
@@ -100,8 +97,7 @@ void cutAnimation(Texture2D instrument, Texture2D background, Vector2 startPos, 
         BeginDrawing();
         ClearBackground(RAYWHITE);
 
-        DrawTexturePro(background, (Rectangle){0, 0, (float)background.width, (float)background.height},
-                   (Rectangle){posX, posY, textureWidth, textureHeight}, (Vector2){0, 0}, 0.0f, WHITE);
+        backgroundImage(background);
 
         // Draw texture
         DrawTexture(instrument, currPos.x, currPos.y - instrument.height, WHITE);
@@ -109,7 +105,6 @@ void cutAnimation(Texture2D instrument, Texture2D background, Vector2 startPos, 
         EndDrawing();
 
     }
-
 }
 
 void editLevel(std::string level) 

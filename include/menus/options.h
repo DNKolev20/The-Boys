@@ -23,6 +23,12 @@ void options()
             }
         }
 
+        if (IsKeyPressed(KEY_ESCAPE))
+        {
+            menu();
+            return;            
+        }
+
         BeginDrawing();
         
         ClearBackground(RAYWHITE);

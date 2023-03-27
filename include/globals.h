@@ -8,10 +8,10 @@
 #include <string>
 #include <vector>
 
-#include "raylib.h"
-#include "rlgl.h"
-#include "raymath.h"
-#include "raylib.h"
+#include "raylib/raylib.h"
+#include "raylib/rlgl.h"
+#include "raylib/raymath.h"
+#include "raylib/raylib.h"
 
 int currentLevel = 1;
 int currentStage = 1;
@@ -21,7 +21,7 @@ void levelTwo();
 void levelThree();
 void menu();
 
-#include "visualFunctions.h"
+#include "functions/visualFunctions.h"
 #include "Levels/pauseMenu.h"
 
 #include "Levels/functionsForLevels.h"
@@ -34,10 +34,10 @@ void menu();
 #include "Levels/levelThree.h"
 
 #include "config.h"
-#include "levelFunctions.h"
-#include "levelsMenu.h"
+#include "functions/levelFunctions.h"
+#include "menus/levelsMenu.h"
 #include "game.h"
-#include "options.h"
-#include "menu.h"
+#include "menus/options.h"
+#include "menus/menu.h"
 
 #endif

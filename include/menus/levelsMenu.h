@@ -82,6 +82,12 @@ void levelSelection()
             selectedSquare = 0;
         }
 
+        if (IsKeyPressed(KEY_ESCAPE))
+        {
+            menu();
+            return;            
+        }
+
         // Draw squares and text
         BeginDrawing();
 
