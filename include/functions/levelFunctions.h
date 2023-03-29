@@ -12,10 +12,10 @@ void drawSelectPanel(Rectangle squares[], int selectedSquare, int MAX_TEXTURES)
         DrawRectangleRec(squares[i], selectedSquare == i ? BLACK : GRAY);
 }
 
-void drawTextForPanels(const char* text[], float textStartX[], float textY, float textHeight, int MAX_TEXTURES)
+void drawTextForPanels(const char* text[], float textStartX[], float textY, float textHeight, int MAX_TEXTURES, Font font)
 {
     for (int i = 0; i < MAX_TEXTURES; i++)
-        DrawText(text[i], textStartX[i], textY, textHeight, BLACK);
+        DrawTextEx(font, text[i], {textStartX[i], textY}, textHeight, 2, BLACK);
 }
 
 std::vector<LevelData> readSaveFile(const std::string& filename)

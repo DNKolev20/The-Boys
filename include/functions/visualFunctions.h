@@ -28,9 +28,12 @@ void backgroundImage(Texture2D background)
 
     DrawTexturePro(background, (Rectangle){0, 0, (float)background.width, (float)background.height},
     (Rectangle){posX, posY, textureWidth, textureHeight}, (Vector2){0, 0}, 0.0f, WHITE);
+
+    if (IsKeyPressed(KEY_F11))
+            ToggleFullscreen();
 }
 
-void DrawButtons(int selectedItem, int itemsNum, Color itemColor[], const char* itemName[], bool showtitle)
+void drawMenu(const char* title, int selectedItem, int itemsNum, Color itemColor[], const char* itemName[], Font titleFont, Font buttonFont)
 {
     int itemHeight = 50;
     int itemPadding = 10;
@@ -43,13 +46,14 @@ void DrawButtons(int selectedItem, int itemsNum, Color itemColor[], const char* 
     int menuX = (screenWidth - menuWidth) / 2;
     int menuY = (screenHeight - menuHeight) / 2;
 
-    if (showtitle)
-    {
-        int titleY = menuY + itemPadding - 150;
-        DrawText("Surgery simulator", menuX + itemPadding - 30, titleY, 40, BLACK);
-    }
+    Vector2 textSizeTitle = MeasureTextEx(titleFont, title, 40, 1);
+    Vector2 textPositionTitle = {(screenWidth - textSizeTitle.x) / 2, (screenHeight - textSizeTitle.y) / 2 - 120};
 
-    for (int i = 0; i < itemsNum; i++) {
+    DrawTextEx(titleFont, title, {(screenWidth - textSizeTitle.x) / 2 - 6, textPositionTitle.y}, 41, 2, WHITE);
+    DrawTextEx(titleFont, title, textPositionTitle, 40, 2, RED);
+
+    for (int i = 0; i < itemsNum; i++) 
+    {
         // calculate position and size of item rectangle
         int x = menuX + itemPadding;
         int y = menuY + itemPadding + (itemHeight + itemPadding) * i;
@@ -67,10 +71,9 @@ void DrawButtons(int selectedItem, int itemsNum, Color itemColor[], const char* 
 
         // calculate position of item text
         int textWidth = MeasureText(itemName[i], itemTextSize);
-        int textX = x + (width - textWidth) / 2;
-        int textY = y + (height - itemTextSize) / 2;
+        Vector2 textPositionButton = {float(x + (width - textWidth) / 2), float(y + (height - itemTextSize) / 2)};
 
         // draw item text
-        DrawText(itemName[i], textX, textY, itemTextSize, WHITE);
+        DrawTextEx(buttonFont, itemName[i], textPositionButton, 20, 2, WHITE);
     }
 }

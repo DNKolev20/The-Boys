@@ -2,6 +2,9 @@
 
 void levelSelection(int selectedItemMenus)
 {
+    Texture2D background = LoadTexture("../res/background.png");
+    Font font = LoadFontEx("../res/fonts/futura.ttf", 32, 0 , 250);
+
     int MAX_TEXTURES = 3;
 
     Texture2D levelTextures[MAX_TEXTURES];
@@ -64,11 +67,12 @@ void levelSelection(int selectedItemMenus)
         // Calculate back button size and position on the screen
         const char* backButton = "Back";
         float backButtonHeight = GetScreenHeight() / 25;
-        float backButtonWidth = MeasureText(backButton, backButtonHeight);
+        float backButtonWidth = MeasureText(backButton, backButtonHeight) + 10;
         float backButtonX = (GetScreenWidth() - backButtonWidth) / 2;
         float backButtonY = textY + GetScreenHeight() / 10;
         float backButtonPadding = backButtonHeight / 2;
-        Rectangle backButtonRec = {
+        Rectangle backButtonRec = 
+        {
             backButtonX - backButtonPadding,
             backButtonY - backButtonPadding,
             backButtonWidth + backButtonPadding * 2,
@@ -104,14 +108,17 @@ void levelSelection(int selectedItemMenus)
         // Draw squares and text
         BeginDrawing();
 
+        backgroundImage(background);
+
         ClearBackground(RAYWHITE);
 
         drawSelectPanel(squares, selectedSquare, MAX_TEXTURES);
 
         DrawRectangleRec(backButtonRec, selectedSquare == 3 ? BLACK : squareColor);
 
-        drawTextForPanels(text, textStartX, textY, textHeight, MAX_TEXTURES);
-        DrawText(backButton, backButtonX, backButtonY, backButtonHeight, textColor);
+        drawTextForPanels(text, textStartX, textY, textHeight, MAX_TEXTURES, font);
+
+        DrawTextEx(font, backButton, {backButtonX, backButtonY}, backButtonHeight, 2, textColor);
 
         for (int i = 0; i < MAX_TEXTURES; i++)
         {

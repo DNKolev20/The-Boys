@@ -5,19 +5,21 @@ extern int currentStage;
 void levelOneStageOne()
 {
     Texture2D background = LoadTexture("../res/Level1_images/patient.png");
+    Font font = LoadFontEx("../res/fonts/backwardssans.otf", 64, 0 , 250);
+
     const char* text[3] = {
         "Hello doctor in training, today your task will be to \noperate A-Train's heart. [Click Enter to continue]",
         "You will be given instruments for the operation.\n[Click Enter to continue]",
         "You will be guided by your mentor.\n[Click Enter to continue]"
     };
     
-    const int fontSize = 32;
+    const int fontSize = 48;
     
     Vector2 textSize[3];
     Vector2 textPosition[3];
 
     for (int i = 0; i < 3; i++)
-        textSize[i] = MeasureTextEx(GetFontDefault(), text[i], fontSize, 2.0f);
+        textSize[i] = MeasureTextEx(font, text[i], fontSize, 2.0f);
 
     for (int i = 0; i < 3; i++)
         textPosition[i] = {GetScreenWidth()/2 - textSize[i].x/2, GetScreenHeight() - textSize[i].y - 200};
@@ -36,7 +38,7 @@ void levelOneStageOne()
         backgroundImage(background);
 
         if (tutorial != 3)
-            DrawTextEx(GetFontDefault(), text[tutorial], textPosition[tutorial], fontSize, 2.0f, BLACK);
+            DrawTextEx(font, text[tutorial], textPosition[tutorial], fontSize, 2.0f, BLACK);
 
         EndDrawing();
 
@@ -517,18 +519,20 @@ void levelOneStageNine()
 void levelOneStageTen()
 {
     Texture2D background = LoadTexture("../res/Level1_images/patient.png");
+    Font font = LoadFontEx("../res/fonts/backwardssans.otf", 64, 0 , 250);
+
     const char* text[2] = {
         "Well done! You're on your way to become an excellent surgeon!\n [Click Enter to continue]",
         "Now head onto the next patient.\n[Click Enter to continue]",
     };
     
-    const int fontSize = 32;
+    const int fontSize = 48;
     
     Vector2 textSize[2];
     Vector2 textPosition[2];
 
     for (int i = 0; i < 2; i++)
-        textSize[i] = MeasureTextEx(GetFontDefault(), text[i], fontSize, 2.0f);
+        textSize[i] = MeasureTextEx(font, text[i], fontSize, 2.0f);
 
     for (int i = 0; i < 2; i++)
         textPosition[i] = {GetScreenWidth()/2 - textSize[i].x/2, GetScreenHeight() - textSize[i].y - 200};
@@ -547,7 +551,7 @@ void levelOneStageTen()
         backgroundImage(background);
 
         if (end != 2)
-            DrawTextEx(GetFontDefault(), text[end], textPosition[end], fontSize, 2.0f, BLACK);
+            DrawTextEx(font, text[end], textPosition[end], fontSize, 2.0f, BLACK);
 
         EndDrawing();
 

@@ -2,6 +2,10 @@
 
 void pauseMenu() 
 {
+    Texture2D background = LoadTexture("../res/background.png");
+    Font titleFont = LoadFont("../res/fonts/Chopsic.otf");
+    Font buttonFont = LoadFontEx("../res/fonts/molot.otf", 32, 0 , 250);
+
     int selectedItem = 0;
     int itemsNum = 4;
     Color itemColor[itemsNum] = { GRAY, GRAY, GRAY, GRAY};
@@ -33,12 +37,15 @@ void pauseMenu()
 
             BeginDrawing();
 
+            backgroundImage(background);
+
             ClearBackground(RAYWHITE);
 
-            DrawText("PAUSE MENU", GetScreenWidth() / 2 - MeasureText("PAUSE MENU", 40) / 2, GetScreenHeight() / 2 - 60, 40, BLACK);
+            // DrawTextEx(titleFont, "PAUSE MENU", {(float)GetScreenWidth() / 2 - MeasureText("PAUSE MENU", 40) / 2 - 22, (float)GetScreenHeight() / 2 - 60}, 41, 2, WHITE);
+            // DrawTextEx(titleFont, "PAUSE MENU", {(float)GetScreenWidth() / 2 - MeasureText("PAUSE MENU", 40) / 2 - 19, (float)GetScreenHeight() / 2 - 60}, 40, 2, RED);
 
             // draw menu items
-            DrawButtons(selectedItem, itemsNum, itemColor, itemName, false);
+            drawMenu("PAUSE MENU", selectedItem, itemsNum, itemColor, itemName, titleFont, buttonFont);
     
             EndDrawing();
             // Check for button press

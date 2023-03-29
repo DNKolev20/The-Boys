@@ -2,6 +2,10 @@
 
 void options(int selectedItemMenus)
 {
+    Texture2D background = LoadTexture("../res/background.png");
+    Font titleFont = LoadFontEx("../res/fonts/Chopsic.otf", 32, 0 , 250);
+    Font buttonFont = LoadFontEx("../res/fonts/molot.otf", 32, 0 , 250);
+
     int selectedItem = 0;
     int itemsNum = 2;
     Color itemColor[itemsNum] = { GRAY, GRAY};
@@ -31,10 +35,12 @@ void options(int selectedItemMenus)
 
         BeginDrawing();
         
+        backgroundImage(background);
+
         ClearBackground(RAYWHITE);
 
         // draw menu items
-        DrawButtons(selectedItem, itemsNum, itemColor, itemName, true);
+        drawMenu("Surgery Simulator", selectedItem, itemsNum, itemColor, itemName, titleFont, buttonFont);
 
         EndDrawing();
 
