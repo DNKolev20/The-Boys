@@ -177,5 +177,179 @@ void levelTwoStageThree()
 
 void levelTwoStageFour()
 {
-    
+    Texture2D background = LoadTexture("../res/Level2_images/open_wound.png");
+    const Texture2D& scalpel = LoadTexture("../res/scalpel.png");
+
+    Vector2 startPos = { 950, 641 }; // Starting position of image
+    Vector2 endPos = { 984, 609 }; // Ending position of image
+
+    Vector2 position = { 0, 0 };
+    Vector2 offset = { 0, 0 };
+    bool isDragging = false;
+
+    while (!WindowShouldClose())
+    {
+        // Handle input
+        if (IsKeyPressed(KEY_ESCAPE))
+            pauseMenu();    
+
+        moveTexture(scalpel, position, offset, isDragging);
+
+        Rectangle rect = { position.x, position.y, (float)scalpel.width, (float)scalpel.height };
+        if (CheckCollisionCircleRec(startPos, 10, rect))
+        {
+            cutAnimation(scalpel, background, startPos, endPos);
+            DrawCircleV(startPos, 10, BLUE);
+        }
+
+        // Draw
+        BeginDrawing();
+        ClearBackground(RAYWHITE);
+        backgroundImage(background);
+
+        DrawTexture(scalpel, position.x, position.y, WHITE);
+
+        DrawCircleV(startPos, 10, BLUE);
+
+        EndDrawing();
+    }
+
+    // Unload textures
+    UnloadTexture(background);
+    UnloadTexture(scalpel);
+
+    // De-initialization
+    CloseWindow();
+}
+
+void levelTwoStageFive()
+{
+    Texture2D background = LoadTexture("../res/Level2_images/removed_appendicitis_with_retractors.png");
+
+    Vector2 circlesPos[2] = {
+        {1370, 247},
+        {499, 708},
+    }; // Starting positions of the circles
+    Vector2 mousePos;
+    bool isCircleClicked[2] = {0, 0};
+    double distance[2];
+
+    while (!WindowShouldClose())
+    {
+        // Handle input
+        if (IsKeyPressed(KEY_ESCAPE))
+            pauseMenu();
+
+        mousePos = GetMousePosition();
+        distance[0] = sqrt(pow(mousePos.x - circlesPos[0].x, 2) + pow(mousePos.y - circlesPos[0].y, 2));
+        distance[1] = sqrt(pow(mousePos.x - circlesPos[1].x, 2) + pow(mousePos.y - circlesPos[1].y, 2));    
+
+        // Draw
+        BeginDrawing();
+        ClearBackground(RAYWHITE);
+        backgroundImage(background);
+
+        for (int i = 0; i < 2; i++)
+        {
+            if (distance[i] < 10 && IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
+                isCircleClicked[i] = true;
+            else if (isCircleClicked[i])
+                DrawCircleV(circlesPos[i], 10, GREEN);
+            else
+                DrawCircleV(circlesPos[i], 10, BLUE);
+
+        }
+
+        if (isCircleClicked[0] == 1 && isCircleClicked[1] == 1)
+        {
+            currentStage++;
+            levelTwo();
+        }
+        EndDrawing();
+    }
+
+    // Unload textures
+    UnloadTexture(background);
+    // De-initialization
+    CloseWindow();
+}
+
+void levelTwoStageSix()
+{
+    Texture2D background = LoadTexture("../res/Level2_images/removed_appendicitis.png");
+    Texture2D needle = LoadTexture("../res/needle.png");
+
+    Vector2 startPos = { 943, 402 };
+
+    Vector2 position = { 0, 0 };
+    Vector2 offset = { 0, 0 };
+    bool isDragging = false;
+
+    while (!WindowShouldClose())
+    {
+        // Handle input
+         if (IsKeyPressed(KEY_ESCAPE))
+            pauseMenu();    
+
+        moveTexture(needle, position, offset, isDragging);
+
+        Rectangle rect = { position.x, position.y, (float)needle.width, (float)needle.height };
+        if (CheckCollisionCircleRec(startPos, 15, rect))
+        {
+            currentStage++;
+            levelTwo();
+            DrawCircleV(startPos, 15, BLUE);
+        }
+
+        // Draw
+        BeginDrawing();
+        ClearBackground(RAYWHITE);
+
+        backgroundImage(background);
+
+        DrawTexture(needle, position.x, position.y, WHITE);
+
+        DrawCircleV(startPos, 15, BLUE);
+        EndDrawing();
+    }
+
+    // Unload textures
+    UnloadTexture(background);
+    UnloadTexture(needle);
+
+    // De-initialization
+    CloseWindow();
+}
+
+void levelTwoStageSeven()
+{
+    Texture2D background = LoadTexture("../res/Level2_images/closed_wound.png");
+
+    while (!WindowShouldClose())
+    {
+        // Handle input
+         if (IsKeyPressed(KEY_ESCAPE))
+            pauseMenu();    
+
+        // Draw
+        BeginDrawing();
+        ClearBackground(RAYWHITE);
+
+        backgroundImage(background);
+
+        DrawTextEx(GetFontDefault(), "Press [Enter] to continue", {(float)GetScreenWidth()/2 - 200, (float)GetScreenHeight() - 232}, 32, 2.0f, BLACK);
+
+        EndDrawing();
+
+        if (IsKeyPressed(KEY_ENTER))
+        {
+            menu(0);
+        }
+    }
+
+    // Unload textures
+    UnloadTexture(background);
+
+    // De-initialization
+    CloseWindow();
 }
