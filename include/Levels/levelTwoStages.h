@@ -324,6 +324,7 @@ void levelTwoStageSix()
 void levelTwoStageSeven()
 {
     Texture2D background = LoadTexture("../res/Level2_images/closed_wound.png");
+    Font font = LoadFontEx("../res/fonts/backwardssans.otf", 64, 0 , 250);
 
     while (!WindowShouldClose())
     {
@@ -337,14 +338,73 @@ void levelTwoStageSeven()
 
         backgroundImage(background);
 
-        DrawTextEx(GetFontDefault(), "Press [Enter] to continue", {(float)GetScreenWidth()/2 - 200, (float)GetScreenHeight() - 232}, 32, 2.0f, BLACK);
+        DrawTextEx(font, "Press [Enter] to continue", {(float)GetScreenWidth()/2 - 200, (float)GetScreenHeight() - 232}, 32, 2.0f, BLACK);
 
         EndDrawing();
 
         if (IsKeyPressed(KEY_ENTER))
         {
+            currentStage++;
+            levelTwo();
+        }
+    }
+
+    // Unload textures
+    UnloadTexture(background);
+
+    // De-initialization
+    CloseWindow();
+}
+
+void levelTwoStageEight()
+{
+    Texture2D background = LoadTexture("../res/Level2_images/patient.png");
+    Font font = LoadFontEx("../res/fonts/backwardssans.otf", 64, 0 , 250);
+
+    const char* text[2] = {
+        "Well done! You're on your way to become an excellent surgeon!\n [Click Enter to continue]",
+        "Now head onto the next patient.\n[Click Enter to continue]",
+    };
+    
+    const int fontSize = 48;
+    
+    Vector2 textSize[2];
+    Vector2 textPosition[2];
+
+    for (int i = 0; i < 2; i++)
+        textSize[i] = MeasureTextEx(font, text[i], fontSize, 2.0f);
+
+    for (int i = 0; i < 2; i++)
+        textPosition[i] = {GetScreenWidth()/2 - textSize[i].x/2, GetScreenHeight() - textSize[i].y - 200};
+
+    int end = 0;
+
+    while (!WindowShouldClose())
+    {
+        // Handle input
+         if (IsKeyPressed(KEY_ESCAPE))
+            pauseMenu();    
+
+        // Draw
+        BeginDrawing();
+
+        backgroundImage(background);
+
+        if (end != 2)
+            DrawTextEx(font, text[end], textPosition[end], fontSize, 2.0f, BLACK);
+
+        EndDrawing();
+
+        if (end == 2)
+        {
+            currentLevel++;
+            currentStage = 1;
+            editLevel("level3");
             menu(0);
         }
+
+        if (IsKeyPressed(KEY_ENTER) && end < 3)
+            end++;
     }
 
     // Unload textures

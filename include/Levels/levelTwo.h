@@ -19,5 +19,17 @@ void levelTwo()
         case 5:
             levelTwoStageFour();
             break;
+        case 6:
+            levelTwoStageFive();
+            break;
+        case 7:
+            levelTwoStageSix();
+            break;
+        case 8:
+            levelTwoStageSeven();
+            break;
+        case 9:
+            levelTwoStageEight();
+            break;
     }
 }
