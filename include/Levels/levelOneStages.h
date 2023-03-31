@@ -1,7 +1,5 @@
 #include <globals.h>
 
-extern int currentStage;
-
 void levelOneStageOne()
 {
     Texture2D background = LoadTexture("../res/Level1_images/patient.png");

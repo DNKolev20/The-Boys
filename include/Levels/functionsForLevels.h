@@ -28,7 +28,18 @@ void fadeBetweenStages(float fadeTime)
     }
 
     currentStage++;
-    levelOne();
+    switch(currentLevel)
+    {
+        case 1:
+            levelOne();
+            break;
+        case 2:
+            levelTwo();
+            break;
+        case 3:
+            levelThree();
+            break;
+    }
 }
 
 void moveTexture(Texture2D texture, Vector2& position, Vector2& offset, bool& isDragging)
@@ -81,16 +92,19 @@ void cutAnimation(Texture2D instrument, Texture2D background, Vector2 startPos, 
         }
         else
         {
-
-            switch (currentStage)
+            currentStage++;
+            switch(currentLevel)
             {
-                case 3:
-                    currentStage++;
+                case 1:
                     levelOne();
                     break;
+                case 2:
+                    levelTwo();
+                    break;
+                case 3:
+                    levelThree();
+                    break;
             }
-            
-            break;
         }
 
         // Draw
@@ -103,7 +117,6 @@ void cutAnimation(Texture2D instrument, Texture2D background, Vector2 startPos, 
         DrawTexture(instrument, currPos.x, currPos.y - instrument.height, WHITE);
 
         EndDrawing();
-
     }
 }
 
