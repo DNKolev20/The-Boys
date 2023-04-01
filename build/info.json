@@ -1,0 +1,89 @@
+{
+  "levels": [
+    {
+      "name": "Level 1",
+      "stages": [
+        {
+          "name": "Stage 1",
+          "items": [
+            {
+              "name": "Item 1",
+              "description": "This is item 1 in stage 1 of \nlevel 1",
+              "imagePath": "../res/scalpel.png"
+            },
+            {
+              "name": "Item 2",
+              "description": "This is item 2 in stage 1 of \nlevel 1",
+              "imagePath": "../res/level2.png"
+            }
+          ]
+        },
+        {
+          "name": "Stage 2",
+          "items": [
+            {
+              "name": "Item 1",
+              "description": "This is item 1 in stage 2 of level 1",
+              "imagePath": "../res/scalpel.png"
+            },
+            {
+              "name": "Item 2",
+              "description": "This is item 2 in stage 2 of level 1",
+              "imagePath": "../res/level2.png"
+            }
+          ]
+        },
+        {
+          "name": "Stage 3",
+          "items": [
+            {
+              "name": "Item 1",
+              "description": "This instrument is used to cut \n the skin to make open wound.",
+              "imagePath": "../res/scalpel.png"
+            },
+            {
+              "name": "Item 2",
+              "description": "This is item 2 in stage 3 of level 1",
+              "imagePath": "../res/level2.png"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Level 2",
+      "stages": [
+        {
+          "name": "Stage 1",
+          "items": [
+            {
+              "name": "Item 1",
+              "description": "This is item 1 in stage 1 of level 2",
+              "imagePath": "../res/scalpel.png"
+            },
+            {
+              "name": "Item 2",
+              "description": "This is item 2 in stage 1 of level 2",
+              "imagePath": "../res/scalpel.png"
+            }
+          ]
+        },
+        {
+          "name": "Stage 2",
+          "items": [
+            {
+              "name": "Item 1",
+              "description": "This is item 1 in stage 2 of level 2",
+              "imagePath": "../res/scalpel.png"
+            },
+            {
+              "name": "Item 2",
+              "description": "This is item 2 in stage 2 of level 2",
+              "imagePath": "../res/level2.png"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

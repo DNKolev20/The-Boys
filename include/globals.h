@@ -13,6 +13,10 @@
 #include "raylib/raymath.h"
 #include "raylib/raylib.h"
 
+#include "json.hpp"
+
+#include "json/getInfoFromJson.h"
+
 int currentLevel = 1;
 int currentStage = 1;
 

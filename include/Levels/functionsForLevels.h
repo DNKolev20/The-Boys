@@ -4,8 +4,8 @@ extern int currentStage;
 
 void fadeBetweenStages(float fadeTime) 
 {
-    const int screenWidth = GetScreenWidth();
-    const int screenHeight = GetScreenHeight();
+    int screenWidth = GetScreenWidth();
+    int screenHeight = GetScreenHeight();
 
     int alpha = 255;
     float fadeTimer = 0.0f;
@@ -92,19 +92,19 @@ void cutAnimation(Texture2D instrument, Texture2D background, Vector2 startPos, 
         }
         else
         {
-            currentStage++;
             switch(currentLevel)
             {
                 case 1:
-                    levelOne();
-                    break;
-                case 2:
-                    levelTwo();
-                    break;
-                case 3:
-                    levelThree();
-                    break;
+                    switch (currentStage)
+                    {
+                        case 3:
+                            currentStage++;
+                            levelOne();
+                            break;
+                    }
             }
+
+            break;
         }
 
         // Draw
@@ -137,4 +137,83 @@ void editLevel(std::string level)
     outfile.close();
     remove("savefile.txt");
     rename("temp.txt", "savefile.txt");
+}
+
+void displayImageWithTextAndButton(Texture2D background, const char* buttonText, int numImages, Font font)
+{
+    std::vector<std::string> name = loadItemNames(currentLevel-1, currentStage-1);
+    std::vector<std::string> description = loadItemDescription(currentLevel-1, currentStage-1);
+    std::vector<Texture2D> textures = loadTextures(currentLevel-1, currentStage-1);
+    
+    int screenWidth = GetMonitorWidth(0); // get current screen width
+    int screenHeight = GetMonitorHeight(0); // get current screen height
+
+    int popupWidth = 800;
+    int popupHeight = 500;
+    int popupX = (screenWidth - popupWidth) / 2;
+    int popupY = (screenHeight - popupHeight) / 2;
+
+    int imageX = popupX + 50;
+    int imageY = popupY + 50;
+    int textX = imageX + 350;
+    int textY = imageY;
+    int buttonWidth = 200;
+    int buttonHeight = 50;
+    int buttonX = popupX + popupWidth - 50 - buttonWidth;
+    int buttonY = popupY + popupHeight - 50 - buttonHeight;
+    int buttonFontSize = 24;
+    int textFontSize = 36;
+    int titleFontSize = 48;
+
+    int currentPage = 0;
+
+    while (!WindowShouldClose())
+    {
+        // Handle input
+        if (IsKeyPressed(KEY_ESCAPE))
+            pauseMenu();
+
+        if (IsKeyPressed(KEY_RIGHT) && currentPage < numImages - 1)
+            currentPage++;
+
+        if (IsKeyPressed(KEY_LEFT) && currentPage > 0)
+            currentPage--;
+
+        // Draw
+        BeginDrawing();
+        ClearBackground(RAYWHITE);
+        backgroundImage(background);
+
+        // Draw popup background
+        DrawRectangle(popupX, popupY, popupWidth, popupHeight, Fade(GRAY, 0.7f));
+        DrawRectangleLines(popupX, popupY, popupWidth, popupHeight, BLACK);
+
+        // Draw image
+        DrawTexture(textures[currentPage], imageX, imageY, WHITE);
+
+        // Draw text
+        DrawTextEx(font, name[currentPage].c_str(), {(float)textX, (float)textY}, textFontSize, 2, BLACK);
+        DrawTextEx(font, description[currentPage].c_str(), {(float)textX, float(textY + textFontSize + 20)}, textFontSize, 2, BLACK);
+
+        // Draw button
+        if (CheckCollisionPointRec(GetMousePosition(), { (float)buttonX, (float)buttonY, (float)buttonWidth, (float)buttonHeight }))
+        {
+            DrawRectangle(buttonX, buttonY, buttonWidth, buttonHeight, LIGHTGRAY);
+            DrawTextEx(font, buttonText, {float(buttonX + 20), float(buttonY + 10)}, buttonFontSize, 2, BLACK);
+            if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
+                break;
+        }
+        else
+        {
+            DrawRectangle(buttonX, buttonY, buttonWidth, buttonHeight, GRAY);
+            DrawText(buttonText, buttonX + 20, buttonY + 10, buttonFontSize, BLACK);
+        }
+
+        // Draw page number
+        DrawTextEx(font, TextFormat("%d/%d", currentPage + 1, numImages), {float(popupX + popupWidth - 100), float(popupY + popupHeight - 40)}, titleFontSize, 2, BLACK);
+
+        EndDrawing();
+    }
+
+    return;
 }

@@ -3,7 +3,7 @@
 void levelOneStageOne()
 {
     Texture2D background = LoadTexture("../res/Level1_images/patient.png");
-    Font font = LoadFontEx("../res/fonts/backwardssans.otf", 64, 0 , 250);
+    Font backwardssans = LoadFontEx("../res/fonts/backwardssans.otf", 64, 0 , 250);
 
     const char* text[3] = {
         "Hello doctor in training, today your task will be to \noperate A-Train's heart. [Click Enter to continue]",
@@ -17,7 +17,7 @@ void levelOneStageOne()
     Vector2 textPosition[3];
 
     for (int i = 0; i < 3; i++)
-        textSize[i] = MeasureTextEx(font, text[i], fontSize, 2.0f);
+        textSize[i] = MeasureTextEx(backwardssans, text[i], fontSize, 2.0f);
 
     for (int i = 0; i < 3; i++)
         textPosition[i] = {GetScreenWidth()/2 - textSize[i].x/2, GetScreenHeight() - textSize[i].y - 200};
@@ -36,7 +36,7 @@ void levelOneStageOne()
         backgroundImage(background);
 
         if (tutorial != 3)
-            DrawTextEx(font, text[tutorial], textPosition[tutorial], fontSize, 2.0f, BLACK);
+            DrawTextEx(backwardssans, text[tutorial], textPosition[tutorial], fontSize, 2.0f, BLACK);
 
         EndDrawing();
 
@@ -52,6 +52,7 @@ void levelOneStageOne()
 
     // Unload textures
     UnloadTexture(background);
+    UnloadFont(backwardssans);
 
     // De-initialization
     CloseWindow();
@@ -60,7 +61,8 @@ void levelOneStageOne()
 void levelOneStageTwo()
 {
     Texture2D background = LoadTexture("../res/Level1_images/stage1_pre-cut.png");
-    const Texture2D& scalpel = LoadTexture("../res/scalpel.png");
+    Texture2D scalpel = LoadTexture("../res/scalpel.png");
+    Font backwardssans = LoadFontEx("../res/fonts/backwardssans.otf", 64, 0 , 250);
 
     Vector2 startPos = { 967, 140 }; // Starting position of image
     Vector2 endPos = { 951, 939 }; // Ending position of image
@@ -69,11 +71,16 @@ void levelOneStageTwo()
     Vector2 offset = { 0, 0 };
     bool isDragging = false;
 
+    const int numImages = 2;
+
     while (!WindowShouldClose())
     {
         // Handle input
         if (IsKeyPressed(KEY_ESCAPE))
             pauseMenu();    
+
+        if (IsKeyPressed(KEY_I))
+            displayImageWithTextAndButton(background, "Close", numImages, backwardssans);
 
         moveTexture(scalpel, position, offset, isDragging);
 
@@ -98,6 +105,7 @@ void levelOneStageTwo()
     // Unload textures
     UnloadTexture(background);
     UnloadTexture(scalpel);
+    UnloadFont(backwardssans);
 
     // De-initialization
     CloseWindow();
@@ -517,7 +525,7 @@ void levelOneStageNine()
 void levelOneStageTen()
 {
     Texture2D background = LoadTexture("../res/Level1_images/patient.png");
-    Font font = LoadFontEx("../res/fonts/backwardssans.otf", 64, 0 , 250);
+    Font backwardssans = LoadFontEx("../res/fonts/backwardssans.otf", 64, 0 , 250);
 
     const char* text[2] = {
         "Well done! You're on your way to become an excellent surgeon!\n [Click Enter to continue]",
@@ -530,7 +538,7 @@ void levelOneStageTen()
     Vector2 textPosition[2];
 
     for (int i = 0; i < 2; i++)
-        textSize[i] = MeasureTextEx(font, text[i], fontSize, 2.0f);
+        textSize[i] = MeasureTextEx(backwardssans, text[i], fontSize, 2.0f);
 
     for (int i = 0; i < 2; i++)
         textPosition[i] = {GetScreenWidth()/2 - textSize[i].x/2, GetScreenHeight() - textSize[i].y - 200};
@@ -549,7 +557,7 @@ void levelOneStageTen()
         backgroundImage(background);
 
         if (end != 2)
-            DrawTextEx(font, text[end], textPosition[end], fontSize, 2.0f, BLACK);
+            DrawTextEx(backwardssans, text[end], textPosition[end], fontSize, 2.0f, BLACK);
 
         EndDrawing();
 
@@ -567,6 +575,7 @@ void levelOneStageTen()
 
     // Unload textures
     UnloadTexture(background);
+    UnloadFont(backwardssans);
 
     // De-initialization
     CloseWindow();
