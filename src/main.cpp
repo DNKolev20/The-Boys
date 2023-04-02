@@ -1,7 +1,5 @@
 #include <globals.h>
 
-using json = nlohmann::json;
-
 int main() 
 {
     config();

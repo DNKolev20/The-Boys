@@ -114,34 +114,91 @@
       "name": "Level 2",
       "stages": [
         {
-          "name": "Stage 1",
+          "name": "Stage 1"
+        },
+        {
+          "name": "Stage 2"
+        },
+        {
+          "name": "Stage 3",
           "items": [
             {
-              "name": "Item 1",
-              "description": "This is item 1 in stage 1 of level 2",
+              "name": "Scalpel",
+              "description": "This instrument is used to cut \n the skin to make open wound.",
               "imagePath": "../res/scalpel.png"
             },
             {
-              "name": "Item 2",
-              "description": "This is item 2 in stage 1 of level 2",
-              "imagePath": "../res/scalpel.png"
+              "name": "What are we going to do?",
+              "description": "We are going to cut the patient's \nskin with the scalpel.",
+              "imagePath": "none"
             }
           ]
         },
         {
-          "name": "Stage 2",
+          "name": "Stage 4",
           "items": [
             {
-              "name": "Item 1",
-              "description": "This is item 1 in stage 2 of level 2",
+              "name": "Retractor",
+              "description": "This instrument is used to keep \nthe wound open.",
+              "imagePath": "../res/retractor.png"
+            },
+            {
+              "name": "What are we going to do?",
+              "description": "We are going to put the retractor\n on the open wound so we can\n keep it open.",
+              "imagePath": "none"
+            }
+          ]
+        },
+        {
+          "name": "Stage 5",
+          "items": [
+            {
+              "name": "Scalpel",
+              "description": "This instrument is used to cut \n the appendicitis.",
               "imagePath": "../res/scalpel.png"
             },
             {
-              "name": "Item 2",
-              "description": "This is item 2 in stage 2 of level 2",
-              "imagePath": "../res/level2.png"
+              "name": "What are we going to do?",
+              "description": "We are going to cut the patient's \nappendicitis with the scalpel to\n prevent infection.",
+              "imagePath": "none"
             }
           ]
+        },
+        {
+          "name": "Stage 6",
+          "items": [
+            {
+              "name": "Retractor",
+              "description": "This instrument is used to keep \nthe wound open.",
+              "imagePath": "../res/retractor.png"
+            },
+            {
+              "name": "What are we going to do?",
+              "description": "We are going to pull the \nretractors to close the wound.",
+              "imagePath": "none"
+            }
+          ]
+        },
+        {
+          "name": "Stage 7",
+          "items": [
+            {
+              "name": "Needle",
+              "description": "The needle is used \nto sew the open wound.",
+              "imagePath": "../res/needle.png"
+            },
+            {
+              "name": "What are we going to do?",
+              "description": "We are going to sew the\n open wound and be good to go.",
+              "imagePath": "none"
+            }
+          ]
+        },
+        {
+          "name": "Stage 8"
+        },
+        {
+          "name": "Stage 9"
         }
       ]
     }

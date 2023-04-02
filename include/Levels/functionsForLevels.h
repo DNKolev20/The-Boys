@@ -102,6 +102,20 @@ void cutAnimation(Texture2D instrument, Texture2D background, Vector2 startPos, 
                             levelOne();
                             break;
                     }
+
+                case 2:
+                    switch (currentStage)
+                    {
+                        case 3:
+                            currentStage++;
+                            levelTwo();
+                            break;
+                        
+                        case 5:
+                            currentStage++;
+                            levelTwo();
+                            break;
+                    }
             }
 
             break;

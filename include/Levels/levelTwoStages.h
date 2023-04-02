@@ -27,8 +27,8 @@ void levelTwoStageOne()
     while (!WindowShouldClose())
     {    
         // Handle input
-         if (IsKeyPressed(KEY_ESCAPE))
-            pauseMenu();    
+          if (IsKeyPressed(KEY_ESCAPE))
+            pauseMenu(); 
 
         // Draw
         BeginDrawing();
@@ -60,7 +60,8 @@ void levelTwoStageOne()
 void levelTwoStageTwo()
 {
     Texture2D background = LoadTexture("../res/Level2_images/stage1_pre_cut.png");
-    const Texture2D& scalpel = LoadTexture("../res/scalpel.png");
+    Font backwardssans = LoadFontEx("../res/fonts/backwardssans.otf", 64, 0 , 250);
+    Texture2D scalpel = LoadTexture("../res/scalpel.png");
 
     Vector2 startPos = { 976, 240 }; // Starting position of image
     Vector2 endPos = { 973, 766 }; // Ending position of image
@@ -72,8 +73,11 @@ void levelTwoStageTwo()
     while (!WindowShouldClose())
     {
         // Handle input
-        if (IsKeyPressed(KEY_ESCAPE))
-            pauseMenu();    
+         if (IsKeyPressed(KEY_ESCAPE))
+            pauseMenu(); 
+
+        if (IsKeyPressed(KEY_I))
+            displayInfoWindow(background, backwardssans);        
 
         moveTexture(scalpel, position, offset, isDragging);
 
@@ -97,6 +101,7 @@ void levelTwoStageTwo()
 
     // Unload textures
     UnloadTexture(background);
+    UnloadFont(backwardssans);
     UnloadTexture(scalpel);
 
     // De-initialization
@@ -106,8 +111,8 @@ void levelTwoStageTwo()
 void levelTwoStageThree()
 {
     Texture2D background = LoadTexture("../res/Level2_images/cut_wound.png");
-
-    Texture2D retract = LoadTexture("../res/retractor.png");
+    Font backwardssans = LoadFontEx("../res/fonts/backwardssans.otf", 64, 0 , 250);
+    Texture2D retractor = LoadTexture("../res/retractor.png");
 
     Vector2 startPos[2] = {
         { 939, 506 },
@@ -121,16 +126,19 @@ void levelTwoStageThree()
     while (!WindowShouldClose())
     {
         // Handle input
-         if (IsKeyPressed(KEY_ESCAPE))
-            pauseMenu();    
+          if (IsKeyPressed(KEY_ESCAPE))
+            pauseMenu(); 
 
-        moveTexture(retract, position, offset, isDragging);
+        if (IsKeyPressed(KEY_I))
+            displayInfoWindow(background, backwardssans);    
+
+        moveTexture(retractor, position, offset, isDragging);
 
         // Update image 1
         if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
         {
             Vector2 mousePosition = GetMousePosition();
-            if (CheckCollisionPointRec(mousePosition, { position.x, position.y, (float)retract.width, (float)retract.height }))
+            if (CheckCollisionPointRec(mousePosition, { position.x, position.y, (float)retractor.width, (float)retractor.height }))
             {
                 offset = Vector2Subtract(mousePosition, position);
                 isDragging = true;
@@ -145,7 +153,7 @@ void levelTwoStageThree()
         else
             isDragging = false;
 
-        Rectangle rect = {position.x, position.y, (float)retract.width, (float)retract.height};
+        Rectangle rect = {position.x, position.y, (float)retractor.width, (float)retractor.height};
 
         bool collidesWithCircle = CheckCollisionCircleRec(startPos[0], 10, rect) && CheckCollisionCircleRec(startPos[1], 10, rect);
 
@@ -155,7 +163,7 @@ void levelTwoStageThree()
 
         backgroundImage(background);
 
-        DrawTexture(retract, position.x, position.y, WHITE);    
+        DrawTexture(retractor, position.x, position.y, WHITE);    
 
         for (int i = 0; i < 2; i++)
             DrawCircleV(startPos[i], 10, BLUE);
@@ -170,6 +178,8 @@ void levelTwoStageThree()
 
     // Unload textures
     UnloadTexture(background);
+    UnloadFont(backwardssans);
+    UnloadTexture(retractor);
 
     // De-initialization
     CloseWindow();
@@ -178,7 +188,8 @@ void levelTwoStageThree()
 void levelTwoStageFour()
 {
     Texture2D background = LoadTexture("../res/Level2_images/open_wound.png");
-    const Texture2D& scalpel = LoadTexture("../res/scalpel.png");
+    Font backwardssans = LoadFontEx("../res/fonts/backwardssans.otf", 64, 0 , 250);
+    Texture2D scalpel = LoadTexture("../res/scalpel.png");
 
     Vector2 startPos = { 950, 641 }; // Starting position of image
     Vector2 endPos = { 984, 609 }; // Ending position of image
@@ -190,8 +201,11 @@ void levelTwoStageFour()
     while (!WindowShouldClose())
     {
         // Handle input
-        if (IsKeyPressed(KEY_ESCAPE))
-            pauseMenu();    
+         if (IsKeyPressed(KEY_ESCAPE))
+            pauseMenu(); 
+
+        if (IsKeyPressed(KEY_I))
+            displayInfoWindow(background, backwardssans);        
 
         moveTexture(scalpel, position, offset, isDragging);
 
@@ -216,6 +230,7 @@ void levelTwoStageFour()
 
     // Unload textures
     UnloadTexture(background);
+    UnloadFont(backwardssans);
     UnloadTexture(scalpel);
 
     // De-initialization
@@ -225,6 +240,7 @@ void levelTwoStageFour()
 void levelTwoStageFive()
 {
     Texture2D background = LoadTexture("../res/Level2_images/removed_appendicitis_with_retractors.png");
+    Font backwardssans = LoadFontEx("../res/fonts/backwardssans.otf", 64, 0 , 250);
 
     Vector2 circlesPos[2] = {
         {1370, 247},
@@ -237,8 +253,11 @@ void levelTwoStageFive()
     while (!WindowShouldClose())
     {
         // Handle input
-        if (IsKeyPressed(KEY_ESCAPE))
-            pauseMenu();
+         if (IsKeyPressed(KEY_ESCAPE))
+            pauseMenu(); 
+
+        if (IsKeyPressed(KEY_I))
+            displayInfoWindow(background, backwardssans);    
 
         mousePos = GetMousePosition();
         distance[0] = sqrt(pow(mousePos.x - circlesPos[0].x, 2) + pow(mousePos.y - circlesPos[0].y, 2));
@@ -270,6 +289,8 @@ void levelTwoStageFive()
 
     // Unload textures
     UnloadTexture(background);
+    UnloadFont(backwardssans);
+
     // De-initialization
     CloseWindow();
 }
@@ -277,6 +298,7 @@ void levelTwoStageFive()
 void levelTwoStageSix()
 {
     Texture2D background = LoadTexture("../res/Level2_images/removed_appendicitis.png");
+    Font backwardssans = LoadFontEx("../res/fonts/backwardssans.otf", 64, 0 , 250);
     Texture2D needle = LoadTexture("../res/needle.png");
 
     Vector2 startPos = { 943, 402 };
@@ -288,8 +310,11 @@ void levelTwoStageSix()
     while (!WindowShouldClose())
     {
         // Handle input
-         if (IsKeyPressed(KEY_ESCAPE))
-            pauseMenu();    
+          if (IsKeyPressed(KEY_ESCAPE))
+            pauseMenu(); 
+
+        if (IsKeyPressed(KEY_I))
+            displayInfoWindow(background, backwardssans);
 
         moveTexture(needle, position, offset, isDragging);
 
@@ -315,6 +340,7 @@ void levelTwoStageSix()
 
     // Unload textures
     UnloadTexture(background);
+    UnloadFont(backwardssans);
     UnloadTexture(needle);
 
     // De-initialization
@@ -324,13 +350,13 @@ void levelTwoStageSix()
 void levelTwoStageSeven()
 {
     Texture2D background = LoadTexture("../res/Level2_images/closed_wound.png");
-    Font font = LoadFontEx("../res/fonts/backwardssans.otf", 64, 0 , 250);
+    Font backwardssans = LoadFontEx("../res/fonts/backwardssans.otf", 64, 0 , 250);
 
     while (!WindowShouldClose())
     {
         // Handle input
-         if (IsKeyPressed(KEY_ESCAPE))
-            pauseMenu();    
+          if (IsKeyPressed(KEY_ESCAPE))
+            pauseMenu();   
 
         // Draw
         BeginDrawing();
@@ -338,7 +364,7 @@ void levelTwoStageSeven()
 
         backgroundImage(background);
 
-        DrawTextEx(font, "Press [Enter] to continue", {(float)GetScreenWidth()/2 - 200, (float)GetScreenHeight() - 232}, 32, 2.0f, BLACK);
+        DrawTextEx(backwardssans, "Press [Enter] to continue", {(float)GetScreenWidth()/2 - 200, (float)GetScreenHeight() - 232}, 32, 2.0f, BLACK);
 
         EndDrawing();
 
@@ -351,6 +377,7 @@ void levelTwoStageSeven()
 
     // Unload textures
     UnloadTexture(background);
+    UnloadFont(backwardssans);
 
     // De-initialization
     CloseWindow();
@@ -359,7 +386,7 @@ void levelTwoStageSeven()
 void levelTwoStageEight()
 {
     Texture2D background = LoadTexture("../res/Level2_images/patient.png");
-    Font font = LoadFontEx("../res/fonts/backwardssans.otf", 64, 0 , 250);
+    Font backwardssans = LoadFontEx("../res/fonts/backwardssans.otf", 64, 0 , 250);
 
     const char* text[2] = {
         "Well done! You're on your way to become an excellent surgeon!\n [Click Enter to continue]",
@@ -372,7 +399,7 @@ void levelTwoStageEight()
     Vector2 textPosition[2];
 
     for (int i = 0; i < 2; i++)
-        textSize[i] = MeasureTextEx(font, text[i], fontSize, 2.0f);
+        textSize[i] = MeasureTextEx(backwardssans, text[i], fontSize, 2.0f);
 
     for (int i = 0; i < 2; i++)
         textPosition[i] = {GetScreenWidth()/2 - textSize[i].x/2, GetScreenHeight() - textSize[i].y - 200};
@@ -382,8 +409,8 @@ void levelTwoStageEight()
     while (!WindowShouldClose())
     {
         // Handle input
-         if (IsKeyPressed(KEY_ESCAPE))
-            pauseMenu();    
+          if (IsKeyPressed(KEY_ESCAPE))
+            pauseMenu();  
 
         // Draw
         BeginDrawing();
@@ -391,7 +418,7 @@ void levelTwoStageEight()
         backgroundImage(background);
 
         if (end != 2)
-            DrawTextEx(font, text[end], textPosition[end], fontSize, 2.0f, BLACK);
+            DrawTextEx(backwardssans, text[end], textPosition[end], fontSize, 2.0f, BLACK);
 
         EndDrawing();
 
@@ -409,6 +436,7 @@ void levelTwoStageEight()
 
     // Unload textures
     UnloadTexture(background);
+    UnloadFont(backwardssans);
 
     // De-initialization
     CloseWindow();
