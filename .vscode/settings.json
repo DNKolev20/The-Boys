@@ -51,6 +51,7 @@
         "ranges": "cpp",
         "ratio": "cpp",
         "span": "cpp",
-        "valarray": "cpp"
+        "valarray": "cpp",
+        "chrono": "cpp"
     }
 }
