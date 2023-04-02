@@ -91,6 +91,21 @@
           "name": "Stage 9",
           "items": [
             {
+              "name": "Retractor",
+              "description": "This instrument is used to keep \nthe wound open.",
+              "imagePath": "../res/retractor.png"
+            },
+            {
+              "name": "What are we going to do?",
+              "description": "We are going to pull the \nretractors to close the wound.",
+              "imagePath": "none"
+            }
+          ]
+        },
+        {
+          "name": "Stage 10",
+          "items": [
+            {
               "name": "Needle",
               "description": "The needle is used \nto sew the open wound.",
               "imagePath": "../res/needle.png"
@@ -103,10 +118,10 @@
           ]
         },
         {
-          "name": "Stage 10"
+          "name": "Stage 11"
         },
         {
-          "name": "Stage 11"
+          "name": "Stage 12"
         }
       ]
     },

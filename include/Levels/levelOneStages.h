@@ -461,6 +461,7 @@ void levelOneStageSeven()
 void levelOneStageEight()
 {
     Texture2D background = LoadTexture("../res/Level1_images/rib3.png");
+    Font backwardssans = LoadFontEx("../res/fonts/backwardssans.otf", 64, 0 , 250);
 
     Vector2 circlesPos[2] = {
         {284, 533},
@@ -475,6 +476,9 @@ void levelOneStageEight()
         // Handle input
         if (IsKeyPressed(KEY_ESCAPE))
             pauseMenu();
+
+        if (IsKeyPressed(KEY_I))
+            displayInfoWindow(background, backwardssans);
 
         mousePos = GetMousePosition();
         distance[0] = sqrt(pow(mousePos.x - circlesPos[0].x, 2) + pow(mousePos.y - circlesPos[0].y, 2));
