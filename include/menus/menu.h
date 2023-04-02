@@ -7,9 +7,9 @@ void menu(int selectedItemMenus)
     Font buttonFont = LoadFontEx("../res/fonts/molot.otf", 32, 0 , 250);
 
     int selectedItem = selectedItemMenus;
-    int itemsNum = 4;
-    Color itemColor[itemsNum] = { GRAY, GRAY, GRAY, GRAY};
-    const char* itemName[itemsNum] = { "Play", "Select Levels", "Options", "Exit"};
+    int itemsNum = 5;
+    Color itemColor[itemsNum] = { GRAY, GRAY, GRAY, GRAY,GRAY};
+    const char* itemName[itemsNum] = { "Play", "Select Levels", "Options", "Controls", "Exit"};
 
     while (!WindowShouldClose())
     {
@@ -52,6 +52,9 @@ void menu(int selectedItemMenus)
                     options(selectedItem);
                     return;
                 case 3:
+                    controls(selectedItem);
+                    return;
+                case 4:
                     CloseWindow();
                     break;
             }

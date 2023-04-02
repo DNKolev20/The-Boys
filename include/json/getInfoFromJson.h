@@ -62,13 +62,18 @@ std::vector<Texture2D> loadTextures(int levelNum, int stageNum)
     auto levels = data["levels"];
     auto& level = levels[levelNum];
     auto& stage = level["stages"][stageNum];
-    
-    // Load textures for each item in the stage
+
     for (auto& item : stage["items"]) {
-        std::string imagePath = item["imagePath"];
+    std::string imagePath = item["imagePath"];
+    if (imagePath == "none") {
+        textures.push_back({0});
+    } else {
+        // Load the texture from the image path and push it to the vector
         Texture2D texture = LoadTexture(imagePath.c_str());
         textures.push_back(texture);
     }
+}
+
     
     return textures;
 }

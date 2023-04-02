@@ -4,49 +4,109 @@
       "name": "Level 1",
       "stages": [
         {
-          "name": "Stage 1",
-          "items": [
-            {
-              "name": "Item 1",
-              "description": "This is item 1 in stage 1 of \nlevel 1",
-              "imagePath": "../res/scalpel.png"
-            },
-            {
-              "name": "Item 2",
-              "description": "This is item 2 in stage 1 of \nlevel 1",
-              "imagePath": "../res/level2.png"
-            }
-          ]
+          "name": "Stage 1"
         },
         {
-          "name": "Stage 2",
-          "items": [
-            {
-              "name": "Item 1",
-              "description": "This is item 1 in stage 2 of level 1",
-              "imagePath": "../res/scalpel.png"
-            },
-            {
-              "name": "Item 2",
-              "description": "This is item 2 in stage 2 of level 1",
-              "imagePath": "../res/level2.png"
-            }
-          ]
+          "name": "Stage 2"
         },
         {
           "name": "Stage 3",
           "items": [
             {
-              "name": "Item 1",
+              "name": "Scalpel",
               "description": "This instrument is used to cut \n the skin to make open wound.",
               "imagePath": "../res/scalpel.png"
             },
             {
-              "name": "Item 2",
-              "description": "This is item 2 in stage 3 of level 1",
-              "imagePath": "../res/level2.png"
+              "name": "What are we going to do?",
+              "description": "We are going to cut the patient's \nskin with the scalpel.",
+              "imagePath": "none"
             }
           ]
+        },
+        {
+          "name": "Stage 4",
+          "items": [
+            {
+              "name": "Retractor",
+              "description": "This instrument is used to keep \nthe wound open.",
+              "imagePath": "../res/retractor.png"
+            },
+            {
+              "name": "What are we going to do?",
+              "description": "We are going to put the retractor\n on the open wound so we can\n keep it open.",
+              "imagePath": "none"
+            }
+          ]
+        },
+        {
+          "name": "Stage 5",
+          "items": [
+            {
+              "name": "Osteotome",
+              "description": "This instrument is used \n to break the rib cage.",
+              "imagePath": "../res/osteotome.png"
+            },
+            {
+              "name": "What are we going to do?",
+              "description": "We are going to break throught\n the rib cage with the osteotome.",
+              "imagePath": "none"
+            }
+          ]
+        },
+        {
+          "name": "Stage 6",
+          "items": [
+            {
+              "name": "Scalpel",
+              "description": "This instrument is used \n to cut the arteries and\n the veins.",
+              "imagePath": "../res/scalpel.png"
+            },
+            {
+              "name": "What are we going to do?",
+              "description": "We are going to cut the veins \nand arteries to work on \nreplacing the heart.",
+              "imagePath": "none"
+            }
+          ]
+        },
+        {
+          "name": "Stage 7",
+          "items": [
+            {
+              "name": "Heart",
+              "description": "This is the new heart to\n replace the sick heart.",
+              "imagePath": "../res/heart.png"
+            },
+            {
+              "name": "What are we going to do?",
+              "description": "We are going to put the\n new heart in the right \nplace and sew it up.",
+              "imagePath": "none"
+            }
+          ]
+        },
+        {
+          "name": "Stage 8"
+        },
+        {
+          "name": "Stage 9",
+          "items": [
+            {
+              "name": "Needle",
+              "description": "The needle is used \nto sew the open wound.",
+              "imagePath": "../res/needle.png"
+            },
+            {
+              "name": "What are we going to do?",
+              "description": "We are going to sew the\n open wound and be good to go.",
+              "imagePath": "none"
+            }
+          ]
+        },
+        {
+          "name": "Stage 10"
+        },
+        {
+          "name": "Stage 11"
         }
       ]
     },

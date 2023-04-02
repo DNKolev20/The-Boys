@@ -28,7 +28,7 @@ void levelOneStageOne()
     {    
         // Handle input
          if (IsKeyPressed(KEY_ESCAPE))
-            pauseMenu();    
+            pauseMenu();
 
         // Draw
         BeginDrawing();
@@ -70,17 +70,14 @@ void levelOneStageTwo()
     Vector2 position = { 0, 0 };
     Vector2 offset = { 0, 0 };
     bool isDragging = false;
-
-    const int numImages = 2;
-
     while (!WindowShouldClose())
     {
         // Handle input
         if (IsKeyPressed(KEY_ESCAPE))
-            pauseMenu();    
+            pauseMenu();
 
         if (IsKeyPressed(KEY_I))
-            displayImageWithTextAndButton(background, "Close", numImages, backwardssans);
+            displayInfoWindow(background, backwardssans);    
 
         moveTexture(scalpel, position, offset, isDragging);
 
@@ -114,6 +111,7 @@ void levelOneStageTwo()
 void levelOneStageThree()
 {
     Texture2D background = LoadTexture("../res/Level1_images/cut_wound.png");
+    Font backwardssans = LoadFontEx("../res/fonts/backwardssans.otf", 64, 0 , 250);
 
     Texture2D retract = LoadTexture("../res/retractor.png");
 
@@ -130,7 +128,10 @@ void levelOneStageThree()
     {
         // Handle input
          if (IsKeyPressed(KEY_ESCAPE))
-            pauseMenu();    
+            pauseMenu();
+
+        if (IsKeyPressed(KEY_I))
+            displayInfoWindow(background, backwardssans);    
 
         moveTexture(retract, position, offset, isDragging);
 
@@ -179,6 +180,7 @@ void levelOneStageThree()
 
     // Unload textures
     UnloadTexture(background);
+    UnloadFont(backwardssans);
 
     // De-initialization
     CloseWindow();    
@@ -187,6 +189,7 @@ void levelOneStageThree()
 void levelOneStageFour()
 {
     Texture2D background = LoadTexture("../res/Level1_images/open_wound.png");
+    Font backwardssans = LoadFontEx("../res/fonts/backwardssans.otf", 64, 0 , 250);
     Texture2D osteotome = LoadTexture("../res/osteotome.png");
 
     Vector2 circlesPos[3] = {
@@ -205,7 +208,10 @@ void levelOneStageFour()
     {
         // Handle input
          if (IsKeyPressed(KEY_ESCAPE))
-            pauseMenu();    
+            pauseMenu();
+
+        if (IsKeyPressed(KEY_I))
+            displayInfoWindow(background, backwardssans);    
 
         moveTexture(osteotome, position, offset, isDragging);
 
@@ -252,6 +258,8 @@ void levelOneStageFour()
 
     // Unload textures
     UnloadTexture(background);
+    UnloadFont(backwardssans);
+    UnloadTexture(osteotome);
 
     // De-initialization
     CloseWindow();     
@@ -260,6 +268,7 @@ void levelOneStageFour()
 void levelOneStageFive()
 {
     Texture2D background = LoadTexture("../res/Level1_images/open_wound_no_bones.png");
+    Font backwardssans = LoadFontEx("../res/fonts/backwardssans.otf", 64, 0 , 250);
     Texture2D scalpel = LoadTexture("../res/scalpel.png");
 
     std::vector<std::vector<Vector2>> cutPositions 
@@ -280,7 +289,10 @@ void levelOneStageFive()
     {
         // Handle input
         if (IsKeyPressed(KEY_ESCAPE))
-            pauseMenu();    
+            pauseMenu();
+
+        if (IsKeyPressed(KEY_I))
+            displayInfoWindow(background, backwardssans);    
 
         moveTexture(scalpel, position, offset, isDragging);
 
@@ -330,6 +342,7 @@ void levelOneStageFive()
 
     // Unload textures
     UnloadTexture(background);
+    UnloadFont(backwardssans);
     UnloadTexture(scalpel);
 
     // De-initialization
@@ -339,6 +352,7 @@ void levelOneStageFive()
 void levelOneStageSix()
 {
     Texture2D background = LoadTexture("../res/Level1_images/no_heart.png");
+    Font backwardssans = LoadFontEx("../res/fonts/backwardssans.otf", 64, 0 , 250);
     Texture2D heart = LoadTexture("../res/Level1_images/heart.png");
 
     Vector2 startPos = { 978, 602 };
@@ -352,7 +366,10 @@ void levelOneStageSix()
 
         // Handle input
          if (IsKeyPressed(KEY_ESCAPE))
-            pauseMenu();    
+            pauseMenu();
+
+        if (IsKeyPressed(KEY_I))
+            displayInfoWindow(background, backwardssans);    
 
         moveTexture(heart, position, offset, isDragging);
 
@@ -378,6 +395,7 @@ void levelOneStageSix()
 
     // Unload textures
     UnloadTexture(background);
+    UnloadFont(backwardssans);
     UnloadTexture(heart);
 
     // De-initialization
@@ -398,7 +416,7 @@ void levelOneStageSeven()
 
         // Handle input
         if (IsKeyPressed(KEY_ESCAPE))
-            pauseMenu();    
+            pauseMenu();
 
         timer += GetFrameTime();
         
@@ -430,7 +448,6 @@ void levelOneStageSeven()
 
         backgroundImage(background);
 
-
         EndDrawing();
     }
 
@@ -444,6 +461,7 @@ void levelOneStageSeven()
 void levelOneStageEight()
 {
     Texture2D background = LoadTexture("../res/Level1_images/cut_wound.png");
+    Font backwardssans = LoadFontEx("../res/fonts/backwardssans.otf", 64, 0 , 250);
     Texture2D needle = LoadTexture("../res/needle.png");
 
     Vector2 startPos = { 967, 140 };
@@ -456,7 +474,10 @@ void levelOneStageEight()
     {
         // Handle input
          if (IsKeyPressed(KEY_ESCAPE))
-            pauseMenu();    
+            pauseMenu();
+
+        if (IsKeyPressed(KEY_I))
+            displayInfoWindow(background, backwardssans);    
 
         moveTexture(needle, position, offset, isDragging);
 
@@ -482,6 +503,7 @@ void levelOneStageEight()
 
     // Unload textures
     UnloadTexture(background);
+    UnloadFont(backwardssans);
     UnloadTexture(needle);
 
     // De-initialization
@@ -491,12 +513,13 @@ void levelOneStageEight()
 void levelOneStageNine()
 {
     Texture2D background = LoadTexture("../res/Level1_images/closed_wound.png");
+    Font backwardssans = LoadFontEx("../res/fonts/backwardssans.otf", 64, 0 , 250);
 
     while (!WindowShouldClose())
     {
         // Handle input
          if (IsKeyPressed(KEY_ESCAPE))
-            pauseMenu();    
+            pauseMenu();
 
         // Draw
         BeginDrawing();
@@ -504,7 +527,7 @@ void levelOneStageNine()
 
         backgroundImage(background);
 
-        DrawTextEx(GetFontDefault(), "Press [Enter] to continue", {(float)GetScreenWidth()/2 - 200, (float)GetScreenHeight() - 232}, 32, 2.0f, BLACK);
+        DrawTextEx(backwardssans, "Press [Enter] to continue", {(float)GetScreenWidth()/2 - 200, (float)GetScreenHeight() - 232}, 32, 2.0f, BLACK);
 
         EndDrawing();
 
@@ -517,6 +540,7 @@ void levelOneStageNine()
 
     // Unload textures
     UnloadTexture(background);
+    UnloadFont(backwardssans);
 
     // De-initialization
     CloseWindow();
@@ -549,7 +573,7 @@ void levelOneStageTen()
     {
         // Handle input
          if (IsKeyPressed(KEY_ESCAPE))
-            pauseMenu();    
+            pauseMenu();
 
         // Draw
         BeginDrawing();

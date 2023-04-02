@@ -39,6 +39,7 @@ void menu(int selectedItemMenus);
 #include "Levels/levelThreeStages.h"
 #include "Levels/levelThree.h"
 
+#include "menus/controls.h"
 #include "config.h"
 #include "functions/levelFunctions.h"
 #include "menus/levelsMenu.h"

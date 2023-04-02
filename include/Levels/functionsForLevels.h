@@ -139,12 +139,14 @@ void editLevel(std::string level)
     rename("temp.txt", "savefile.txt");
 }
 
-void displayImageWithTextAndButton(Texture2D background, const char* buttonText, int numImages, Font font)
+void displayInfoWindow(Texture2D background, Font font)
 {
     std::vector<std::string> name = loadItemNames(currentLevel-1, currentStage-1);
     std::vector<std::string> description = loadItemDescription(currentLevel-1, currentStage-1);
     std::vector<Texture2D> textures = loadTextures(currentLevel-1, currentStage-1);
     
+    int numImages = textures.size();
+
     int screenWidth = GetMonitorWidth(0); // get current screen width
     int screenHeight = GetMonitorHeight(0); // get current screen height
 
@@ -188,25 +190,37 @@ void displayImageWithTextAndButton(Texture2D background, const char* buttonText,
         DrawRectangle(popupX, popupY, popupWidth, popupHeight, Fade(GRAY, 0.7f));
         DrawRectangleLines(popupX, popupY, popupWidth, popupHeight, BLACK);
 
-        // Draw image
-        DrawTexture(textures[currentPage], imageX, imageY, WHITE);
+        if (textures[currentPage].id != 0) 
+        {
+            DrawTexture(textures[currentPage], imageX, imageY, WHITE);
+            DrawTextEx(font, name[currentPage].c_str(), {(float)textX, (float)textY}, textFontSize, 2, BLACK);
+            DrawTextEx(font, description[currentPage].c_str(), {(float)textX, float(textY + textFontSize + 20)}, textFontSize, 2, BLACK);
+        }
+        else
+        {
+            Vector2 nameSize = MeasureTextEx(font, name[currentPage].c_str(), textFontSize, 1);
+            int nameX = popupX + (popupWidth - nameSize.x) / 2;
+            int nameY = popupY + (popupHeight - nameSize.y) / 2 - 120;
+            DrawTextEx(font, name[currentPage].c_str(), {(float)nameX, (float)nameY}, textFontSize, 2, BLACK);
 
-        // Draw text
-        DrawTextEx(font, name[currentPage].c_str(), {(float)textX, (float)textY}, textFontSize, 2, BLACK);
-        DrawTextEx(font, description[currentPage].c_str(), {(float)textX, float(textY + textFontSize + 20)}, textFontSize, 2, BLACK);
+            Vector2 descriptionSize = MeasureTextEx(font, description[currentPage].c_str(), textFontSize, 1);
+            int descriptionX = popupX + (popupWidth - descriptionSize.x) / 2;
+            int descriptionY = popupY + (popupHeight - descriptionSize.y) / 2 - 70;
+            DrawTextEx(font, description[currentPage].c_str(), {(float)descriptionX, float(descriptionY + textFontSize + 20)}, textFontSize, 2, BLACK);    
+        }
 
         // Draw button
         if (CheckCollisionPointRec(GetMousePosition(), { (float)buttonX, (float)buttonY, (float)buttonWidth, (float)buttonHeight }))
         {
             DrawRectangle(buttonX, buttonY, buttonWidth, buttonHeight, LIGHTGRAY);
-            DrawTextEx(font, buttonText, {float(buttonX + 20), float(buttonY + 10)}, buttonFontSize, 2, BLACK);
+            DrawTextEx(font, "Close", {float(buttonX + 20), float(buttonY + 10)}, buttonFontSize, 2, BLACK);
             if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
                 break;
         }
         else
         {
             DrawRectangle(buttonX, buttonY, buttonWidth, buttonHeight, GRAY);
-            DrawText(buttonText, buttonX + 20, buttonY + 10, buttonFontSize, BLACK);
+            DrawTextEx(font, "Close", {float(buttonX + 20), float(buttonY + 10)}, buttonFontSize, 2, BLACK);
         }
 
         // Draw page number
