@@ -22,15 +22,15 @@
 
 # Contributors
 
->Denis Kolev - Scrum Trainer
+Denis Kolev - Scrum Trainer
 <br>
->Bozhidar Boyadzhiev - Backend developer
+Bozhidar Boyadzhiev - Backend developer
 <br>
->Mario Zlatev - Backend developer
+Mario Zlatev - Backend developer
 <br>
->Georgi Zhekov - Backend developer
+Georgi Zhekov - Backend developer
 <br>
->Kliment Tenev - Designer
+Kliment Tenev - Designer
 <br>
 
 ---
