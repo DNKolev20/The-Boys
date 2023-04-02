@@ -61,13 +61,13 @@ void levelThreeStageOne()
 void levelThreeStageTwo()
 {
     Texture2D background = LoadTexture("../res/Level3_images/homelander.png");
-    Texture2D scalpel = LoadTexture("../res/scalpel.png");
+    Texture2D trimmer = LoadTexture("../res/trimmer.png");
     Font backwardssans = LoadFontEx("../res/fonts/backwardssans.otf", 64, 0 , 250);
     int flag = 0;
 
     Vector2 animPos[5] = { 
-        {856, 263},
-        {861, 99},
+        {842, 253},
+        {844, 102},
         {931, 75},
         {1052, 81},
         {1084, 208}
@@ -87,15 +87,15 @@ void levelThreeStageTwo()
         if (IsKeyPressed(KEY_I))
             displayInfoWindow(background, backwardssans);    
 
-        moveTexture(scalpel, position, offset, isDragging);
+        moveTexture(trimmer, position, offset, isDragging);
 
-        Rectangle rect = { position.x, position.y, (float)scalpel.width, (float)scalpel.height };
+        Rectangle rect = { position.x, position.y, (float)trimmer.width, (float)trimmer.height };
 
-        if (CheckCollisionCircleRec(animPos[0], 15, rect))
+        if (CheckCollisionCircleRec(animPos[0], 10, rect))
         {
             for (int i = 0; i < 4; i++)
             {
-                cutAnimation(scalpel, background, animPos[flag], animPos[flag+1]);
+                cutAnimation(trimmer, background, animPos[flag], animPos[flag+1]);
                 flag++;
             }
         }
@@ -105,9 +105,9 @@ void levelThreeStageTwo()
         ClearBackground(RAYWHITE);
         backgroundImage(background);
 
-        DrawTexture(scalpel, position.x, position.y, WHITE);
+        DrawTexture(trimmer, position.x, position.y, WHITE);
 
-        DrawCircleV(animPos[0], 15, BLUE);
+        DrawCircleV(animPos[0], 10, BLUE);
 
         if (flag == 4)
         {
@@ -120,7 +120,7 @@ void levelThreeStageTwo()
 
     // Unload textures
     UnloadTexture(background);
-    UnloadTexture(scalpel);
+    UnloadTexture(trimmer);
     UnloadFont(backwardssans);
 
     // De-initialization
@@ -306,19 +306,20 @@ void levelThreeStageSix()
 {
     Texture2D background = LoadTexture("../res/Level3_images/fracture.png");
     Font backwardssans = LoadFontEx("../res/fonts/backwardssans.otf", 64, 0 , 250);
-    Texture2D osteotome = LoadTexture("../res/osteotome.png");
+    Texture2D drill = LoadTexture("../res/drill.png");
 
-    Vector2 circlesPos[3] = {
-        {772, 396},
-        {794, 563},
-        {801, 690}
+    Vector2 circlesPos[4] = {
+        {798, 297},
+        {990, 285},
+        {1173, 411},
+        {1054, 696}
     }; // Starting positions of the circles
 
     Vector2 position = { 0, 0 };
     Vector2 offset = { 0, 0 };
     bool isDragging = false;
 
-    bool touchedCircles[3] = {0, 0, 0};
+    bool touchedCircles[4] = {0, 0, 0, 0};
 
     while (!WindowShouldClose())
     {
@@ -329,9 +330,9 @@ void levelThreeStageSix()
         if (IsKeyPressed(KEY_I))
             displayInfoWindow(background, backwardssans);    
 
-        moveTexture(osteotome, position, offset, isDragging);
+        moveTexture(drill, position, offset, isDragging);
 
-        Rectangle rect = { position.x, position.y, (float)osteotome.width, (float)osteotome.height };
+        Rectangle rect = { position.x, position.y, (float)drill.width, (float)drill.height };
 
         // Draw
         BeginDrawing();
@@ -339,7 +340,7 @@ void levelThreeStageSix()
 
         backgroundImage(background);
 
-        for (int i = 0; i < 3; i++)
+        for (int i = 0; i < 4; i++)
         {
             if (CheckCollisionCircleRec(circlesPos[i], 15, rect))
             {
@@ -352,7 +353,7 @@ void levelThreeStageSix()
         }
         
         bool allCirclesTouched = true;
-        for (int i = 0; i < 3; i++)
+        for (int i = 0; i < 4; i++)
         {
             if (!touchedCircles[i])
             {
@@ -361,7 +362,7 @@ void levelThreeStageSix()
             }
         }
 
-        DrawTexture(osteotome, position.x, position.y, WHITE);
+        DrawTexture(drill, position.x, position.y, WHITE);
 
         if (allCirclesTouched)
         {
@@ -375,8 +376,129 @@ void levelThreeStageSix()
     // Unload textures
     UnloadTexture(background);
     UnloadFont(backwardssans);
-    UnloadTexture(osteotome);
+    UnloadTexture(drill);
 
     // De-initialization
     CloseWindow();
 }
+
+void levelThreeStageSeven()
+{
+    Texture2D background = LoadTexture("../res/Level3_images/fracture_holes.png");
+    Texture2D scalpel = LoadTexture("../res/bonesaw.png");
+    Font backwardssans = LoadFontEx("../res/fonts/backwardssans.otf", 64, 0 , 250);
+    int flag = 0;
+
+    Vector2 animPos[8] = { 
+        {798, 297},
+        {990, 285},
+        {1173, 411},
+        {1054, 696},
+        {982, 624},
+        {880, 606},
+        {794, 468},
+        {798, 297}
+    };
+
+    Vector2 position = { 0, 0 };
+    Vector2 offset = { 0, 0 };
+
+    bool isDragging = false;
+
+    while (!WindowShouldClose())
+    {
+        // Handle input
+        if (IsKeyPressed(KEY_ESCAPE))
+            pauseMenu();
+
+        if (IsKeyPressed(KEY_I))
+            displayInfoWindow(background, backwardssans);    
+
+        moveTexture(scalpel, position, offset, isDragging);
+
+        Rectangle rect = { position.x, position.y, (float)scalpel.width, (float)scalpel.height };
+
+        if (CheckCollisionCircleRec(animPos[0], 15, rect))
+        {
+            for (int i = 0; i < 7; i++)
+            {
+                cutAnimation(scalpel, background, animPos[flag], animPos[flag+1]);
+                flag++;
+            }
+        }
+
+        // Draw
+        BeginDrawing();
+        ClearBackground(RAYWHITE);
+        backgroundImage(background);
+
+        DrawTexture(scalpel, position.x, position.y, WHITE);
+
+        DrawCircleV(animPos[0], 15, BLUE);
+
+        if (flag == 7)
+        {
+            currentStage++;
+            levelThree();
+        }
+
+        EndDrawing();
+    }
+
+    // Unload textures
+    UnloadTexture(background);
+    UnloadTexture(scalpel);
+    UnloadFont(backwardssans);
+
+    // De-initialization
+    CloseWindow();
+}
+
+void levelThreeStageEight()
+{
+    Texture2D background = LoadTexture("../res/Level3_images/fracture_holes_cut.png");
+    Font backwardssans = LoadFontEx("../res/fonts/backwardssans.otf", 64, 0 , 250);
+
+    Vector2 circlePos = {987, 467};
+    Vector2 mousePos;
+    bool isCircleClicked = 0;
+    double distance;
+
+    while (!WindowShouldClose())
+    {
+        // Handle input
+         if (IsKeyPressed(KEY_ESCAPE))
+            pauseMenu(); 
+
+        mousePos = GetMousePosition();
+        distance = sqrt(pow(mousePos.x - circlePos.x, 2) + pow(mousePos.y - circlePos.y, 2));   
+
+        // Draw
+        BeginDrawing();
+        ClearBackground(RAYWHITE);
+        backgroundImage(background);
+
+        if (distance < 10 && IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
+            isCircleClicked = true;
+        else if (isCircleClicked)
+            DrawCircleV(circlePos, 10, GREEN);
+        else
+            DrawCircleV(circlePos, 10, BLUE);
+
+        if (isCircleClicked == 1)
+        {
+            currentStage++;
+            levelThree();
+        }
+ 
+        EndDrawing();
+    }
+
+    // Unload textures
+    UnloadTexture(background);
+    UnloadFont(backwardssans);
+
+    // De-initialization
+    CloseWindow();
+}
+
