@@ -460,6 +460,58 @@ void levelOneStageSeven()
 
 void levelOneStageEight()
 {
+    Texture2D background = LoadTexture("../res/Level1_images/rib3.png");
+
+    Vector2 circlesPos[2] = {
+        {284, 533},
+        {1728, 516},
+    }; // Starting positions of the circles
+    Vector2 mousePos;
+    bool isCircleClicked[2] = {0, 0};
+    double distance[2];
+
+    while (!WindowShouldClose())
+    {
+        // Handle input
+        if (IsKeyPressed(KEY_ESCAPE))
+            pauseMenu();
+
+        mousePos = GetMousePosition();
+        distance[0] = sqrt(pow(mousePos.x - circlesPos[0].x, 2) + pow(mousePos.y - circlesPos[0].y, 2));
+        distance[1] = sqrt(pow(mousePos.x - circlesPos[1].x, 2) + pow(mousePos.y - circlesPos[1].y, 2));    
+
+        // Draw
+        BeginDrawing();
+        ClearBackground(RAYWHITE);
+        backgroundImage(background);
+
+        for (int i = 0; i < 2; i++)
+        {
+            if (distance[i] < 10 && IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
+                isCircleClicked[i] = true;
+            else if (isCircleClicked[i])
+                DrawCircleV(circlesPos[i], 10, GREEN);
+            else
+                DrawCircleV(circlesPos[i], 10, BLUE);
+
+        }
+
+        if (isCircleClicked[0] == 1 && isCircleClicked[1] == 1)
+        {
+            currentStage++;
+            levelOne();
+        }
+        EndDrawing();
+    }
+
+    // Unload textures
+    UnloadTexture(background);
+    // De-initialization
+    CloseWindow();
+}
+
+void levelOneStageNine()
+{
     Texture2D background = LoadTexture("../res/Level1_images/cut_wound.png");
     Font backwardssans = LoadFontEx("../res/fonts/backwardssans.otf", 64, 0 , 250);
     Texture2D needle = LoadTexture("../res/needle.png");
@@ -510,7 +562,7 @@ void levelOneStageEight()
     CloseWindow();
 }
 
-void levelOneStageNine()
+void levelOneStageTen()
 {
     Texture2D background = LoadTexture("../res/Level1_images/closed_wound.png");
     Font backwardssans = LoadFontEx("../res/fonts/backwardssans.otf", 64, 0 , 250);
@@ -546,7 +598,7 @@ void levelOneStageNine()
     CloseWindow();
 }
 
-void levelOneStageTen()
+void levelOneStageEleven()
 {
     Texture2D background = LoadTexture("../res/Level1_images/patient.png");
     Font backwardssans = LoadFontEx("../res/fonts/backwardssans.otf", 64, 0 , 250);

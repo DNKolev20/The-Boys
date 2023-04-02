@@ -38,5 +38,8 @@ void levelOne()
         case 11:
             levelOneStageTen();
             break;
+        case 12:
+            levelOneStageEleven();
+            break;
     }
 }
