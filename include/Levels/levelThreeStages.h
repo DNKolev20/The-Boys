@@ -66,16 +66,18 @@ void levelThreeStageTwo()
     int flag = 0;
 
     Vector2 animPos[5] = { 
-        856, 263,
-        861, 99,
-        931, 75,
-        1052, 81,
-        1084, 208
-    }; // Starting position of image
+        {856, 263},
+        {861, 99},
+        {931, 75},
+        {1052, 81},
+        {1084, 208}
+    };
 
     Vector2 position = { 0, 0 };
     Vector2 offset = { 0, 0 };
+
     bool isDragging = false;
+
     while (!WindowShouldClose())
     {
         // Handle input
@@ -91,10 +93,10 @@ void levelThreeStageTwo()
 
         if (CheckCollisionCircleRec(animPos[0], 15, rect))
         {
-            for (int i = 0; i < 5; i++)
+            for (int i = 0; i < 4; i++)
             {
-                cutAnimation(scalpel, background, animPos[i], animPos[i + 1]);
-                ++flag;
+                cutAnimation(scalpel, background, animPos[flag], animPos[flag+1]);
+                flag++;
             }
         }
 
@@ -106,6 +108,12 @@ void levelThreeStageTwo()
         DrawTexture(scalpel, position.x, position.y, WHITE);
 
         DrawCircleV(animPos[0], 15, BLUE);
+
+        if (flag == 4)
+        {
+            currentStage++;
+            levelThree();
+        }
 
         EndDrawing();
     }
@@ -134,9 +142,6 @@ void levelThreeStageThree()
         // Handle input
          if (IsKeyPressed(KEY_ESCAPE))
             pauseMenu(); 
-
-        if (IsKeyPressed(KEY_I))
-            displayInfoWindow(background, backwardssans);    
 
         mousePos = GetMousePosition();
         distance = sqrt(pow(mousePos.x - circlePos.x, 2) + pow(mousePos.y - circlePos.y, 2));   
@@ -181,6 +186,7 @@ void levelThreeStageFour()
     Vector2 position = { 0, 0 };
     Vector2 offset = { 0, 0 };
     bool isDragging = false;
+    
     while (!WindowShouldClose())
     {
         // Handle input
@@ -223,7 +229,6 @@ void levelThreeStageFive()
 {
     Texture2D background = LoadTexture("../res/Level3_images/homelander_cut.png");
     Font backwardssans = LoadFontEx("../res/fonts/backwardssans.otf", 64, 0 , 250);
-
     Texture2D retract = LoadTexture("../res/retractor.png");
 
     Vector2 startPos[2] = {

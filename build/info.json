@@ -216,6 +216,86 @@
           "name": "Stage 9"
         }
       ]
+    },
+    {
+      "name": "Level 3",
+      "stages": [
+        {
+          "name": "Stage 1"
+        },
+        {
+          "name": "Stage 2"
+        },
+        {
+          "name": "Stage 3",
+          "items": [
+            {
+              "name": "Trimmer",
+              "description": "This instrument is used to cut \n the patient's hair.",
+              "imagePath": "../res/scalpel.png"
+            },
+            {
+              "name": "What are we going to do?",
+              "description": "We are going to cut his hair\n so we can be able to operate\n on the patient.",
+              "imagePath": "none"
+            }
+          ]
+        },
+        {
+          "name": "Stage 4"
+        },
+        {
+          "name": "Stage 5",
+          "items": [
+            {
+              "name": "Scalpel",
+              "description": "This instrument is used to cut \n the head.",
+              "imagePath": "../res/scalpel.png"
+            },
+            {
+              "name": "What are we going to do?",
+              "description": "We are going to cut the patient's \nhead to continue working \non the brain.",
+              "imagePath": "none"
+            }
+          ]
+        },
+        {
+          "name": "Stage 6",
+          "items": [
+            {
+              "name": "Retractor",
+              "description": "This instrument is used to keep \nthe head open.",
+              "imagePath": "../res/retractor.png"
+            },
+            {
+              "name": "What are we going to do?",
+              "description": "We are going to pull the \nretractors to open the head.",
+              "imagePath": "none"
+            }
+          ]
+        },
+        {
+          "name": "Stage 7",
+          "items": [
+            {
+              "name": "Needle",
+              "description": "The needle is used \nto sew the open wound.",
+              "imagePath": "../res/needle.png"
+            },
+            {
+              "name": "What are we going to do?",
+              "description": "We are going to put the retractor\n on the open head so we can\n work in it.",
+              "imagePath": "none"
+            }
+          ]
+        },
+        {
+          "name": "Stage 8"
+        },
+        {
+          "name": "Stage 9"
+        }
+      ]
     }
   ]
 }

@@ -120,13 +120,6 @@ void cutAnimation(Texture2D instrument, Texture2D background, Vector2 startPos, 
                 case 3:
                     switch(currentStage)
                     {
-                        case 3:
-                            if (flag == 4)
-                            {
-                                currentStage++;
-                                levelThree();
-                                break;
-                            }
                         case 5:
                             currentStage++;
                             levelThree();

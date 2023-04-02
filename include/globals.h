@@ -19,7 +19,6 @@
 
 int currentLevel = 1;
 int currentStage = 1;
-int flag = 0;
 
 void levelOne();
 void levelTwo();

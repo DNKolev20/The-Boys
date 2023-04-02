@@ -22,5 +22,8 @@ void levelThree()
         case 6:
             levelThreeStageFive();
             break;
+        case 7:
+            levelThreeStageSix();
+            break;
     }
 }
