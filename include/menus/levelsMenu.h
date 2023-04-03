@@ -1,6 +1,6 @@
 #include <globals.h>
 
-void levelSelection(int selectedItemMenus, float secPosition)
+void levelSelection(int selectedItemMenus, float secPosition, bool isMusicPlaying)
 {
     Music music = PlayMusic("../res/music/Menu.mp3", secPosition);
     SeekMusicStream(music, secPosition);
@@ -45,9 +45,11 @@ void levelSelection(int selectedItemMenus, float secPosition)
 
     while (!WindowShouldClose()) 
     {
-        secPosition = GetMusicTimePlayed(music);
-        
-        UpdateMusicStream(music);
+        if (isMusicPlaying == true)
+        {
+            secPosition = GetMusicTimePlayed(music);
+            UpdateMusicStream(music);
+        }
 
         float squareSize = GetScreenHeight() / 3.5;
         float squareSpacing = GetScreenWidth() / 10;
@@ -109,7 +111,7 @@ void levelSelection(int selectedItemMenus, float secPosition)
         if (IsKeyPressed(KEY_ESCAPE))
         {
             
-            menu(selectedItemMenus, secPosition);
+            menu(selectedItemMenus, secPosition, isMusicPlaying);
             return;            
         }
 
@@ -147,20 +149,20 @@ void levelSelection(int selectedItemMenus, float secPosition)
                 case 0:
                     currentLevel = 1;
                     currentStage = 1;
-                    menu(selectedItemMenus, secPosition);
+                    menu(selectedItemMenus, secPosition, isMusicPlaying);
                     return;
                 case 1:
                     currentLevel = 2;
                     currentStage = 1;
-                    menu(selectedItemMenus, secPosition);
+                    menu(selectedItemMenus, secPosition, isMusicPlaying);
                     return;
                 case 2:
                     currentLevel = 3;
                     currentStage = 1;
-                    menu(selectedItemMenus, secPosition);
+                    menu(selectedItemMenus, secPosition, isMusicPlaying);
                     return;
                 case 3:
-                    menu(selectedItemMenus, secPosition);
+                    menu(selectedItemMenus, secPosition, isMusicPlaying);
                     return;
 
             }

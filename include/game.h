@@ -1,6 +1,6 @@
 #include <globals.h>
 
-void game(int selectedItemMenus)
+void game(int selectedItemMenus, bool isMusicPlaying)
 {
     Music music;
 
@@ -20,13 +20,13 @@ void game(int selectedItemMenus)
     switch(currentLevel)
     {
         case 1:
-            levelOne(music, 1.0f);
+            levelOne(music, 1.0f, isMusicPlaying);
             return;
         case 2:
-            levelTwo(music, 1.0f);
+            levelTwo(music, 1.0f, isMusicPlaying);
             return;
         case 3:
-            levelThree(music, 1.0f);
+            levelThree(music, 1.0f, isMusicPlaying);
             return;
     }
 }

@@ -2,7 +2,7 @@
 
 extern int currentStage;
 
-void fadeBetweenStages(float fadeTime, Music music, float secPosition) 
+void fadeBetweenStages(float fadeTime, Music music, float secPosition, bool isMusicPlaying) 
 {
     int screenWidth = GetScreenWidth();
     int screenHeight = GetScreenHeight();
@@ -14,8 +14,11 @@ void fadeBetweenStages(float fadeTime, Music music, float secPosition)
 
     while (fadeTimer < fadeTime) 
     {     
-        secPosition = GetMusicTimePlayed(music);
-        UpdateMusicStream(music);
+        if (isMusicPlaying == true)
+        {
+            secPosition = GetMusicTimePlayed(music);
+            UpdateMusicStream(music);
+        }
 
         fadeTimer += GetFrameTime();
         alpha = (int)(255 * (1.0f - fadeTimer / fadeTime));
@@ -35,13 +38,13 @@ void fadeBetweenStages(float fadeTime, Music music, float secPosition)
     switch(currentLevel)
     {
         case 1:
-            levelOne(music, secPosition);
+            levelOne(music, secPosition, isMusicPlaying);
             break;
         case 2:
-            levelTwo(music, secPosition);
+            levelTwo(music, secPosition, isMusicPlaying);
             break;
         case 3:
-            levelThree(music, secPosition);
+            levelThree(music, secPosition, isMusicPlaying);
             break;
     }
 }
@@ -70,7 +73,7 @@ void moveTexture(Texture2D texture, Vector2& position, Vector2& offset, bool& is
 }
 
 
-void cutAnimation(Texture2D instrument, Texture2D background, Vector2 startPos, Vector2 endPos, Music music, float secPosition)
+void cutAnimation(Texture2D instrument, Texture2D background, Vector2 startPos, Vector2 endPos, Music music, float secPosition, bool isMusicPlaying)
 {
     // Define animation variables
     Vector2 currPos = startPos; // Current position of image
@@ -79,14 +82,15 @@ void cutAnimation(Texture2D instrument, Texture2D background, Vector2 startPos, 
 
     while (!WindowShouldClose())
     {
-        secPosition = GetMusicTimePlayed(music);
-        UpdateMusicStream(music);
+        if (isMusicPlaying == true)
+        {
+            secPosition = GetMusicTimePlayed(music);
+            UpdateMusicStream(music);
+        }
 
         // Handle input
         if (IsKeyPressed(KEY_ESCAPE))
-        {
-            pauseMenu();    
-        }
+            pauseMenu(music, secPosition, isMusicPlaying);
 
         // Update animation
         if (animationTime < animationDuration) 
@@ -105,7 +109,7 @@ void cutAnimation(Texture2D instrument, Texture2D background, Vector2 startPos, 
                     {
                         case 3:
                             currentStage++;
-                            levelOne(music, secPosition);
+                            levelOne(music, secPosition, isMusicPlaying);
                             break;
                     }
 
@@ -114,12 +118,12 @@ void cutAnimation(Texture2D instrument, Texture2D background, Vector2 startPos, 
                     {
                         case 3:
                             currentStage++;
-                            levelTwo(music, secPosition);
+                            levelTwo(music, secPosition, isMusicPlaying);
                             break;
                         
                         case 5:
                             currentStage++;
-                            levelTwo(music, secPosition);
+                            levelTwo(music, secPosition, isMusicPlaying);
                             break;
                     }
 
@@ -128,7 +132,7 @@ void cutAnimation(Texture2D instrument, Texture2D background, Vector2 startPos, 
                     {
                         case 5:
                             currentStage++;
-                            levelThree(music, secPosition);
+                            levelThree(music, secPosition, isMusicPlaying);
                             break;
                     }
             }
@@ -168,7 +172,7 @@ void editLevel(std::string level)
     rename("temp.txt", "savefile.txt");
 }
 
-void displayInfoWindow(Texture2D background, Font font, Music music, float secPosition)
+void displayInfoWindow(Texture2D background, Font font, Music music, float secPosition, bool isMusicPlaying)
 {
     std::vector<std::string> name = loadItemNames(currentLevel-1, currentStage-1);
     std::vector<std::string> description = loadItemDescription(currentLevel-1, currentStage-1);
@@ -200,12 +204,15 @@ void displayInfoWindow(Texture2D background, Font font, Music music, float secPo
 
     while (!WindowShouldClose())
     {
-        secPosition = GetMusicTimePlayed(music);
-        UpdateMusicStream(music);
+        if (isMusicPlaying == true)
+        {        
+            secPosition = GetMusicTimePlayed(music);
+            UpdateMusicStream(music);
+        }
         
         // Handle input
         if (IsKeyPressed(KEY_ESCAPE))
-            pauseMenu();
+            pauseMenu(music, secPosition, isMusicPlaying);
 
         if (IsKeyPressed(KEY_RIGHT) && currentPage < numImages - 1)
             currentPage++;

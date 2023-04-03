@@ -1,6 +1,6 @@
 #include <globals.h>
 
-void levelThreeStageOne(Music music, float secPosition)
+void levelThreeStageOne(Music music, float secPosition, bool isMusicPlaying)
 {
     Texture2D background = LoadTexture("../res/Level3_images/homelander.png");
     Font backwardssans = LoadFontEx("../res/fonts/backwardssans.otf", 64, 0 , 250);
@@ -26,12 +26,15 @@ void levelThreeStageOne(Music music, float secPosition)
 
     while (!WindowShouldClose())
     {
-        secPosition = GetMusicTimePlayed(music);
-        UpdateMusicStream(music); 
+        if (isMusicPlaying == true)
+        {
+            secPosition = GetMusicTimePlayed(music);
+            UpdateMusicStream(music);
+        } 
 
         // Handle input
          if (IsKeyPressed(KEY_ESCAPE))
-            pauseMenu();
+            pauseMenu(music, secPosition, isMusicPlaying);
 
         // Draw
         BeginDrawing();
@@ -46,7 +49,7 @@ void levelThreeStageOne(Music music, float secPosition)
         if (tutorial == 3)
         {
             currentStage++;
-            levelThree(music, secPosition);
+            levelThree(music, secPosition, isMusicPlaying);
         }
 
         if (IsKeyPressed(KEY_ENTER) && tutorial < 3)
@@ -61,7 +64,7 @@ void levelThreeStageOne(Music music, float secPosition)
     CloseWindow();    
 }
 
-void levelThreeStageTwo(Music music, float secPosition)
+void levelThreeStageTwo(Music music, float secPosition, bool isMusicPlaying)
 {
     Texture2D background = LoadTexture("../res/Level3_images/homelander.png");
     Texture2D trimmer = LoadTexture("../res/trimmer.png");
@@ -83,14 +86,17 @@ void levelThreeStageTwo(Music music, float secPosition)
 
     while (!WindowShouldClose())
     {
-        secPosition = GetMusicTimePlayed(music);
-        UpdateMusicStream(music); 
+        if (isMusicPlaying == true)
+        {
+            secPosition = GetMusicTimePlayed(music);
+            UpdateMusicStream(music);
+        } 
         // Handle input
         if (IsKeyPressed(KEY_ESCAPE))
-            pauseMenu();
+            pauseMenu(music, secPosition, isMusicPlaying);
 
         if (IsKeyPressed(KEY_I))
-            displayInfoWindow(background, backwardssans, music, secPosition);       
+            displayInfoWindow(background, backwardssans, music, secPosition, isMusicPlaying);       
 
         moveTexture(trimmer, position, offset, isDragging);
 
@@ -100,7 +106,7 @@ void levelThreeStageTwo(Music music, float secPosition)
         {
             for (int i = 0; i < 4; i++)
             {
-                cutAnimation(trimmer, background, animPos[flag], animPos[flag+1], music, 1.0f);
+                cutAnimation(trimmer, background, animPos[flag], animPos[flag+1], music, secPosition, isMusicPlaying);
                 flag++;
             }
         }
@@ -117,7 +123,7 @@ void levelThreeStageTwo(Music music, float secPosition)
         if (flag == 4)
         {
             currentStage++;
-            levelThree(music, secPosition);
+            levelThree(music, secPosition, isMusicPlaying);
         }
 
         EndDrawing();
@@ -132,7 +138,7 @@ void levelThreeStageTwo(Music music, float secPosition)
     CloseWindow();
 }
 
-void levelThreeStageThree(Music music, float secPosition)
+void levelThreeStageThree(Music music, float secPosition, bool isMusicPlaying)
 {
     Texture2D background = LoadTexture("../res/Level3_images/homelander_bald.png");
     Font backwardssans = LoadFontEx("../res/fonts/backwardssans.otf", 64, 0 , 250);
@@ -144,11 +150,14 @@ void levelThreeStageThree(Music music, float secPosition)
 
     while (!WindowShouldClose())
     {
-        secPosition = GetMusicTimePlayed(music);
-        UpdateMusicStream(music); 
+        if (isMusicPlaying == true)
+        {
+            secPosition = GetMusicTimePlayed(music);
+            UpdateMusicStream(music);
+        } 
         // Handle input
          if (IsKeyPressed(KEY_ESCAPE))
-            pauseMenu(); 
+            pauseMenu(music, secPosition, isMusicPlaying); 
 
         mousePos = GetMousePosition();
         distance = sqrt(pow(mousePos.x - circlePos.x, 2) + pow(mousePos.y - circlePos.y, 2));   
@@ -168,7 +177,7 @@ void levelThreeStageThree(Music music, float secPosition)
         if (isCircleClicked == 1)
         {
             currentStage++;
-            levelThree(music, secPosition);
+            levelThree(music, secPosition, isMusicPlaying);
         }
         EndDrawing();
     }
@@ -181,7 +190,7 @@ void levelThreeStageThree(Music music, float secPosition)
     CloseWindow();  
 }
 
-void levelThreeStageFour(Music music, float secPosition)
+void levelThreeStageFour(Music music, float secPosition, bool isMusicPlaying)
 {
     Texture2D background = LoadTexture("../res/Level3_images/homelander_head.png");
     Texture2D scalpel = LoadTexture("../res/scalpel.png");
@@ -196,21 +205,24 @@ void levelThreeStageFour(Music music, float secPosition)
     
     while (!WindowShouldClose())
     {
-        secPosition = GetMusicTimePlayed(music);
-        UpdateMusicStream(music); 
+        if (isMusicPlaying == true)
+        {
+            secPosition = GetMusicTimePlayed(music);
+            UpdateMusicStream(music);
+        } 
         // Handle input
         if (IsKeyPressed(KEY_ESCAPE))
-            pauseMenu();
+            pauseMenu(music, secPosition, isMusicPlaying);
 
         if (IsKeyPressed(KEY_I))
-            displayInfoWindow(background, backwardssans, music, secPosition);       
+            displayInfoWindow(background, backwardssans, music, secPosition, isMusicPlaying);       
 
         moveTexture(scalpel, position, offset, isDragging);
 
         Rectangle rect = { position.x, position.y, (float)scalpel.width, (float)scalpel.height };
         if (CheckCollisionCircleRec(startPos, 15, rect))
         {
-            cutAnimation(scalpel, background, startPos, endPos, music, 1.0f);
+            cutAnimation(scalpel, background, startPos, endPos, music, secPosition, isMusicPlaying);
             DrawCircleV(startPos, 15, BLUE);
         }
 
@@ -234,7 +246,7 @@ void levelThreeStageFour(Music music, float secPosition)
     CloseWindow();
 }
 
-void levelThreeStageFive(Music music, float secPosition)
+void levelThreeStageFive(Music music, float secPosition, bool isMusicPlaying)
 {
     Texture2D background = LoadTexture("../res/Level3_images/homelander_cut.png");
     Font backwardssans = LoadFontEx("../res/fonts/backwardssans.otf", 64, 0 , 250);
@@ -251,14 +263,17 @@ void levelThreeStageFive(Music music, float secPosition)
 
     while (!WindowShouldClose())
     {
-        secPosition = GetMusicTimePlayed(music);
-        UpdateMusicStream(music); 
+        if (isMusicPlaying == true)
+        {
+            secPosition = GetMusicTimePlayed(music);
+            UpdateMusicStream(music);
+        } 
         // Handle input
          if (IsKeyPressed(KEY_ESCAPE))
-            pauseMenu();
+            pauseMenu(music, secPosition, isMusicPlaying);
 
         if (IsKeyPressed(KEY_I))
-            displayInfoWindow(background, backwardssans, music, secPosition);       
+            displayInfoWindow(background, backwardssans, music, secPosition, isMusicPlaying);       
 
         moveTexture(retract, position, offset, isDragging);
 
@@ -299,7 +314,7 @@ void levelThreeStageFive(Music music, float secPosition)
         if (collidesWithCircle)
         {
             currentStage++;
-            levelThree(music, secPosition);
+            levelThree(music, secPosition, isMusicPlaying);
         }
 
         EndDrawing();
@@ -313,7 +328,7 @@ void levelThreeStageFive(Music music, float secPosition)
     CloseWindow();
 }
 
-void levelThreeStageSix(Music music, float secPosition)
+void levelThreeStageSix(Music music, float secPosition, bool isMusicPlaying)
 {
     Texture2D background = LoadTexture("../res/Level3_images/fracture.png");
     Font backwardssans = LoadFontEx("../res/fonts/backwardssans.otf", 64, 0 , 250);
@@ -334,14 +349,17 @@ void levelThreeStageSix(Music music, float secPosition)
 
     while (!WindowShouldClose())
     {
-        secPosition = GetMusicTimePlayed(music);
-        UpdateMusicStream(music); 
+        if (isMusicPlaying == true)
+        {
+            secPosition = GetMusicTimePlayed(music);
+            UpdateMusicStream(music);
+        } 
         // Handle input
          if (IsKeyPressed(KEY_ESCAPE))
-            pauseMenu();
+            pauseMenu(music, secPosition, isMusicPlaying);
 
         if (IsKeyPressed(KEY_I))
-            displayInfoWindow(background, backwardssans, music, secPosition);       
+            displayInfoWindow(background, backwardssans, music, secPosition, isMusicPlaying);       
 
         moveTexture(drill, position, offset, isDragging);
 
@@ -380,7 +398,7 @@ void levelThreeStageSix(Music music, float secPosition)
         if (allCirclesTouched)
         {
             currentStage++;
-            levelThree(music, secPosition);
+            levelThree(music, secPosition, isMusicPlaying);
         }
 
         EndDrawing();
@@ -395,7 +413,7 @@ void levelThreeStageSix(Music music, float secPosition)
     CloseWindow();
 }
 
-void levelThreeStageSeven(Music music, float secPosition)
+void levelThreeStageSeven(Music music, float secPosition, bool isMusicPlaying)
 {
     Texture2D background = LoadTexture("../res/Level3_images/fracture_holes.png");
     Texture2D scalpel = LoadTexture("../res/bonesaw.png");
@@ -420,14 +438,17 @@ void levelThreeStageSeven(Music music, float secPosition)
 
     while (!WindowShouldClose())
     {
-        secPosition = GetMusicTimePlayed(music);
-        UpdateMusicStream(music); 
+        if (isMusicPlaying == true)
+        {
+            secPosition = GetMusicTimePlayed(music);
+            UpdateMusicStream(music);
+        } 
         // Handle input
         if (IsKeyPressed(KEY_ESCAPE))
-            pauseMenu();
+            pauseMenu(music, secPosition, isMusicPlaying);
 
         if (IsKeyPressed(KEY_I))
-            displayInfoWindow(background, backwardssans, music, secPosition);       
+            displayInfoWindow(background, backwardssans, music, secPosition, isMusicPlaying);       
 
         moveTexture(scalpel, position, offset, isDragging);
 
@@ -437,7 +458,7 @@ void levelThreeStageSeven(Music music, float secPosition)
         {
             for (int i = 0; i < 7; i++)
             {
-                cutAnimation(scalpel, background, animPos[flag], animPos[flag+1], music, 1.0f);
+                cutAnimation(scalpel, background, animPos[flag], animPos[flag+1], music, secPosition, isMusicPlaying);
                 flag++;
             }
         }
@@ -454,7 +475,7 @@ void levelThreeStageSeven(Music music, float secPosition)
         if (flag == 7)
         {
             currentStage++;
-            levelThree(music, secPosition);
+            levelThree(music, secPosition, isMusicPlaying);
         }
 
         EndDrawing();
@@ -469,7 +490,7 @@ void levelThreeStageSeven(Music music, float secPosition)
     CloseWindow();
 }
 
-void levelThreeStageEight(Music music, float secPosition)
+void levelThreeStageEight(Music music, float secPosition, bool isMusicPlaying)
 {
     Texture2D background = LoadTexture("../res/Level3_images/fracture_holes_cut.png");
     Font backwardssans = LoadFontEx("../res/fonts/backwardssans.otf", 64, 0 , 250);
@@ -481,12 +502,15 @@ void levelThreeStageEight(Music music, float secPosition)
 
     while (!WindowShouldClose())
     {
-        secPosition = GetMusicTimePlayed(music);
-        UpdateMusicStream(music);
+        if (isMusicPlaying == true)
+        {
+            secPosition = GetMusicTimePlayed(music);
+            UpdateMusicStream(music);
+        }
         
         // Handle input
          if (IsKeyPressed(KEY_ESCAPE))
-            pauseMenu(); 
+            pauseMenu(music, secPosition, isMusicPlaying); 
 
         mousePos = GetMousePosition();
         distance = sqrt(pow(mousePos.x - circlePos.x, 2) + pow(mousePos.y - circlePos.y, 2));   
@@ -506,7 +530,7 @@ void levelThreeStageEight(Music music, float secPosition)
         if (isCircleClicked == 1)
         {
             currentStage++;
-            levelThree(music, secPosition);
+            levelThree(music, secPosition, isMusicPlaying);
         }
  
         EndDrawing();

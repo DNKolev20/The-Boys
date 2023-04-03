@@ -1,6 +1,6 @@
 #include <globals.h>
 
-void options(int selectedItemMenus, float secPosition)
+void options(int selectedItemMenus, float secPosition, bool isMusicPlaying)
 {
     Music music = PlayMusic("../res/music/Menu.mp3", secPosition);
     SeekMusicStream(music, secPosition);
@@ -10,16 +10,18 @@ void options(int selectedItemMenus, float secPosition)
     Font buttonFont = LoadFontEx("../res/fonts/molot.otf", 32, 0 , 250);
 
     int selectedItem = 0;
-    int itemsNum = 2;
-    Color itemColor[itemsNum] = { GRAY, GRAY};
-    const char* itemName[itemsNum] = { "Fullscreen", "Back"};
+    int itemsNum = 3;
+    Color itemColor[itemsNum] = { GRAY, GRAY, GRAY};
+    const char* itemName[itemsNum] = { "Mute Music","Fullscreen", "Back"};
 
     while (!WindowShouldClose())
     {   
-        secPosition = GetMusicTimePlayed(music);
+        if (isMusicPlaying == true)
+        {
+            secPosition = GetMusicTimePlayed(music);
+            UpdateMusicStream(music);
+        }
 
-        UpdateMusicStream(music);
-        //secPosition = GetMusicTimePlayed(music);
         // handle user input
         if (IsKeyPressed(KEY_UP)) {
             selectedItem--;
@@ -36,7 +38,7 @@ void options(int selectedItemMenus, float secPosition)
 
         if (IsKeyPressed(KEY_ESCAPE))
         {
-            menu(selectedItemMenus, secPosition);
+            menu(selectedItemMenus, secPosition, isMusicPlaying);
             return;            
         }
 
@@ -56,10 +58,16 @@ void options(int selectedItemMenus, float secPosition)
             // Action to take when Enter key is pressed on selected button
             switch (selectedItem) {
                 case 0:
-                    ToggleFullscreen();
+                    if (isMusicPlaying)
+                        isMusicPlaying = false;
+                    else
+                        isMusicPlaying = true;
                     break;
                 case 1:
-                    menu(selectedItemMenus, secPosition);
+                    ToggleFullscreen();
+                    break;
+                case 2:
+                    menu(selectedItemMenus, secPosition, isMusicPlaying);
                     return;
             }
         }

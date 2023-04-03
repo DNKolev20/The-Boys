@@ -20,10 +20,10 @@
 int currentLevel = 1;
 int currentStage = 1;
 
-void levelOne(Music music, float secPosition);
-void levelTwo(Music music, float secPosition);
-void levelThree(Music music, float secPosition);
-void menu(int selectedItemMenus, float secPosition);
+void levelOne(Music music, float secPosition, bool isMusicPlaying);
+void levelTwo(Music music, float secPosition, bool isMusicPlaying);
+void levelThree(Music music, float secPosition, bool isMusicPlaying);
+void menu(int selectedItemMenus, float secPosition, bool isMusicPlaying);
 
 #include "music/music.h"
 

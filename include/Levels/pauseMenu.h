@@ -1,26 +1,21 @@
 #include <globals.h>
 
-void pauseMenu() 
+void pauseMenu(Music music, float secPosition, bool isMusicPlaying) 
 {
     Texture2D background = LoadTexture("../res/background.png");
     Font titleFont = LoadFont("../res/fonts/Chopsic.otf");
     Font buttonFont = LoadFontEx("../res/fonts/molot.otf", 32, 0 , 250);
 
     int selectedItem = 0;
-    int itemsNum = 4;
-    Color itemColor[itemsNum] = { GRAY, GRAY, GRAY, GRAY};
-    const char* itemName[itemsNum] = { "Fullscreen","Resume", "Main Menu","Exit Game"};
-    bool isPaused = false;
+    int itemsNum = 5;
+    Color itemColor[itemsNum] = { GRAY, GRAY, GRAY, GRAY, GRAY};
+    const char* itemName[itemsNum] = { "Resume","Mute Music","FullScreen", "Main Menu","Exit Game"};
+    bool isPaused = true;
 
     while (!WindowShouldClose()) 
     {
-        if (IsKeyPressed(KEY_ESCAPE)) {
-            isPaused = !isPaused;
-        }
-
         if (isPaused) 
         {
-
             // handle user input
             if (IsKeyPressed(KEY_UP)) {
                 selectedItem--;
@@ -41,32 +36,50 @@ void pauseMenu()
 
             ClearBackground(RAYWHITE);
 
-            // DrawTextEx(titleFont, "PAUSE MENU", {(float)GetScreenWidth() / 2 - MeasureText("PAUSE MENU", 40) / 2 - 22, (float)GetScreenHeight() / 2 - 60}, 41, 2, WHITE);
-            // DrawTextEx(titleFont, "PAUSE MENU", {(float)GetScreenWidth() / 2 - MeasureText("PAUSE MENU", 40) / 2 - 19, (float)GetScreenHeight() / 2 - 60}, 40, 2, RED);
-
             // draw menu items
             drawMenu("PAUSE MENU", selectedItem, itemsNum, itemColor, itemName, titleFont, buttonFont);
     
             EndDrawing();
+
             // Check for button press
             if (IsKeyPressed(KEY_ENTER) && selectedItem >= 0 && selectedItem < itemsNum) {
                 // Action to take when Enter key is pressed on selected button
                 switch (selectedItem) {
                     case 0:
-                        ToggleFullscreen();
-                        break;
-                    case 1:
                         isPaused = false;
                         break;
+                    case 1:
+                        if (isMusicPlaying)
+                            isMusicPlaying = false;
+                        else
+                            isMusicPlaying = true;
+                        break;
                     case 2:
-                        menu(0, 1.0f);
-                        return;
+                        ToggleFullscreen();
+                        break;
                     case 3:
+                        menu(0, 1.0f, isMusicPlaying);
+                        return;
+                    case 4:
                         CloseWindow();
                         break;
                 }
             }
         }
-        else{ break; }
+        else
+        {
+            switch(currentLevel)
+            {
+                case 1:
+                    levelOne(music, secPosition, isMusicPlaying);
+                    return;
+                case 2:
+                    levelTwo(music, secPosition, isMusicPlaying);
+                    return;
+                case 3:
+                    levelThree(music, secPosition, isMusicPlaying);
+                    return;
+            }
+        }
     }
 }

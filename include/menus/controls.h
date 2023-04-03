@@ -1,6 +1,6 @@
 #include <globals.h>
 
-void controls(int selectedItemMenus, float secPosition)
+void controls(int selectedItemMenus, float secPosition, bool isMusicPlaying)
 {
     Music music = PlayMusic("../res/music/Menu.mp3", secPosition);
     SeekMusicStream(music, secPosition);
@@ -20,7 +20,11 @@ void controls(int selectedItemMenus, float secPosition)
 
     while (!WindowShouldClose())
     {   
-        secPosition = GetMusicTimePlayed(music);
+        if (isMusicPlaying == true)
+        {
+            secPosition = GetMusicTimePlayed(music);
+            UpdateMusicStream(music);
+        }
 
         int screenWidth = GetScreenWidth();
         int screenHeight = GetScreenHeight();
@@ -48,7 +52,7 @@ void controls(int selectedItemMenus, float secPosition)
 
         if (IsKeyPressed(KEY_ESCAPE))
         {
-            menu(selectedItemMenus, secPosition);
+            menu(selectedItemMenus, secPosition, isMusicPlaying);
             return;            
         }
 
@@ -87,7 +91,7 @@ void controls(int selectedItemMenus, float secPosition)
         // Check for button press
         if (IsKeyPressed(KEY_ENTER) && selectedItem >= 0 && selectedItem < itemsNum) {
             // Action to take when Enter key is pressed on selected button
-            menu(selectedItemMenus, secPosition);
+            menu(selectedItemMenus, secPosition, isMusicPlaying);
             return;
         }
     }

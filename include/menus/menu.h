@@ -1,6 +1,6 @@
 #include <globals.h>
 
-void menu(int selectedItemMenus, float secPosition)
+void menu(int selectedItemMenus, float secPosition, bool isMusicPlaying)
 {
     Music music = PlayMusic("../res/music/Menu.mp3", secPosition);
     SeekMusicStream(music, secPosition);
@@ -16,8 +16,11 @@ void menu(int selectedItemMenus, float secPosition)
 
     while (!WindowShouldClose())
     {
-        secPosition = GetMusicTimePlayed(music);
-        UpdateMusicStream(music);
+        if (isMusicPlaying == true)
+        {
+            secPosition = GetMusicTimePlayed(music);
+            UpdateMusicStream(music);
+        }
 
         // handle user input
         if (IsKeyPressed(KEY_UP)) {
@@ -50,16 +53,16 @@ void menu(int selectedItemMenus, float secPosition)
             switch (selectedItem) {
                 case 0:
 
-                    game(selectedItem);
+                    game(selectedItem, isMusicPlaying);
                     return;
                 case 1:
-                    levelSelection(selectedItem, secPosition);
+                    levelSelection(selectedItem, secPosition, isMusicPlaying);
                     return;
                 case 2:
-                    options(selectedItem, secPosition);
+                    options(selectedItem, secPosition, isMusicPlaying);
                     return;
                 case 3:
-                    controls(selectedItem, secPosition);
+                    controls(selectedItem, secPosition, isMusicPlaying);
                     return;
                 case 4:
                     CloseWindow();
