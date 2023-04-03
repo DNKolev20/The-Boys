@@ -1,7 +1,11 @@
 <br>
 <br>
 <p align="center">
-<img align="center" src="res/github/project_logo.png" >
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="https://i.imgur.com/mb6253P.png">
+  <source media="(prefers-color-scheme: light)" srcset="https://i.imgur.com/0PK6SEq.png">
+  <img src="https://i.imgur.com/0PK6SEq.png">
+</picture>
 </p>
 <br>
 <br>
