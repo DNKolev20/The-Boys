@@ -506,7 +506,7 @@ void levelOneStageEight(Music music, float secPosition, bool isMusicPlaying)
 
     Vector2 circlesPos[2] = {
         {284, 533},
-        {1728, 516},
+        {1728, 506},
     }; // Starting positions of the circles
     Vector2 mousePos;
     bool isCircleClicked[2] = {0, 0};

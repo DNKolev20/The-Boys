@@ -127,8 +127,8 @@ void levelTwoStageThree(Music music, float secPosition, bool isMusicPlaying)
     Texture2D retractor = LoadTexture("../res/retractor.png");
 
     Vector2 startPos[2] = {
-        { 939, 506 },
-        { 979, 506 }
+        { 945, 506 },
+        { 989, 506 }
     };
 
     Vector2 position = {0, 0};
@@ -327,11 +327,11 @@ void levelTwoStageFive(Music music, float secPosition, bool isMusicPlaying)
 
 void levelTwoStageSix(Music music, float secPosition, bool isMusicPlaying)
 {
-    Texture2D background = LoadTexture("../res/Level2_images/removed_appendicitis.png");
+    Texture2D background = LoadTexture("../res/Level2_images/cut_wound.png");
     Font backwardssans = LoadFontEx("../res/fonts/backwardssans.otf", 64, 0 , 250);
     Texture2D needle = LoadTexture("../res/needle.png");
 
-    Vector2 startPos = { 943, 402 };
+    Vector2 startPos = { 976, 272 };
 
     Vector2 position = { 0, 0 };
     Vector2 offset = { 0, 0 };
@@ -370,6 +370,7 @@ void levelTwoStageSix(Music music, float secPosition, bool isMusicPlaying)
         DrawTexture(needle, position.x, position.y, WHITE);
 
         DrawCircleV(startPos, 15, BLUE);
+
         EndDrawing();
     }
 

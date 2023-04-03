@@ -31,5 +31,26 @@ void levelThree(Music music, float secPosition, bool isMusicPlaying)
         case 9:
             levelThreeStageEight(music, secPosition, isMusicPlaying);
             break;
+        case 10:
+            levelThreeStageNine(music, secPosition, isMusicPlaying);
+            break;
+        case 11:
+            levelThreeStageTen(music, secPosition, isMusicPlaying);
+            break;
+        case 12:
+            levelThreeStageEleven(music, secPosition, isMusicPlaying);
+            break;
+        case 13:
+            levelThreeStageTwelve(music, secPosition, isMusicPlaying);
+            break;
+        case 14:
+            levelThreeStageThirteen(music, secPosition, isMusicPlaying);
+            break;
+        case 15:
+            levelThreeStageFourteen(music, secPosition, isMusicPlaying);
+            break;
+        case 16:
+            levelThreeStageFifteen(music, secPosition, isMusicPlaying);
+            break;
     }
 }
