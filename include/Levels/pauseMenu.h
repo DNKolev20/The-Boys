@@ -59,7 +59,7 @@ void pauseMenu()
                         isPaused = false;
                         break;
                     case 2:
-                        menu(0);
+                        menu(0, 1.0f);
                         return;
                     case 3:
                         CloseWindow();

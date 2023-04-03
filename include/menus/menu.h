@@ -1,7 +1,10 @@
 #include <globals.h>
 
-void menu(int selectedItemMenus)
+void menu(int selectedItemMenus, float secPosition)
 {
+    Music music = PlayMusic("../res/music/Menu.mp3", secPosition);
+    SeekMusicStream(music, secPosition);
+
     Texture2D background = LoadTexture("../res/background.png");
     Font titleFont = LoadFontEx("../res/fonts/Chopsic.otf", 32, 0 , 250);
     Font buttonFont = LoadFontEx("../res/fonts/molot.otf", 32, 0 , 250);
@@ -13,6 +16,9 @@ void menu(int selectedItemMenus)
 
     while (!WindowShouldClose())
     {
+        secPosition = GetMusicTimePlayed(music);
+        UpdateMusicStream(music);
+
         // handle user input
         if (IsKeyPressed(KEY_UP)) {
             selectedItem--;
@@ -43,16 +49,17 @@ void menu(int selectedItemMenus)
             // Action to take when Enter key is pressed on selected button
             switch (selectedItem) {
                 case 0:
+
                     game(selectedItem);
                     return;
                 case 1:
-                    levelSelection(selectedItem);
+                    levelSelection(selectedItem, secPosition);
                     return;
                 case 2:
-                    options(selectedItem);
+                    options(selectedItem, secPosition);
                     return;
                 case 3:
-                    controls(selectedItem);
+                    controls(selectedItem, secPosition);
                     return;
                 case 4:
                     CloseWindow();
@@ -60,6 +67,9 @@ void menu(int selectedItemMenus)
             }
         }        
     }
+
+    UnloadTexture(background);
+    UnloadMusicStream(music);
 
     // De-initialization
     CloseWindow();

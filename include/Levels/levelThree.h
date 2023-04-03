@@ -1,35 +1,35 @@
 #include <globals.h>
 
-void levelThree()
+void levelThree(Music music, float secPosition)
 {
     switch (currentStage)
     {
         case 1:
-            levelThreeStageOne();
+            levelThreeStageOne(music, secPosition);
             break;
         case 2:
-            fadeBetweenStages(2.0f);
+            fadeBetweenStages(2.0f, music, secPosition);
             break;
         case 3:
-            levelThreeStageTwo();
+            levelThreeStageTwo(music, secPosition);
             break;
         case 4:
-            levelThreeStageThree();
+            levelThreeStageThree(music, secPosition);
             break;
         case 5:
-            levelThreeStageFour();
+            levelThreeStageFour(music, secPosition);
             break;
         case 6:
-            levelThreeStageFive();
+            levelThreeStageFive(music, secPosition);
             break;
         case 7:
-            levelThreeStageSix();
+            levelThreeStageSix(music, secPosition);
             break;
         case 8:
-            levelThreeStageSeven();
+            levelThreeStageSeven(music, secPosition);
             break;
         case 9:
-            levelThreeStageEight();
+            levelThreeStageEight(music, secPosition);
             break;
     }
 }

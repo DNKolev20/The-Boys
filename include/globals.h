@@ -20,10 +20,12 @@
 int currentLevel = 1;
 int currentStage = 1;
 
-void levelOne();
-void levelTwo();
-void levelThree();
-void menu(int selectedItemMenus);
+void levelOne(Music music, float secPosition);
+void levelTwo(Music music, float secPosition);
+void levelThree(Music music, float secPosition);
+void menu(int selectedItemMenus, float secPosition);
+
+#include "music/music.h"
 
 #include "functions/visualFunctions.h"
 #include "Levels/pauseMenu.h"

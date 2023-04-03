@@ -1,45 +1,45 @@
 #include <globals.h>
 
-void levelOne()
+void levelOne(Music music, float secPosition)
 {
     
     switch (currentStage)
     {
         case 1:
-            levelOneStageOne();
+            levelOneStageOne(music, secPosition);
             break;
         case 2:
-            fadeBetweenStages(2.0f);
+            fadeBetweenStages(2.0f, music, secPosition);
             break;
         case 3:
-            levelOneStageTwo();
+            levelOneStageTwo(music, secPosition);
             break;
         case 4:
-            levelOneStageThree();
+            levelOneStageThree(music, secPosition);
             break;
         case 5:
-            levelOneStageFour();
+            levelOneStageFour(music, secPosition);
             break;
         case 6:
-            levelOneStageFive();
+            levelOneStageFive(music, secPosition);
             break;
         case 7:
-            levelOneStageSix();
+            levelOneStageSix(music, secPosition);
             break;
         case 8:
-            levelOneStageSeven();
+            levelOneStageSeven(music, secPosition);
             break;
         case 9:
-            levelOneStageEight();
+            levelOneStageEight(music, secPosition);
             break;
         case 10:
-            levelOneStageNine();
+            levelOneStageNine(music, secPosition);
             break;
         case 11:
-            levelOneStageTen();
+            levelOneStageTen(music, secPosition);
             break;
         case 12:
-            levelOneStageEleven();
+            levelOneStageEleven(music, secPosition);
             break;
     }
 }

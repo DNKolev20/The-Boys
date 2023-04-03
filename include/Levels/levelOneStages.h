@@ -1,6 +1,6 @@
 #include <globals.h>
 
-void levelOneStageOne()
+void levelOneStageOne(Music music, float secPosition)
 {
     Texture2D background = LoadTexture("../res/Level1_images/patient.png");
     Font backwardssans = LoadFontEx("../res/fonts/backwardssans.otf", 64, 0 , 250);
@@ -25,7 +25,10 @@ void levelOneStageOne()
     int tutorial = 0;
 
     while (!WindowShouldClose())
-    {    
+    {   
+        secPosition = GetMusicTimePlayed(music);
+        UpdateMusicStream(music);
+
         // Handle input
          if (IsKeyPressed(KEY_ESCAPE))
             pauseMenu();
@@ -43,7 +46,7 @@ void levelOneStageOne()
         if (tutorial == 3)
         {
             currentStage++;
-            levelOne();
+            levelOne(music, secPosition);
         }
 
         if (IsKeyPressed(KEY_ENTER) && tutorial < 3)
@@ -58,7 +61,7 @@ void levelOneStageOne()
     CloseWindow();
 }
 
-void levelOneStageTwo()
+void levelOneStageTwo(Music music, float secPosition)
 {
     Texture2D background = LoadTexture("../res/Level1_images/stage1_pre-cut.png");
     Texture2D scalpel = LoadTexture("../res/scalpel.png");
@@ -72,19 +75,22 @@ void levelOneStageTwo()
     bool isDragging = false;
     while (!WindowShouldClose())
     {
+        secPosition = GetMusicTimePlayed(music);
+        UpdateMusicStream(music);
+
         // Handle input
         if (IsKeyPressed(KEY_ESCAPE))
             pauseMenu();
 
         if (IsKeyPressed(KEY_I))
-            displayInfoWindow(background, backwardssans);    
+            displayInfoWindow(background, backwardssans, music, secPosition);       
 
         moveTexture(scalpel, position, offset, isDragging);
 
         Rectangle rect = { position.x, position.y, (float)scalpel.width, (float)scalpel.height };
         if (CheckCollisionCircleRec(startPos, 15, rect))
         {
-            cutAnimation(scalpel, background, startPos, endPos);
+            cutAnimation(scalpel, background, startPos, endPos, music, secPosition);
             DrawCircleV(startPos, 15, BLUE);
         }
 
@@ -108,7 +114,7 @@ void levelOneStageTwo()
     CloseWindow();
 }
 
-void levelOneStageThree()
+void levelOneStageThree(Music music, float secPosition)
 {
     Texture2D background = LoadTexture("../res/Level1_images/cut_wound.png");
     Font backwardssans = LoadFontEx("../res/fonts/backwardssans.otf", 64, 0 , 250);
@@ -125,13 +131,16 @@ void levelOneStageThree()
     bool isDragging = false;
 
     while (!WindowShouldClose())
-    {
+    {   
+        secPosition = GetMusicTimePlayed(music);
+        UpdateMusicStream(music);
+
         // Handle input
          if (IsKeyPressed(KEY_ESCAPE))
             pauseMenu();
 
         if (IsKeyPressed(KEY_I))
-            displayInfoWindow(background, backwardssans);    
+            displayInfoWindow(background, backwardssans, music, secPosition);       
 
         moveTexture(retract, position, offset, isDragging);
 
@@ -172,7 +181,7 @@ void levelOneStageThree()
         if (collidesWithCircle)
         {
             currentStage++;
-            levelOne();
+            levelOne(music, secPosition);
         }
 
         EndDrawing();
@@ -186,7 +195,7 @@ void levelOneStageThree()
     CloseWindow();    
 }
 
-void levelOneStageFour()
+void levelOneStageFour(Music music, float secPosition)
 {
     Texture2D background = LoadTexture("../res/Level1_images/open_wound.png");
     Font backwardssans = LoadFontEx("../res/fonts/backwardssans.otf", 64, 0 , 250);
@@ -205,13 +214,16 @@ void levelOneStageFour()
     bool touchedCircles[3] = {0, 0, 0};
 
     while (!WindowShouldClose())
-    {
+    {   
+        secPosition = GetMusicTimePlayed(music);
+        UpdateMusicStream(music);
+
         // Handle input
          if (IsKeyPressed(KEY_ESCAPE))
             pauseMenu();
 
         if (IsKeyPressed(KEY_I))
-            displayInfoWindow(background, backwardssans);    
+            displayInfoWindow(background, backwardssans, music, secPosition);       
 
         moveTexture(osteotome, position, offset, isDragging);
 
@@ -250,7 +262,7 @@ void levelOneStageFour()
         if (allCirclesTouched)
         {
             currentStage++;
-            levelOne();
+            levelOne(music, secPosition);
         }
 
         EndDrawing();
@@ -265,7 +277,7 @@ void levelOneStageFour()
     CloseWindow();     
 }
 
-void levelOneStageFive()
+void levelOneStageFive(Music music, float secPosition)
 {
     Texture2D background = LoadTexture("../res/Level1_images/open_wound_no_bones.png");
     Font backwardssans = LoadFontEx("../res/fonts/backwardssans.otf", 64, 0 , 250);
@@ -286,13 +298,16 @@ void levelOneStageFive()
     int cutVeinArtery = 0;
 
     while (!WindowShouldClose())
-    {
+    {   
+        secPosition = GetMusicTimePlayed(music);
+        UpdateMusicStream(music);
+
         // Handle input
         if (IsKeyPressed(KEY_ESCAPE))
             pauseMenu();
 
         if (IsKeyPressed(KEY_I))
-            displayInfoWindow(background, backwardssans);    
+            displayInfoWindow(background, backwardssans, music, secPosition);       
 
         moveTexture(scalpel, position, offset, isDragging);
 
@@ -309,7 +324,7 @@ void levelOneStageFive()
                     // Reset the position of the scalpel to {0, 0} when it collides with the circle
                     cutVeinArtery++;
 
-                    cutAnimation(scalpel, background, positions[i], positions[i+1]);
+                    cutAnimation(scalpel, background, positions[i], positions[i+1], music, secPosition);
                     position = {0, 0};
                     break;
                 }
@@ -334,7 +349,7 @@ void levelOneStageFive()
         if (cutVeinArtery == 4)
         {
             currentStage++;
-            levelOne();
+            levelOne(music, secPosition);
         }
 
         EndDrawing();
@@ -349,7 +364,7 @@ void levelOneStageFive()
     CloseWindow();     
 }
 
-void levelOneStageSix()
+void levelOneStageSix(Music music, float secPosition)
 {
     Texture2D background = LoadTexture("../res/Level1_images/no_heart.png");
     Font backwardssans = LoadFontEx("../res/fonts/backwardssans.otf", 64, 0 , 250);
@@ -362,14 +377,16 @@ void levelOneStageSix()
     bool isDragging = false;
 
     while (!WindowShouldClose())
-    {
+    {   
+        secPosition = GetMusicTimePlayed(music);
+        UpdateMusicStream(music);
 
         // Handle input
          if (IsKeyPressed(KEY_ESCAPE))
             pauseMenu();
 
         if (IsKeyPressed(KEY_I))
-            displayInfoWindow(background, backwardssans);    
+            displayInfoWindow(background, backwardssans, music, secPosition);       
 
         moveTexture(heart, position, offset, isDragging);
 
@@ -377,7 +394,7 @@ void levelOneStageSix()
         if (CheckCollisionCircleRec(startPos, 15, rect))
         {
             currentStage++;
-            levelOne();
+            levelOne(music, secPosition);
             DrawCircleV(startPos, 15, BLUE);
         }
 
@@ -402,7 +419,7 @@ void levelOneStageSix()
     CloseWindow();   
 }
 
-void levelOneStageSeven()
+void levelOneStageSeven(Music music, float secPosition)
 {
     Texture2D background = LoadTexture("../res/Level1_images/new_heart.png");
     
@@ -411,7 +428,10 @@ void levelOneStageSeven()
     int backgroundNum = 0;
 
     while (!WindowShouldClose())
-    {
+    {   
+        secPosition = GetMusicTimePlayed(music);
+        UpdateMusicStream(music);
+
         timer += GetFrameTime();
 
         // Handle input
@@ -431,7 +451,7 @@ void levelOneStageSeven()
             if (backgroundNum > 3)
             {
                 currentStage++;
-                levelOne();
+                levelOne(music, secPosition);
             };   
 
             char filename[20];
@@ -458,7 +478,7 @@ void levelOneStageSeven()
     CloseWindow();    
 }
 
-void levelOneStageEight()
+void levelOneStageEight(Music music, float secPosition)
 {
     Texture2D background = LoadTexture("../res/Level1_images/rib3.png");
     Font backwardssans = LoadFontEx("../res/fonts/backwardssans.otf", 64, 0 , 250);
@@ -472,13 +492,16 @@ void levelOneStageEight()
     double distance[2];
 
     while (!WindowShouldClose())
-    {
+    {   
+        secPosition = GetMusicTimePlayed(music);
+        UpdateMusicStream(music);
+
         // Handle input
         if (IsKeyPressed(KEY_ESCAPE))
             pauseMenu();
 
         if (IsKeyPressed(KEY_I))
-            displayInfoWindow(background, backwardssans);
+            displayInfoWindow(background, backwardssans, music, secPosition);   
 
         mousePos = GetMousePosition();
         distance[0] = sqrt(pow(mousePos.x - circlesPos[0].x, 2) + pow(mousePos.y - circlesPos[0].y, 2));
@@ -503,7 +526,7 @@ void levelOneStageEight()
         if (isCircleClicked[0] == 1 && isCircleClicked[1] == 1)
         {
             currentStage++;
-            levelOne();
+            levelOne(music, secPosition);
         }
         EndDrawing();
     }
@@ -514,7 +537,7 @@ void levelOneStageEight()
     CloseWindow();
 }
 
-void levelOneStageNine()
+void levelOneStageNine(Music music, float secPosition)
 {
     Texture2D background = LoadTexture("../res/Level1_images/cut_wound.png");
     Font backwardssans = LoadFontEx("../res/fonts/backwardssans.otf", 64, 0 , 250);
@@ -527,13 +550,16 @@ void levelOneStageNine()
     bool isDragging = false;
 
     while (!WindowShouldClose())
-    {
+    {   
+        secPosition = GetMusicTimePlayed(music);
+        UpdateMusicStream(music);
+
         // Handle input
          if (IsKeyPressed(KEY_ESCAPE))
             pauseMenu();
 
         if (IsKeyPressed(KEY_I))
-            displayInfoWindow(background, backwardssans);    
+            displayInfoWindow(background, backwardssans, music, secPosition);       
 
         moveTexture(needle, position, offset, isDragging);
 
@@ -541,7 +567,7 @@ void levelOneStageNine()
         if (CheckCollisionCircleRec(startPos, 15, rect))
         {
             currentStage++;
-            levelOne();
+            levelOne(music, secPosition);
             DrawCircleV(startPos, 15, BLUE);
         }
 
@@ -566,13 +592,16 @@ void levelOneStageNine()
     CloseWindow();
 }
 
-void levelOneStageTen()
+void levelOneStageTen(Music music, float secPosition)
 {
     Texture2D background = LoadTexture("../res/Level1_images/closed_wound.png");
     Font backwardssans = LoadFontEx("../res/fonts/backwardssans.otf", 64, 0 , 250);
 
     while (!WindowShouldClose())
-    {
+    {   
+        secPosition = GetMusicTimePlayed(music);
+        UpdateMusicStream(music);
+
         // Handle input
          if (IsKeyPressed(KEY_ESCAPE))
             pauseMenu();
@@ -590,7 +619,7 @@ void levelOneStageTen()
         if (IsKeyPressed(KEY_ENTER))
         {
             currentStage++;
-            levelOne();
+            levelOne(music, secPosition);
         }
     }
 
@@ -602,7 +631,7 @@ void levelOneStageTen()
     CloseWindow();
 }
 
-void levelOneStageEleven()
+void levelOneStageEleven(Music music, float secPosition)
 {
     Texture2D background = LoadTexture("../res/Level1_images/patient.png");
     Font backwardssans = LoadFontEx("../res/fonts/backwardssans.otf", 64, 0 , 250);
@@ -626,7 +655,10 @@ void levelOneStageEleven()
     int end = 0;
 
     while (!WindowShouldClose())
-    {
+    {   
+        secPosition = GetMusicTimePlayed(music);
+        UpdateMusicStream(music);
+
         // Handle input
          if (IsKeyPressed(KEY_ESCAPE))
             pauseMenu();
@@ -646,7 +678,7 @@ void levelOneStageEleven()
             currentLevel++;
             currentStage = 1;
             editLevel("level2");
-            menu(0);
+            menu(0, 1.0f);
         }
 
         if (IsKeyPressed(KEY_ENTER) && end < 3)

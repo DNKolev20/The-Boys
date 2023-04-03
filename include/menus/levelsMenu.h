@@ -1,7 +1,10 @@
 #include <globals.h>
 
-void levelSelection(int selectedItemMenus)
+void levelSelection(int selectedItemMenus, float secPosition)
 {
+    Music music = PlayMusic("../res/music/Menu.mp3", secPosition);
+    SeekMusicStream(music, secPosition);
+
     Texture2D background = LoadTexture("../res/background.png");
     Font font = LoadFontEx("../res/fonts/futura.ttf", 32, 0 , 250);
 
@@ -42,6 +45,10 @@ void levelSelection(int selectedItemMenus)
 
     while (!WindowShouldClose()) 
     {
+        secPosition = GetMusicTimePlayed(music);
+        
+        UpdateMusicStream(music);
+
         float squareSize = GetScreenHeight() / 3.5;
         float squareSpacing = GetScreenWidth() / 10;
         float totalWidth = squareSize * 3 + squareSpacing * 2;
@@ -101,7 +108,8 @@ void levelSelection(int selectedItemMenus)
 
         if (IsKeyPressed(KEY_ESCAPE))
         {
-            menu(selectedItemMenus);
+            
+            menu(selectedItemMenus, secPosition);
             return;            
         }
 
@@ -139,20 +147,20 @@ void levelSelection(int selectedItemMenus)
                 case 0:
                     currentLevel = 1;
                     currentStage = 1;
-                    menu(selectedItemMenus);
+                    menu(selectedItemMenus, secPosition);
                     return;
                 case 1:
                     currentLevel = 2;
                     currentStage = 1;
-                    menu(selectedItemMenus);
+                    menu(selectedItemMenus, secPosition);
                     return;
                 case 2:
                     currentLevel = 3;
                     currentStage = 1;
-                    menu(selectedItemMenus);
+                    menu(selectedItemMenus, secPosition);
                     return;
                 case 3:
-                    menu(selectedItemMenus);
+                    menu(selectedItemMenus, secPosition);
                     return;
 
             }

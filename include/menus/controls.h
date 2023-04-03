@@ -1,7 +1,10 @@
 #include <globals.h>
 
-void controls(int selectedItemMenus)
+void controls(int selectedItemMenus, float secPosition)
 {
+    Music music = PlayMusic("../res/music/Menu.mp3", secPosition);
+    SeekMusicStream(music, secPosition);
+
     Texture2D background = LoadTexture("../res/background.png");
     Font titleFont = LoadFontEx("../res/fonts/Chopsic.otf", 32, 0 , 250);
     Font buttonFont = LoadFontEx("../res/fonts/molot.otf", 32, 0 , 250);
@@ -17,6 +20,7 @@ void controls(int selectedItemMenus)
 
     while (!WindowShouldClose())
     {   
+        secPosition = GetMusicTimePlayed(music);
 
         int screenWidth = GetScreenWidth();
         int screenHeight = GetScreenHeight();
@@ -44,7 +48,7 @@ void controls(int selectedItemMenus)
 
         if (IsKeyPressed(KEY_ESCAPE))
         {
-            menu(selectedItemMenus);
+            menu(selectedItemMenus, secPosition);
             return;            
         }
 
@@ -59,6 +63,8 @@ void controls(int selectedItemMenus)
 
         for (int i = 0; i < itemsNum; i++) 
         {
+            UpdateMusicStream(music);
+
             // calculate position and size of item rectangle
             int x = menuX + itemPadding;
             int y = menuY + itemPadding + (itemHeight + itemPadding) * i;
@@ -81,7 +87,7 @@ void controls(int selectedItemMenus)
         // Check for button press
         if (IsKeyPressed(KEY_ENTER) && selectedItem >= 0 && selectedItem < itemsNum) {
             // Action to take when Enter key is pressed on selected button
-            menu(selectedItemMenus);
+            menu(selectedItemMenus, secPosition);
             return;
         }
     }

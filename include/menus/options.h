@@ -1,7 +1,10 @@
 #include <globals.h>
 
-void options(int selectedItemMenus)
+void options(int selectedItemMenus, float secPosition)
 {
+    Music music = PlayMusic("../res/music/Menu.mp3", secPosition);
+    SeekMusicStream(music, secPosition);
+
     Texture2D background = LoadTexture("../res/background.png");
     Font titleFont = LoadFontEx("../res/fonts/Chopsic.otf", 32, 0 , 250);
     Font buttonFont = LoadFontEx("../res/fonts/molot.otf", 32, 0 , 250);
@@ -13,6 +16,10 @@ void options(int selectedItemMenus)
 
     while (!WindowShouldClose())
     {   
+        secPosition = GetMusicTimePlayed(music);
+
+        UpdateMusicStream(music);
+        //secPosition = GetMusicTimePlayed(music);
         // handle user input
         if (IsKeyPressed(KEY_UP)) {
             selectedItem--;
@@ -29,7 +36,7 @@ void options(int selectedItemMenus)
 
         if (IsKeyPressed(KEY_ESCAPE))
         {
-            menu(selectedItemMenus);
+            menu(selectedItemMenus, secPosition);
             return;            
         }
 
@@ -52,7 +59,7 @@ void options(int selectedItemMenus)
                     ToggleFullscreen();
                     break;
                 case 1:
-                    menu(selectedItemMenus);
+                    menu(selectedItemMenus, secPosition);
                     return;
             }
         }
