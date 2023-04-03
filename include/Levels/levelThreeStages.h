@@ -6,9 +6,9 @@ void levelThreeStageOne(Music music, float secPosition, bool isMusicPlaying)
     Font backwardssans = LoadFontEx("../res/fonts/backwardssans.otf", 64, 0 , 250);
 
     const char* text[3] = {
-        "Hello doctor in training, today your task will be to \noperate Homelander's brain. [Click Enter to continue]",
-        "You will be given instruments for the operation.\n[Click Enter to continue]",
-        "You will be guided by your mentor.\n[Click Enter to continue]"
+        "This is your most important operation. Your final \ntask will be focused on mending\nHomelander's head injury. [Click Enter to continue]",
+        "Do not fail or The Seven will go after us.\n[Click Enter to continue]",
+        "Press [I] for more info. \n[Click Enter to continue]"
     };
     
     const int fontSize = 48;
@@ -936,8 +936,8 @@ void levelThreeStageFifteen(Music music, float secPosition, bool isMusicPlaying)
     Font backwardssans = LoadFontEx("../res/fonts/backwardssans.otf", 64, 0 , 250);
 
     const char* text[2] = {
-        "Well done! You're on your way to become an excellent surgeon!\n [Click Enter to continue]",
-        "Now head onto the next patient.\n[Click Enter to continue]",
+        "You did it! You are now an official surgeon.\n [Click Enter to continue]",
+        "You won!\n[Click Enter to continue]",
     };
     
     const int fontSize = 48;

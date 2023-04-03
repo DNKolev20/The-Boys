@@ -6,9 +6,9 @@ void levelTwoStageOne(Music music, float secPosition, bool isMusicPlaying)
     Font font = LoadFontEx("../res/fonts/backwardssans.otf", 64, 0 , 250);
 
     const char* text[3] = {
-        "Hello doctor in training, today your task will be to \noperate Black Noir's appendix. [Click Enter to continue]",
-        "You will be given instruments for the operation.\n[Click Enter to continue]",
-        "You will be guided by your mentor.\n[Click Enter to continue]"
+        "Your next operation will be focused on removing\n Black Noir's appendix. [Click Enter to continue]",
+        "His appendix has been acting up recently\n and he has experienced several stomachaches\n[Click Enter to continue]",
+        "Press [I] for more info. \n[Click Enter to continue]"
     };
     
     const int fontSize = 48;
@@ -431,8 +431,8 @@ void levelTwoStageEight(Music music, float secPosition, bool isMusicPlaying)
     Font backwardssans = LoadFontEx("../res/fonts/backwardssans.otf", 64, 0 , 250);
 
     const char* text[2] = {
-        "Well done! You're on your way to become an excellent surgeon!\n [Click Enter to continue]",
-        "Now head onto the next patient.\n[Click Enter to continue]",
+        "Well done! This is a must-known operation \nwhich every surgeon should be able to perform!\n [Click Enter to continue]",
+        "Now head onto the Homelander.\n[Click Enter to continue]",
     };
     
     const int fontSize = 48;

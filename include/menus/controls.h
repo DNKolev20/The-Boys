@@ -63,7 +63,12 @@ void controls(int selectedItemMenus, float secPosition, bool isMusicPlaying)
         ClearBackground(RAYWHITE);
         
         DrawTextEx(titleFont, "Surgery Simulator", {(screenWidth - textSizeTitle.x) / 2 - 6, textPositionTitle.y}, 41, 2, WHITE);
-        DrawTextEx(titleFont, "Surgery Simulator", textPositionTitle, 40, 2, RED);
+        std::vector<LevelData> savefileData = readSaveFile("savefile.txt");
+        LevelData& level = savefileData[3];
+        if (level.value == true)
+            DrawTextEx(titleFont, "Surgery Simulator", textPositionTitle, 40, 2, YELLOW);
+        else
+            DrawTextEx(titleFont, "Surgery Simulator", textPositionTitle, 40, 2, RED);
 
         for (int i = 0; i < itemsNum; i++) 
         {

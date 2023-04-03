@@ -169,12 +169,12 @@
           "items": [
             {
               "name": "Scalpel",
-              "description": "This instrument is used to cut \n the appendicitis.",
+              "description": "This instrument is used to cut \n the appendix.",
               "imagePath": "../res/scalpel.png"
             },
             {
               "name": "What are we going to do?",
-              "description": "We are going to cut the patient's \nappendicitis with the scalpel to\n prevent infection.",
+              "description": "We are going to cut the patient's \nappendix with the scalpel to\n prevent infection.",
               "imagePath": "none"
             }
           ]
@@ -232,11 +232,11 @@
             {
               "name": "Trimmer",
               "description": "This instrument is used to cut \n the patient's hair.",
-              "imagePath": "../res/scalpel.png"
+              "imagePath": "../res/trimmer.png"
             },
             {
               "name": "What are we going to do?",
-              "description": "We are going to cut his hair\n so we can be able to operate\n on the patient.",
+              "description": "We are going to cut his hair so we \ncan be able to operate on the patient.",
               "imagePath": "none"
             }
           ]
@@ -249,12 +249,12 @@
           "items": [
             {
               "name": "Scalpel",
-              "description": "This instrument is used to cut \n the head.",
+              "description": "This instrument is used to cut \nthe head.",
               "imagePath": "../res/scalpel.png"
             },
             {
               "name": "What are we going to do?",
-              "description": "We are going to cut the patient's \nhead to continue working \non the brain.",
+              "description": "We are going to cut the patient's \nhead to continue working on the brain.",
               "imagePath": "none"
             }
           ]
@@ -278,22 +278,103 @@
           "name": "Stage 7",
           "items": [
             {
+              "name": "Drill",
+              "description": "This instrument is used to \ndrill holes in a patient's bones.",
+              "imagePath": "../res/drill.png"
+            },
+            {
+              "name": "What are we going to do?",
+              "description": "We are going to drill holes in the \npatient's skull so we can work on it.",
+              "imagePath": "none"
+            }
+          ]
+        },
+        {
+          "name": "Stage 8",
+          "items": [
+            {
+              "name": "Bone saw",
+              "description": "This instrument is used to cut \na patient's bones.",
+              "imagePath": "../res/bonesaw.png"
+            },
+            {
+              "name": "What are we going to do?",
+              "description": "We are going to cut the \npatient's skull so we can work on it.",
+              "imagePath": "none"
+            }
+          ]
+        },
+        {
+          "name": "Stage 9"
+        },
+        {
+          "name": "Stage 10",
+          "items": [
+            {
+              "name": "Suction tube",
+              "description": "This istrument is used to \nsuck blood.",
+              "imagePath": "../res/suction_tube.png"
+            },
+            {
+              "name": "What are we going to do?",
+              "description": "We are going to suck blood from the wound.",
+              "imagePath": "none"
+            }
+          ]
+        },
+        {
+          "name": "Stage 11"
+        },
+        {
+          "name": "Stage 12",
+          "items": [
+            {
+              "name": "Metal plate",
+              "description": "The metal plate is used to \nmend the wound together.",
+              "imagePath": "../res/metal.png"
+            },
+            {
+              "name": "What are we going to do?",
+              "description": "We are going to place the metal plate on the wound.",
+              "imagePath": "none"
+            }
+          ]
+        },
+        {
+          "name": "Stage 13",
+          "items": [
+            {
+              "name": "Screw",
+              "description": "The screw is used to hold the \nmetal plate in place.",
+              "imagePath": "../res/screw.png"
+            },
+            {
+              "name": "What are we going to do?",
+              "description": "We are going to use the screws to \nhold the metal plate together.",
+              "imagePath": "none"
+            }
+          ]
+        },
+        {
+          "name": "Stage 14",
+          "items": [
+            {
               "name": "Needle",
               "description": "The needle is used \nto sew the open wound.",
               "imagePath": "../res/needle.png"
             },
             {
               "name": "What are we going to do?",
-              "description": "We are going to put the retractor\n on the open head so we can\n work in it.",
+              "description": "We are going to sew the\nopen wound and be good to go.",
               "imagePath": "none"
             }
           ]
         },
         {
-          "name": "Stage 8"
+          "name": "Stage 15"
         },
         {
-          "name": "Stage 9"
+          "name": "Stage 16"
         }
       ]
     }
