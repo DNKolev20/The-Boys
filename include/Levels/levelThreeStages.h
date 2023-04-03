@@ -558,8 +558,12 @@ void levelThreeStageNine(Music music, float secPosition, bool isMusicPlaying)
 
     while (!WindowShouldClose())
     {
-        secPosition = GetMusicTimePlayed(music);
-        UpdateMusicStream(music); 
+        if (isMusicPlaying)
+        {
+            secPosition = GetMusicTimePlayed(music);
+            UpdateMusicStream(music);
+        }
+        
         // Handle input
          if (IsKeyPressed(KEY_ESCAPE))
             pauseMenu(music, secPosition, isMusicPlaying);
@@ -629,8 +633,11 @@ void levelThreeStageTen(Music music, float secPosition, bool isMusicPlaying)
 
     while (!WindowShouldClose())
     {   
-        secPosition = GetMusicTimePlayed(music);
-        UpdateMusicStream(music);
+        if (isMusicPlaying)
+        {
+            secPosition = GetMusicTimePlayed(music);
+            UpdateMusicStream(music);
+        }
 
         timer += GetFrameTime();
 
@@ -692,8 +699,11 @@ void levelThreeStageEleven(Music music, float secPosition, bool isMusicPlaying)
 
     while (!WindowShouldClose())
     {   
-        secPosition = GetMusicTimePlayed(music);
-        UpdateMusicStream(music);
+        if (isMusicPlaying)
+        {
+            secPosition = GetMusicTimePlayed(music);
+            UpdateMusicStream(music);
+        }
 
         // Handle input
          if (IsKeyPressed(KEY_ESCAPE))
@@ -754,8 +764,11 @@ void levelThreeStageTwelve(Music music, float secPosition, bool isMusicPlaying)
 
     while (!WindowShouldClose())
     {   
-        secPosition = GetMusicTimePlayed(music);
-        UpdateMusicStream(music);
+        if (isMusicPlaying)
+        {
+            secPosition = GetMusicTimePlayed(music);
+            UpdateMusicStream(music);
+        }
 
         // Handle input
          if (IsKeyPressed(KEY_ESCAPE))
@@ -830,8 +843,12 @@ void levelThreeStageThirteen(Music music, float secPosition, bool isMusicPlaying
 
     while (!WindowShouldClose())
     {   
-        secPosition = GetMusicTimePlayed(music);
-        UpdateMusicStream(music);
+        if (isMusicPlaying)
+        {
+            secPosition = GetMusicTimePlayed(music);
+            UpdateMusicStream(music);
+        }
+
         // Handle input
           if (IsKeyPressed(KEY_ESCAPE))
             pauseMenu(music, secPosition, isMusicPlaying); 
@@ -878,8 +895,11 @@ void levelThreeStageFourteen(Music music, float secPosition, bool isMusicPlaying
 
     while (!WindowShouldClose())
     {   
-        secPosition = GetMusicTimePlayed(music);
-        UpdateMusicStream(music);
+        if (isMusicPlaying)
+        {
+            secPosition = GetMusicTimePlayed(music);
+            UpdateMusicStream(music);
+        }
 
         // Handle input
          if (IsKeyPressed(KEY_ESCAPE))
@@ -935,8 +955,11 @@ void levelThreeStageFifteen(Music music, float secPosition, bool isMusicPlaying)
 
     while (!WindowShouldClose())
     {   
-        secPosition = GetMusicTimePlayed(music);
-        UpdateMusicStream(music);
+        if (isMusicPlaying)
+        {
+            secPosition = GetMusicTimePlayed(music);
+            UpdateMusicStream(music);
+        }
 
         // Handle input
          if (IsKeyPressed(KEY_ESCAPE))
@@ -956,7 +979,7 @@ void levelThreeStageFifteen(Music music, float secPosition, bool isMusicPlaying)
         {
             currentLevel = 1;
             currentStage = 1;
-            editLevel("level2");
+            editLevel("gameCompleted");
             menu(0, 1.0f, isMusicPlaying);
         }
 

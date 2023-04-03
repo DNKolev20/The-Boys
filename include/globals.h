@@ -27,6 +27,7 @@ void menu(int selectedItemMenus, float secPosition, bool isMusicPlaying);
 
 #include "music/music.h"
 
+#include "functions/levelFunctions.h"
 #include "functions/visualFunctions.h"
 #include "Levels/pauseMenu.h"
 
@@ -43,7 +44,6 @@ void menu(int selectedItemMenus, float secPosition, bool isMusicPlaying);
 
 #include "menus/controls.h"
 #include "config.h"
-#include "functions/levelFunctions.h"
 #include "menus/levelsMenu.h"
 #include "game.h"
 #include "menus/options.h"

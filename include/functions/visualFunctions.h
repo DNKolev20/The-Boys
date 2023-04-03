@@ -1,5 +1,11 @@
 #include <globals.h>
 
+struct LevelData1
+{
+    std::string name;
+    bool value;
+};
+
 void backgroundImage(Texture2D background) 
 {
     // Get the current screen size
@@ -33,6 +39,7 @@ void backgroundImage(Texture2D background)
             ToggleFullscreen();
 }
 
+
 void drawMenu(const char* title, int selectedItem, int itemsNum, Color itemColor[], const char* itemName[], Font titleFont, Font buttonFont)
 {
     int itemHeight = 50;
@@ -50,7 +57,13 @@ void drawMenu(const char* title, int selectedItem, int itemsNum, Color itemColor
     Vector2 textPositionTitle = {(screenWidth - textSizeTitle.x) / 2, (screenHeight - textSizeTitle.y) / 2 - 120};
 
     DrawTextEx(titleFont, title, {(screenWidth - textSizeTitle.x) / 2 - 6, textPositionTitle.y}, 41, 2, WHITE);
-    DrawTextEx(titleFont, title, textPositionTitle, 40, 2, RED);
+
+    std::vector<LevelData> savefileData = readSaveFile("savefile.txt");
+    LevelData& level = savefileData[3];
+    if (level.value == true)
+        DrawTextEx(titleFont, title, textPositionTitle, 40, 2, YELLOW);
+    else
+        DrawTextEx(titleFont, title, textPositionTitle, 40, 2, RED);
 
     for (int i = 0; i < itemsNum; i++) 
     {
