@@ -1,4 +1,4 @@
 level1 = 1
-level2 = 1
-level3 = 1
-gameCompleted = 1
+level2 = 0
+level3 = 0
+gameCompleted = 0
